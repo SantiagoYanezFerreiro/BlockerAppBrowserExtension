@@ -1,0 +1,102 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: #ffffff;
+  background-color: #000000;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+p {
+  font-weight: 700;
+  font-size: 120%;
+  color: #bdbdbd;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #4caf50; /* Vibrant color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+  transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+button:hover {
+  background-color: #66bb6a; /* Slightly darker shade on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+button:active {
+  background-color: #388e3c; /* Even darker when pressed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow when pressed */
+}
+
+input {
+  padding: 10px;
+}
+
+li {
+  list-style: none;
+  text-align: center;
+}
+
+a {
+  font-weight: 500;
+  color: #388e3c;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #388e3c;
+}
+
+.addButton {
+  width: 35%;
+}
+
+.blocker-container {
+  width: 1000px;
+}
+
+.blocker-sites-section {
+  text-align: center;
+  border: 10px solid white;
+  margin-bottom: 30px;
+  padding: 15px; /* Center-align the section content */
+}
+
+.blocker-sites-section ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+}
+
+.blocker-sites-section li {
+  margin-bottom: 20px;
+}
+
+.section-name {
+  margin-right: 500px;
+}
+
+.add-edit-website {
+  margin: 20px;
+}
