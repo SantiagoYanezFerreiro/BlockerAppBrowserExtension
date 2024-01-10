@@ -2,13 +2,12 @@
   "manifest_version": 3,
   "name": "Website Blocker",
   "version": "1.0",
-  "permissions": ["storage", "activeTab", "<all_urls>"],
-  "browser_action": {
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
     "default_popup": "dist/index.html",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16": "icons/icon16.png"
     }
   },
   "icons": {
