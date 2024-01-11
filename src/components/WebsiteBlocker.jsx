@@ -6,10 +6,16 @@ export default function WebsiteBlocker() {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
 
   useEffect(() => {
-    const blockedSites = sections.flatMap((section) => section.sites);
-    // Assuming you're using Chrome storage sync
+    chrome.storage.sync.get(["sections"], function (result) {
+      if (result.sections) {
+        setSections(result.sections);
+      }
+    });
+  }, []);
+  // Assuming you're using Chrome storage sync
+  useEffect(() => {
     chrome.storage.sync.set({ sections: sections });
-  }, [sections]); // Run this effect when 'sections' changes
+  }, [sections]);
 
   const addSection = (title) => {
     setSections([...sections, { title, sites: [] }]);
