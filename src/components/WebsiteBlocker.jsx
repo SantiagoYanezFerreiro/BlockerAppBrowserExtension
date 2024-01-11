@@ -8,7 +8,7 @@ export default function WebsiteBlocker() {
   useEffect(() => {
     const blockedSites = sections.flatMap((section) => section.sites);
     // Assuming you're using Chrome storage sync
-    chrome.storage.sync.set({ blockedSites: blockedSites });
+    chrome.storage.sync.set({ sections: sections });
   }, [sections]); // Run this effect when 'sections' changes
 
   const addSection = (title) => {
@@ -25,6 +25,10 @@ export default function WebsiteBlocker() {
     const updatedSections = [...sections];
     updatedSections[sectionIndex].sites.push(website);
     setSections(updatedSections);
+
+    chrome.storage.sync.set({ sections: updatedSections }, function () {
+      console.log("blocked sits have been updated");
+    });
   };
 
   const editWebsiteInSection = (sectionIndex, websiteIndex, newWebsite) => {
@@ -42,6 +46,10 @@ export default function WebsiteBlocker() {
     const updatedSections = [...sections];
     updatedSections[sectionIndex].sites.splice(websiteIndex, 1);
     setSections(updatedSections);
+
+    chrome.storage.sync.set({ sections: updatedSections }, function () {
+      console.log("website has been deleted");
+    });
   };
 
   const openModal = (index) => setActiveModalIndex(index);
