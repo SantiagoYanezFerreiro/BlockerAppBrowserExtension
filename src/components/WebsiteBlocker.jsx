@@ -33,7 +33,11 @@ export default function WebsiteBlocker() {
     setSections(updatedSections);
 
     chrome.storage.sync.set({ sections: updatedSections }, function () {
-      console.log("blocked sits have been updated");
+      if (chrome.runtime.lastError) {
+        console.error("Error saving data", chrome.runtime.lastError);
+      } else {
+        console.log("blocked sites have been updated");
+      }
     });
   };
 
