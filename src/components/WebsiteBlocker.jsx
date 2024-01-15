@@ -17,6 +17,10 @@ export default function WebsiteBlocker() {
     chrome.storage.sync.set({ sections: updatedSections }, function () {
       if (chrome.runtime.lastError) {
         console.error("Error saving data", chrome.runtime.lastError);
+      } else {
+        chrome.storage.sync.get(["sections"], function (result) {
+          console.log("Updated sections in storage", result.sections);
+        });
       }
     });
   };
