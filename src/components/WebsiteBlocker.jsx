@@ -6,39 +6,39 @@ export default function WebsiteBlocker() {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
 
   useEffect(() => {
-    chrome.storage.sync.get(["sections"], function (result) {
+    chrome.storage.sync.get(["sections"], (result) => {
       if (result.sections) {
         setSections(result.sections);
       }
     });
   }, []);
-  // Assuming you're using Chrome storage sync
-  useEffect(() => {
-    chrome.storage.sync.set({ sections: sections });
-  }, [sections]);
+
+  const saveSectionsToStorage = (updatedSections) => {
+    chrome.storage.sync.set({ sections: updatedSections }, function () {
+      if (chrome.runtime.lastError) {
+        console.error("Error saving data", chrome.runtime.lastError);
+      }
+    });
+  };
 
   const addSection = (title) => {
-    setSections([...sections, { title, sites: [] }]);
+    const newSections = [...sections, { title, sites: [] }];
+    setSections(newSections);
+    saveSectionsToStorage(newSections);
   };
 
   const editSectionTitle = (index, newTitle) => {
     const updatedSections = [...sections];
     updatedSections[index].title = newTitle;
     setSections(updatedSections);
+    saveSectionsToStorage(updatedSections);
   };
 
   const addWebsiteToSection = (sectionIndex, website) => {
     const updatedSections = [...sections];
     updatedSections[sectionIndex].sites.push(website);
     setSections(updatedSections);
-
-    chrome.storage.sync.set({ sections: updatedSections }, function () {
-      if (chrome.runtime.lastError) {
-        console.error("Error saving data", chrome.runtime.lastError);
-      } else {
-        console.log("blocked sites have been updated");
-      }
-    });
+    saveSectionsToStorage(updatedSections);
   };
 
   const editWebsiteInSection = (sectionIndex, websiteIndex, newWebsite) => {
