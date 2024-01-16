@@ -4,6 +4,9 @@
   "version": "1.0",
   "permissions": ["storage", "activeTab"],
   "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "dist/index.html",
     "default_icon": {
