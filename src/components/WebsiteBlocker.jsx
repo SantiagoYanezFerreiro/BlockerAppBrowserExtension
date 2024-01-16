@@ -7,6 +7,7 @@ export default function WebsiteBlocker() {
 
   useEffect(() => {
     chrome.storage.sync.get(["sections"], (result) => {
+      console.log("Retrieved sections", result.sections);
       if (result.sections) {
         setSections(result.sections);
       }
