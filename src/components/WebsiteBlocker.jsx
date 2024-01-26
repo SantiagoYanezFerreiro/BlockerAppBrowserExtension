@@ -50,11 +50,13 @@ export default function WebsiteBlocker() {
     const updatedSections = [...sections];
     updatedSections[sectionIndex].sites[websiteIndex] = newWebsite;
     setSections(updatedSections);
+    saveSectionsToStorage(updatedSections);
   };
 
   const deleteSection = (index) => {
     const updatedSections = sections.filter((_, i) => i !== index);
     setSections(updatedSections);
+    saveSectionsToStorage(updatedSections);
   };
 
   const deleteWebsiteFromSection = (sectionIndex, websiteIndex) => {
