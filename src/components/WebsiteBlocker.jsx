@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import BlockedSitesSection from "./BlockedSitesSection";
-import { getFromStorage, saveToStorage } from "./chromeAPI";
+import { getFromStorage, saveToStorage } from "../utils/chromeAPI";
 
 export default function WebsiteBlocker() {
   const [sections, setSections] = useState([]);
