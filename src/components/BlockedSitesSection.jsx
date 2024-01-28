@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import "../BlockedSitesSection.css";
 
 export default function BlockedSitesSection({
   index,

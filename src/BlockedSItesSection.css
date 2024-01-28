@@ -1,0 +1,27 @@
+.addButton {
+  width: 35%;
+}
+
+.blocker-container {
+  width: 1000px;
+}
+
+.blocker-sites-section {
+  text-align: center;
+  border: 10px solid white;
+  margin-bottom: 30px;
+  padding: 15px; /* Center-align the section content */
+}
+
+.blocker-sites-section ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+}
+
+.blocker-sites-section li {
+  margin-bottom: 20px;
+}
+
+.add-edit-website {
+  margin: 20px;
+}
