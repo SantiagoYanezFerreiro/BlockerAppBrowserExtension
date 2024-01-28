@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import BlockedSitesSection from "./BlockedSitesSection";
+import { getFromStorage, saveToStorage } from "./chromeAPI";
 
 export default function WebsiteBlocker() {
   const [sections, setSections] = useState([]);
@@ -7,7 +8,7 @@ export default function WebsiteBlocker() {
 
   // Load sections from storage when the component mounts
   useEffect(() => {
-    chrome.storage.sync.get(["sections"], (result) => {
+    getFromStorage(["sections"], (result) => {
       console.log("Retrieved sections", result.sections);
       if (result.sections) {
         setSections(result.sections);
@@ -15,22 +16,13 @@ export default function WebsiteBlocker() {
     });
   }, []);
 
-  // Helper function to save sections to storage
-  const saveSectionsToStorage = (updatedSections) => {
-    chrome.storage.sync.set({ sections: updatedSections }, function () {
-      if (chrome.runtime.lastError) {
-        console.error("Error saving data", chrome.runtime.lastError);
-      } else {
-        console.log("Sections saved to storage");
-      }
-    });
-  };
-
   // Function to add a new section
   const addSection = (title) => {
     const newSections = [...sections, { title, sites: [] }];
     setSections(newSections);
-    saveSectionsToStorage(newSections);
+    saveToStorage({ sections: newSections }, () => {
+      console.log("sections saved correctly");
+    });
   };
 
   // Function to edit a section title
@@ -39,7 +31,9 @@ export default function WebsiteBlocker() {
       idx === index ? { ...section, title: newTitle } : section
     );
     setSections(updatedSections);
-    saveSectionsToStorage(updatedSections);
+    saveToStorage({ sections: updatedSections }, () => {
+      console.log("sections saved correctly");
+    });
   };
 
   // Function to add a website to a section
@@ -50,7 +44,9 @@ export default function WebsiteBlocker() {
         : section
     );
     setSections(updatedSections);
-    saveSectionsToStorage(updatedSections);
+    saveToStorage({ sections: updatedSections }, () => {
+      console.log("sections saved correctly");
+    });
   };
 
   // Function to edit a website within a section
@@ -66,14 +62,18 @@ export default function WebsiteBlocker() {
         : section
     );
     setSections(updatedSections);
-    saveSectionsToStorage(updatedSections);
+    saveToStorage({ sections: updatedSections }, () => {
+      console.log("sections saved correctly");
+    });
   };
 
   // Function to delete a section
   const deleteSection = (index) => {
     const updatedSections = sections.filter((_, i) => i !== index);
     setSections(updatedSections);
-    saveSectionsToStorage(updatedSections);
+    saveToStorage({ sections: updatedSections }, () => {
+      console.log("sections saved correctly");
+    });
   };
 
   // Function to delete a website from a section
@@ -87,7 +87,9 @@ export default function WebsiteBlocker() {
         : section
     );
     setSections(updatedSections);
-    saveSectionsToStorage(updatedSections);
+    saveToStorage({ sections: updatedSections }, () => {
+      console.log("sections saved correctly");
+    });
   };
 
   // Function to handle opening the modal
