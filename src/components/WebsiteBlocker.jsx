@@ -6,7 +6,8 @@ import "../WebsiteBlocker.css";
 export default function WebsiteBlocker() {
   const [sections, setSections] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(null);
-
+  const [newSectionTitle, setNewSectionTitle] = useState("");
+  const [isAddingSection, setIsAddingNewSection] = useState(false);
   // Load sections from storage when the component mounts
   useEffect(() => {
     getFromStorage(["sections"], (result) => {
@@ -18,12 +19,14 @@ export default function WebsiteBlocker() {
   }, []);
 
   // Function to add a new section
-  const addSection = (title) => {
-    const newSections = [...sections, { title, sites: [] }];
-    setSections(newSections);
-    saveToStorage({ sections: newSections }, () => {
-      console.log("sections saved correctly");
-    });
+  const handleAddSection = () => {
+    if (newSectionTitle.trim()) {
+      const newSections = [...sections, { title: newSectionTitle, sites: [] }];
+      setSections(newSections);
+      saveToStorage({ sections: newSections });
+      setNewSectionTitle("");
+      setIsAddingNewSection(false);
+    }
   };
 
   // Function to edit a section title
