@@ -126,9 +126,7 @@ export default function WebsiteBlocker() {
           }
         />
       ))}
-      <button onClick={() => addSection(`Section ${sections.length + 1}`)}>
-        Add Section
-      </button>
+      {isAddingSection ? (<div></div>)}
     </div>
   );
 }
