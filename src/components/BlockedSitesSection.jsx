@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import "../BlockedSitesSection.css";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
+import { VscDiffAdded } from "react-icons/vsc";
+import { FaRegWindowClose } from "react-icons/fa";
 
 export default function BlockedSitesSection({
   index,
@@ -35,6 +37,7 @@ export default function BlockedSitesSection({
           <li key={siteIndex} className="site-item">
             <p className="site-name">{site}</p>
             <FaPencilAlt
+              className="icon"
               onClick={() =>
                 onEditWebsite(siteIndex, prompt("Edit website", site))
               }
@@ -42,7 +45,10 @@ export default function BlockedSitesSection({
               Edit
             </FaPencilAlt>
 
-            <AiOutlineDelete onClick={() => onDeleteWebsite(siteIndex)}>
+            <AiOutlineDelete
+              className="icon"
+              onClick={() => onDeleteWebsite(siteIndex)}
+            >
               Delete{" "}
             </AiOutlineDelete>
           </li>
@@ -59,7 +65,12 @@ export default function BlockedSitesSection({
                 onChange={(e) => setNewWebsite(e.target.value)}
                 placeholder="Enter new website"
               />
-              <button onClick={handleAddWebsite}>Add Website</button>
+              <VscDiffAdded
+                className="icon"
+                onClick={handleAddWebsite}
+                Add
+                Website
+              />
             </div>
             <div className="add-edit-section">
               <input
@@ -68,10 +79,18 @@ export default function BlockedSitesSection({
                 onChange={(e) => onEditSectionTitle(e.target.value)}
                 placeholder="Enter Section Title"
               />
-              <button onClick={() => onDeleteSection(index)}>
-                Delete Section
-              </button>
-              <button onClick={onCloseModal}>Close</button>
+              <AiOutlineDelete
+                className="icon"
+                onClick={() => onDeleteSection(index)}
+                Delete
+                Section
+              />
+
+              <FaRegWindowClose
+                className="icon"
+                sonClick={onCloseModal}
+                Close
+              />
             </div>
           </div>
         </div>
