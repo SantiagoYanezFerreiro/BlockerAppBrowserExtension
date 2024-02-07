@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "../BlockedSitesSection.css";
+import { FaPencilAlt } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
 
 export default function BlockedSitesSection({
   index,
@@ -32,14 +34,17 @@ export default function BlockedSitesSection({
         {sites.map((site, siteIndex) => (
           <li key={siteIndex} className="site-item">
             <p className="site-name">{site}</p>
-            <button
+            <FaPencilAlt
               onClick={() =>
                 onEditWebsite(siteIndex, prompt("Edit website", site))
               }
             >
               Edit
-            </button>
-            <button onClick={() => onDeleteWebsite(siteIndex)}>Delete </button>
+            </FaPencilAlt>
+
+            <AiOutlineDelete onClick={() => onDeleteWebsite(siteIndex)}>
+              Delete{" "}
+            </AiOutlineDelete>
           </li>
         ))}
       </ul>
