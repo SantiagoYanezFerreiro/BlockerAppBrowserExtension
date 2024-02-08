@@ -126,7 +126,21 @@ export default function WebsiteBlocker() {
           }
         />
       ))}
-      {isAddingSection ? (<div></div>)}
+      {isAddingSection ? (
+        <div>
+          <input
+            type="text"
+            value={newSectionTitle}
+            onChange={(e) => setNewSectionTitle(e.target.value)}
+            placeholder="Enter Section Title"
+          ></input>
+          <button onClick={handleAddSection}>Add</button>
+        </div>
+      ) : (
+        <button onClick={() => setIsAddingNewSection(true)}>
+          Add New Section
+        </button>
+      )}
     </div>
   );
 }

@@ -86,11 +86,7 @@ export default function BlockedSitesSection({
                 Section
               />
 
-              <FaRegWindowClose
-                className="icon"
-                sonClick={onCloseModal}
-                Close
-              />
+              <FaRegWindowClose className="icon" onClick={onCloseModal} Close />
             </div>
           </div>
         </div>
