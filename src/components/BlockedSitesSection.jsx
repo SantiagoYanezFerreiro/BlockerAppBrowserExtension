@@ -5,6 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { VscDiffAdded } from "react-icons/vsc";
 import { FaRegWindowClose } from "react-icons/fa";
+import { TfiSave } from "react-icons/tfi";
 
 export default function BlockedSitesSection({
   index,
@@ -54,8 +55,11 @@ export default function BlockedSitesSection({
                   value={editingValue}
                   onChange={(e) => setEditingValue(e.target.value)}
                 />
-                <button onClick={handleSaveEdit}>Save</button>
-                <button onClick={() => setEditingIndex(null)}>Cancel</button>
+                <TfiSave className="icon" onClick={handleSaveEdit} />
+                <FaRegWindowClose
+                  className="icon"
+                  onClick={() => setEditingIndex(null)}
+                />
               </div>
             ) : (
               <div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BlockedSitesSection from "./BlockedSitesSection";
 import { getFromStorage, saveToStorage } from "../utils/chromeAPI";
 import "../WebsiteBlocker.css";
+import { VscDiffAdded } from "react-icons/vsc";
 
 export default function WebsiteBlocker() {
   const [sections, setSections] = useState([]);
@@ -132,13 +133,19 @@ export default function WebsiteBlocker() {
             value={newSectionTitle}
             onChange={(e) => setNewSectionTitle(e.target.value)}
             placeholder="Enter Section Title"
-          ></input>
-          <button onClick={handleAddSection}>Add</button>
+          />
+          <VscDiffAdded
+            className="icon-website-blocker"
+            onClick={handleAddSection}
+          />
         </div>
       ) : (
-        <button onClick={() => setIsAddingNewSection(true)}>
+        <VscDiffAdded
+          className="icon-website-blocker"
+          onClick={() => setIsAddingNewSection(true)}
+        >
           Add New Section
-        </button>
+        </VscDiffAdded>
       )}
     </div>
   );
