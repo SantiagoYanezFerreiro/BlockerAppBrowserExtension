@@ -17,10 +17,10 @@ function App() {
         </nav>
         {/* Show Content */}
         <Routes>
-          <Route exact path="/" component={WebsiteBlocker} />
-          <Route path="/blocks" component={Blocks} />
-          <Route path="/stats" component={Stats} />
-          <Route path="/settings" component={Settings} />
+          <Route exact path="/" element={<WebsiteBlocker />} />
+          <Route path="/blocks" element={<Blocks />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
     </Router>
