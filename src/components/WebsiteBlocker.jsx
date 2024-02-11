@@ -96,13 +96,10 @@ export default function WebsiteBlocker() {
     });
   };
 
-  // Function to handle opening the modal
-  const openModal = (index) => setActiveModalIndex(index);
+  const toggleModal = (index) => {
+    setActiveModalIndex(activeModalIndex === index ? null : index);
+  };
 
-  // Function to handle closing the modal
-  const closeModal = () => setActiveModalIndex(null);
-
-  // JSX for the component
   return (
     <div className="blocker-container">
       <h1>Blocks</h1>
@@ -113,8 +110,9 @@ export default function WebsiteBlocker() {
           title={section.title}
           sites={section.sites}
           isModalOpen={activeModalIndex === index}
-          onOpenModal={() => openModal(index)}
-          onCloseModal={closeModal}
+          onOpenModal={() => toggleModal(index)}
+          onCloseModal={() => setActiveModalIndex(null)}
+          onToggleModal={toggleModal}
           onAddWebsite={(website) => addWebsiteToSection(index, website)}
           onEditWebsite={(websiteIndex, newWebsite) =>
             editWebsiteInSection(index, websiteIndex, newWebsite)

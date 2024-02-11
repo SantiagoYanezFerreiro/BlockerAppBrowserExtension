@@ -12,8 +12,8 @@ export default function BlockedSitesSection({
   title,
   sites,
   isModalOpen,
-  onOpenModal,
   onCloseModal,
+  onToggleModal,
   onAddWebsite,
   onEditWebsite,
   onEditSectionTitle,
@@ -42,7 +42,7 @@ export default function BlockedSitesSection({
 
   return (
     <div className="blocker-sites-section">
-      <h2 className="section-name" onClick={onOpenModal}>
+      <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
       <ul>
@@ -125,6 +125,7 @@ BlockedSitesSection.propTypes = {
   isModalOpen: PropTypes.bool.isRequired,
   onOpenModal: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
+  onToggleModal: PropTypes.func.isRequired,
   onAddWebsite: PropTypes.func.isRequired,
   onEditWebsite: PropTypes.func.isRequired,
   onEditSectionTitle: PropTypes.func.isRequired,
