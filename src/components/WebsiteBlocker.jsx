@@ -55,16 +55,15 @@ export default function WebsiteBlocker() {
 
   // Function to edit a website within a section
   const editWebsiteInSection = (sectionIndex, websiteIndex, newWebsite) => {
-    const updatedSections = sections.map((section, idx) =>
-      idx === sectionIndex
-        ? {
-            ...section,
-            sites: section.sites.map((site, sIdx) =>
-              sIdx === websiteIndex ? newWebsite : site
-            ),
-          }
-        : section
-    );
+    const updatedSections = sections.map((section, idx) => {
+      if (idx === sectionIndex) {
+        const updatedSites = section.sites.map((site, sIdx) => {
+          return sIdx === websiteIndex ? newWebsite : site;
+        });
+        return { ...section, sites: updatedSites };
+      }
+      return section;
+    });
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections }, () => {
       console.log("sections saved correctly");

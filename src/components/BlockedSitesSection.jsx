@@ -44,26 +44,32 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={onOpenModal}>
         {title}
       </h2>
-
       <ul>
         {sites.map((site, siteIndex) => (
           <li key={siteIndex} className="site-item">
-            <p className="site-name">{site}</p>
-            <FaPencilAlt
-              className="icon"
-              onClick={() =>
-                onEditWebsite(siteIndex, prompt("Edit website", site))
-              }
-            >
-              Edit
-            </FaPencilAlt>
-
-            <AiOutlineDelete
-              className="icon"
-              onClick={() => onDeleteWebsite(siteIndex)}
-            >
-              Delete{" "}
-            </AiOutlineDelete>
+            {editingIndex === siteIndex ? (
+              <div>
+                <input
+                  type="text"
+                  value={editingValue}
+                  onChange={(e) => setEditingValue(e.target.value)}
+                />
+                <button onClick={handleSaveEdit}>Save</button>
+                <button onClick={() => setEditingIndex(null)}>Cancel</button>
+              </div>
+            ) : (
+              <div>
+                <p className="site-name">{site}</p>
+                <FaPencilAlt
+                  className="icon"
+                  onClick={() => handleEditWebsite(siteIndex, site)}
+                />
+                <AiOutlineDelete
+                  className="icon"
+                  onClick={() => onDeleteWebsite(siteIndex)}
+                />
+              </div>
+            )}
           </li>
         ))}
       </ul>
