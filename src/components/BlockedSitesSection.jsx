@@ -45,38 +45,40 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-      <ul>
-        {sites.map((site, siteIndex) => (
-          <li key={siteIndex} className="site-item">
-            {editingIndex === siteIndex ? (
-              <div>
-                <input
-                  type="text"
-                  value={editingValue}
-                  onChange={(e) => setEditingValue(e.target.value)}
-                />
-                <TfiSave className="icon" onClick={handleSaveEdit} />
-                <FaRegWindowClose
-                  className="icon"
-                  onClick={() => setEditingIndex(null)}
-                />
-              </div>
-            ) : (
-              <div>
-                <p className="site-name">{site}</p>
-                <FaPencilAlt
-                  className="icon"
-                  onClick={() => handleEditWebsite(siteIndex, site)}
-                />
-                <AiOutlineDelete
-                  className="icon"
-                  onClick={() => onDeleteWebsite(siteIndex)}
-                />
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+      {isModalOpen && (
+        <ul>
+          {sites.map((site, siteIndex) => (
+            <li key={siteIndex} className="site-item">
+              {editingIndex === siteIndex ? (
+                <div>
+                  <input
+                    type="text"
+                    value={editingValue}
+                    onChange={(e) => setEditingValue(e.target.value)}
+                  />
+                  <TfiSave className="icon" onClick={handleSaveEdit} />
+                  <FaRegWindowClose
+                    className="icon"
+                    onClick={() => setEditingIndex(null)}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <p className="site-name">{site}</p>
+                  <FaPencilAlt
+                    className="icon"
+                    onClick={() => handleEditWebsite(siteIndex, site)}
+                  />
+                  <AiOutlineDelete
+                    className="icon"
+                    onClick={() => onDeleteWebsite(siteIndex)}
+                  />
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
 
       {isModalOpen && (
         <div className="modal">
