@@ -20,10 +20,23 @@ export default function BlockedSitesSection({
   onDeleteWebsite,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingValue, setEditingValue] = useState("");
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
     setNewWebsite("");
+  };
+
+  const handleEditWebsite = (siteIndex, site) => {
+    setEditingIndex(siteIndex);
+    setEditingValue(site);
+  };
+
+  const handleSaveEdit = () => {
+    onEditWebsite(editingIndex, editingValue);
+    setEditingIndex(null);
+    setEditingValue("");
   };
 
   return (
