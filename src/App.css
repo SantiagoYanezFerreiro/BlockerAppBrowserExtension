@@ -10,6 +10,11 @@ nav {
   display: flex;
   justify-content: right;
   align-items: center;
+  position: fixed; /* Fix the position */
+  top: 20px;
+  right: 40px;
+  width: 100%; /* Navbar spans the full width */
+  z-index: 1000; /* Ensures navbar is above other elements */
 }
 
 nav a {
