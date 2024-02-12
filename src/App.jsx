@@ -10,7 +10,7 @@ function App() {
     <Router>
       <div>
         <nav>
-          <Link to="/">WebsiteBlocker</Link>
+          <Link to="/">Overview</Link>
           <Link to="/blocks">Blocks</Link>
           <Link to="/stats">Stats</Link>
           <Link to="/settings">Settings</Link>
