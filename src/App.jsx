@@ -1,20 +1,16 @@
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import WebsiteBlocker from "./components/WebsiteBlocker";
 import Overview from "./components/Overview";
 import Stats from "./components/Stats";
 import Settings from "./components/Settings";
+import Navbar from "./components/Navbar";
 import "./App.css";
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <Link to="/">Overview</Link>
-          <Link to="/blocks">Blocks</Link>
-          <Link to="/stats">Stats</Link>
-          <Link to="/settings">Settings</Link>
-        </nav>
+        <Navbar />
         {/* Show Content */}
         <Routes>
           <Route exact path="/" element={<Overview />} />

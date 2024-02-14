@@ -4,31 +4,3 @@
   padding: 2rem;
   text-align: center;
 }
-
-nav {
-  height: 60px;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  position: fixed; /* Fix the position */
-  top: 20px;
-  right: 40px;
-  width: 100%; /* Navbar spans the full width */
-  z-index: 1000; /* Ensures navbar is above other elements */
-}
-
-nav a {
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  font-size: 18px;
-}
-
-nav a:hover {
-  background-color: grey;
-  color: black;
-}
-
-nav a:active {
-  border-bottom: 2px solid yellow;
-}
