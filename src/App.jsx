@@ -4,12 +4,13 @@ import Overview from "./components/Overview";
 import Stats from "./components/Stats";
 import Settings from "./components/Settings";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <div>
+    <div>
+      <Router>
         <Navbar />
         {/* Show Content */}
         <Routes>
@@ -18,8 +19,9 @@ function App() {
           <Route path="/stats" element={<Stats />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+      <Footer />
+    </div>
   );
 }
 
