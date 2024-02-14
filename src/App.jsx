@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import WebsiteBlocker from "./components/WebsiteBlocker";
-import Blocks from "./components/Blocks";
+import Overview from "./components/Overview";
 import Stats from "./components/Stats";
 import Settings from "./components/Settings";
 import "./App.css";
@@ -17,8 +17,8 @@ function App() {
         </nav>
         {/* Show Content */}
         <Routes>
-          <Route exact path="/" element={<WebsiteBlocker />} />
-          <Route path="/blocks" element={<Blocks />} />
+          <Route exact path="/" element={<Overview />} />
+          <Route path="/blocks" element={<WebsiteBlocker />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
