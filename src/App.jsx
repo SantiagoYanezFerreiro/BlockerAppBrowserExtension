@@ -5,11 +5,13 @@ import Stats from "./components/Stats";
 import Settings from "./components/Settings";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Logo from "./components/Logo";
 import "./App.css";
 
 function App() {
   return (
     <div>
+      <Logo />
       <Router>
         <Navbar />
         {/* Show Content */}
