@@ -10,9 +10,9 @@ import "./App.css";
 
 function App() {
   return (
-    <div>
-      <Logo />
-      <Router>
+    <Router>
+      <div>
+        <Logo />
         <Navbar />
         {/* Show Content */}
         <Routes>
@@ -21,9 +21,9 @@ function App() {
           <Route path="/stats" element={<Stats />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
-      </Router>
+      </div>
       <Footer />
-    </div>
+    </Router>
   );
 }
 
