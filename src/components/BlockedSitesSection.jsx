@@ -47,9 +47,14 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-      <button onClick={onToggleSectionEnabled}>
-        {section.enabled ? "Disable" : "Enable"}
-      </button>
+      <label className="toggle-switch">
+        <input
+          type="checkbox"
+          checked={section.enabled}
+          onChange={onToggleSectionEnabled}
+        />
+        <span className="slider round"></span>
+      </label>
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (
