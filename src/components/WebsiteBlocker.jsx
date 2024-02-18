@@ -12,17 +12,30 @@ export default function WebsiteBlocker() {
   // Load sections from storage when the component mounts
   useEffect(() => {
     getFromStorage(["sections"], (result) => {
-      console.log("Retrieved sections", result.sections);
-      if (result.sections) {
-        setSections(result.sections);
-      }
+      const updatedSections =
+        result.sections?.map((section) => ({
+          ...section,
+          enabled: section.enabled ?? true,
+          locked: section.locked ?? false,
+          lockMethod: section.lockMethod ?? null,
+        })) || [];
+      setSections(updatedSections);
     });
   }, []);
 
   // Function to add a new section
   const handleAddSection = () => {
     if (newSectionTitle.trim()) {
-      const newSections = [...sections, { title: newSectionTitle, sites: [] }];
+      const newSections = [
+        ...sections,
+        {
+          title: newSectionTitle,
+          sites: [],
+          enabled: true,
+          locked: false,
+          lockMethod: null,
+        },
+      ];
       setSections(newSections);
       saveToStorage({ sections: newSections });
       setNewSectionTitle("");
