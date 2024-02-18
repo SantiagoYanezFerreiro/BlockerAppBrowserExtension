@@ -25,6 +25,9 @@ export default function BlockedSitesSection({
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingValue, setEditingValue] = useState("");
+  const [unlockTime, setUnlockTime] = useState(null);
+  const [randomText, setRandomText] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -41,6 +44,8 @@ export default function BlockedSitesSection({
     setEditingIndex(null);
     setEditingValue("");
   };
+
+  //Handlers for Blocking Methods
 
   return (
     <div className="blocker-sites-section">
