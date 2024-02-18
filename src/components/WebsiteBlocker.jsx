@@ -113,6 +113,19 @@ export default function WebsiteBlocker() {
     setActiveModalIndex(activeModalIndex === index ? null : index);
   };
 
+  const toggleSectionEnabled = (index) => {
+    const updatedSections = [...sections];
+    const section = updatedSections[index];
+
+    if (sections.locked) {
+      console.log("section locked", section.lockMethod);
+    } else {
+      section.enabled = !section.enabled;
+      setSections(updatedSections);
+      saveToStorage({ sections: updatedSections });
+    }
+  };
+
   return (
     <div className="blocker-container">
       <h1>Blocks</h1>
@@ -120,6 +133,8 @@ export default function WebsiteBlocker() {
         <BlockedSitesSection
           key={index}
           index={index}
+          section={section}
+          onToggleSectionEnabled={() => toggleSectionEnabled(index)}
           title={section.title}
           sites={section.sites}
           isModalOpen={activeModalIndex === index}

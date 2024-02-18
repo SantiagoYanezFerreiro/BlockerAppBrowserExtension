@@ -10,6 +10,7 @@ import { TfiSave } from "react-icons/tfi";
 export default function BlockedSitesSection({
   index,
   title,
+  section,
   sites,
   isModalOpen,
   onCloseModal,
@@ -19,6 +20,7 @@ export default function BlockedSitesSection({
   onEditSectionTitle,
   onDeleteSection,
   onDeleteWebsite,
+  onToggleSectionEnabled,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
@@ -45,6 +47,9 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
+      <button onClick={onToggleSectionEnabled}>
+        {section.enabled ? "Disable" : "Enable"}
+      </button>
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (
@@ -124,6 +129,7 @@ BlockedSitesSection.propTypes = {
   index: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   sites: PropTypes.array.isRequired,
+  section: PropTypes.string.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
   onOpenModal: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
@@ -133,4 +139,5 @@ BlockedSitesSection.propTypes = {
   onEditSectionTitle: PropTypes.func.isRequired,
   onDeleteSection: PropTypes.func.isRequired,
   onDeleteWebsite: PropTypes.func.isRequired,
+  onToggleSectionEnabled: PropTypes.func.isRequired,
 };
