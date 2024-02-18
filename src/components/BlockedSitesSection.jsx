@@ -47,7 +47,7 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-      <p>On</p>
+      <p>{section.enabled ? "On" : "Off"}</p>
       <label className="toggle-switch">
         <input
           type="checkbox"
