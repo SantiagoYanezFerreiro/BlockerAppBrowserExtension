@@ -47,7 +47,7 @@ export default function BlockedSitesSection({
 
   //Handlers for Blocking Methods
 
-  const HandleRimeRangeLock = (time) => {
+  const HandleTimeRangeLock = (time) => {
     setUnlockTime(time);
   };
 
@@ -73,6 +73,21 @@ export default function BlockedSitesSection({
         />
         <span className="slider round"></span>
       </label>
+
+      {/*Input fields for locks*/}
+      <input
+        type="datetime-local"
+        onChange={(e) => HandleTimeRangeLock(e.target.value)}
+      />
+      <input
+        type="text"
+        onChange={(e) => HandleRandomTextLock(e.target.value)}
+      />
+      <input
+        type="password"
+        onChange={(e) => HandlePasswordLock(e.target.value)}
+      />
+
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (
