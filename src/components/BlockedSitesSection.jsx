@@ -47,6 +47,18 @@ export default function BlockedSitesSection({
 
   //Handlers for Blocking Methods
 
+  const HandleRimeRangeLock = (time) => {
+    setUnlockTime(time);
+  };
+
+  const HandleRandomTextLock = (randomStr) => {
+    setRandomText(randomStr);
+  };
+
+  const HandlePasswordLock = (pass) => {
+    setPassword(pass);
+  };
+
   return (
     <div className="blocker-sites-section">
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
