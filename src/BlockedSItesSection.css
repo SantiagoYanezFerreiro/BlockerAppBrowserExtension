@@ -97,3 +97,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.lock-methods {
+  margin: 20px 0;
+}

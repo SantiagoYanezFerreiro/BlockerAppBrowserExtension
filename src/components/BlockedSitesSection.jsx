@@ -64,29 +64,6 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-      <p>{section.enabled ? "On" : "Off"}</p>
-      <label className="toggle-switch">
-        <input
-          type="checkbox"
-          checked={section.enabled}
-          onChange={onToggleSectionEnabled}
-        />
-        <span className="slider round"></span>
-      </label>
-
-      {/*Input fields for locks*/}
-      <input
-        type="datetime-local"
-        onChange={(e) => HandleTimeRangeLock(e.target.value)}
-      />
-      <input
-        type="text"
-        onChange={(e) => HandleRandomTextLock(e.target.value)}
-      />
-      <input
-        type="password"
-        onChange={(e) => HandlePasswordLock(e.target.value)}
-      />
 
       {isModalOpen && (
         <ul>
@@ -159,6 +136,31 @@ export default function BlockedSitesSection({
           </div>
         </div>
       )}
+      <p className="toggle-text">{section.enabled ? "On" : "Off"}</p>
+      <label className="toggle-switch">
+        <input
+          type="checkbox"
+          checked={section.enabled}
+          onChange={onToggleSectionEnabled}
+        />
+        <span className="slider round"></span>
+      </label>
+
+      {/*Input fields for locks*/}
+      <section className="lock-methods">
+        <input
+          type="datetime-local"
+          onChange={(e) => HandleTimeRangeLock(e.target.value)}
+        />
+        <input
+          type="text"
+          onChange={(e) => HandleRandomTextLock(e.target.value)}
+        />
+        <input
+          type="password"
+          onChange={(e) => HandlePasswordLock(e.target.value)}
+        />
+      </section>
     </div>
   );
 }
