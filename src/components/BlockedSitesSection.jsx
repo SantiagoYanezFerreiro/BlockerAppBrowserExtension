@@ -21,6 +21,7 @@ export default function BlockedSitesSection({
   onDeleteSection,
   onDeleteWebsite,
   onToggleSectionEnabled,
+  onToggleSectionLock,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
@@ -57,6 +58,47 @@ export default function BlockedSitesSection({
 
   const HandlePasswordLock = (pass) => {
     setPassword(pass);
+  };
+
+  const renderLockInputs = () => {
+    console.log("renderLockInputs called, section.locked:", section.locked);
+    if (section.locked) {
+      console.log("Lock method:", section.lockMethod);
+      switch (section.lockMethod) {
+        case "timer":
+          return (
+            <input
+              type="datetime-local"
+              onChange={(e) => HandleTimeRangeLock(e.target.value)}
+            />
+          );
+        case "randomText":
+          return (
+            <input
+              type="text"
+              onChange={(e) => HandleRandomTextLock(e.target.value)}
+            />
+          );
+        case "password":
+          return (
+            <input
+              type="password"
+              onChange={(e) => HandlePasswordLock(e.target.value)}
+            />
+          );
+        default:
+          return null;
+      }
+    }
+    return null;
+  };
+
+  const renderLockToggle = () => {
+    return (
+      <button onClick={onToggleSectionLock}>
+        {section.locked ? "Unlock Section" : "Lock Section"}
+      </button>
+    );
   };
 
   return (
@@ -141,26 +183,12 @@ export default function BlockedSitesSection({
         <input
           type="checkbox"
           checked={section.enabled}
-          onChange={onToggleSectionEnabled}
+          onChange={() => onToggleSectionEnabled(index)}
         />
         <span className="slider round"></span>
       </label>
-
-      {/*Input fields for locks*/}
-      <section className="lock-methods">
-        <input
-          type="datetime-local"
-          onChange={(e) => HandleTimeRangeLock(e.target.value)}
-        />
-        <input
-          type="text"
-          onChange={(e) => HandleRandomTextLock(e.target.value)}
-        />
-        <input
-          type="password"
-          onChange={(e) => HandlePasswordLock(e.target.value)}
-        />
-      </section>
+      {renderLockInputs()}
+      {renderLockToggle()}
     </div>
   );
 }
@@ -169,7 +197,7 @@ BlockedSitesSection.propTypes = {
   index: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   sites: PropTypes.array.isRequired,
-  section: PropTypes.string.isRequired,
+  section: PropTypes.object.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
   onOpenModal: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
@@ -180,4 +208,5 @@ BlockedSitesSection.propTypes = {
   onDeleteSection: PropTypes.func.isRequired,
   onDeleteWebsite: PropTypes.func.isRequired,
   onToggleSectionEnabled: PropTypes.func.isRequired,
+  onToggleSectionLock: PropTypes.func.isRequired,
 };

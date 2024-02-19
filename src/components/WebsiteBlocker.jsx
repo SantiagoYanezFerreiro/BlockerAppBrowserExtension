@@ -116,14 +116,26 @@ export default function WebsiteBlocker() {
   const toggleSectionEnabled = (index) => {
     const updatedSections = [...sections];
     const section = updatedSections[index];
-
-    if (sections.locked) {
+    if (section.locked) {
       console.log("section locked", section.lockMethod);
     } else {
       section.enabled = !section.enabled;
       setSections(updatedSections);
       saveToStorage({ sections: updatedSections });
     }
+  };
+
+  const toggleSectionLock = (index) => {
+    const updatedSections = [...sections];
+    const section = updatedSections[index];
+    section.locked = !updatedSections[index].locked;
+
+    if (section.locked && !section.lockMethod) {
+      section.lockMethod = "password";
+    }
+
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
   };
 
   return (
@@ -135,6 +147,7 @@ export default function WebsiteBlocker() {
           index={index}
           section={section}
           onToggleSectionEnabled={() => toggleSectionEnabled(index)}
+          onToggleSectionLock={() => toggleSectionLock(index)}
           title={section.title}
           sites={section.sites}
           isModalOpen={activeModalIndex === index}
@@ -152,6 +165,7 @@ export default function WebsiteBlocker() {
           }
         />
       ))}
+
       {isAddingSection ? (
         <div>
           <input
