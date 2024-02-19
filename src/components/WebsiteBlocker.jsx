@@ -138,6 +138,13 @@ export default function WebsiteBlocker() {
     saveToStorage({ sections: updatedSections });
   };
 
+  const handleLockMethodChange = (sectionIndex, lockMethod) => {
+    const updatedSections = [...sections];
+    updatedSections[sectionIndex].lockMethod = lockMethod;
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
+
   return (
     <div className="blocker-container">
       <h1>Blocks</h1>

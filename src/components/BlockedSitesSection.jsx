@@ -6,6 +6,8 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { VscDiffAdded } from "react-icons/vsc";
 import { FaRegWindowClose } from "react-icons/fa";
 import { TfiSave } from "react-icons/tfi";
+import { FaLock } from "react-icons/fa";
+import { GrUnlock } from "react-icons/gr";
 
 export default function BlockedSitesSection({
   index,
@@ -96,7 +98,7 @@ export default function BlockedSitesSection({
   const renderLockToggle = () => {
     return (
       <button onClick={onToggleSectionLock}>
-        {section.locked ? "Unlock Section" : "Lock Section"}
+        {section.locked ? <GrUnlock /> : <FaLock />}
       </button>
     );
   };
