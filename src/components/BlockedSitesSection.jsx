@@ -24,6 +24,7 @@ export default function BlockedSitesSection({
   onDeleteWebsite,
   onToggleSectionEnabled,
   onToggleSectionLock,
+  onLockMethodChange,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
@@ -50,16 +51,20 @@ export default function BlockedSitesSection({
 
   //Handlers for Blocking Methods
 
-  const HandleTimeRangeLock = (time) => {
+  const handleTimeRangeLock = (time) => {
     setUnlockTime(time);
   };
 
-  const HandleRandomTextLock = (randomStr) => {
+  const handleRandomTextLock = (randomStr) => {
     setRandomText(randomStr);
   };
 
-  const HandlePasswordLock = (pass) => {
+  const handlePasswordLock = (pass) => {
     setPassword(pass);
+  };
+
+  const handleLockMethodChange = (event) => {
+    const newLockMethod = event.target.value;
   };
 
   const renderLockInputs = () => {
@@ -211,4 +216,5 @@ BlockedSitesSection.propTypes = {
   onDeleteWebsite: PropTypes.func.isRequired,
   onToggleSectionEnabled: PropTypes.func.isRequired,
   onToggleSectionLock: PropTypes.func.isRequired,
+  onLockMethodChange: PropTypes.func.isRequired,
 };

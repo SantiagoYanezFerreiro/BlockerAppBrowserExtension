@@ -155,6 +155,7 @@ export default function WebsiteBlocker() {
           section={section}
           onToggleSectionEnabled={() => toggleSectionEnabled(index)}
           onToggleSectionLock={() => toggleSectionLock(index)}
+          onLockMethodChange={() => toggleSectionLock(index)}
           title={section.title}
           sites={section.sites}
           isModalOpen={activeModalIndex === index}
