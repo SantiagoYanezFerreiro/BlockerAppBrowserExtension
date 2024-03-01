@@ -6,8 +6,6 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { VscDiffAdded } from "react-icons/vsc";
 import { FaRegWindowClose } from "react-icons/fa";
 import { TfiSave } from "react-icons/tfi";
-import { FaLock } from "react-icons/fa";
-import { GrUnlock } from "react-icons/gr";
 
 export default function BlockedSitesSection({
   index,
@@ -22,7 +20,6 @@ export default function BlockedSitesSection({
   onEditSectionTitle,
   onDeleteSection,
   onDeleteWebsite,
-  onToggleSectionEnabled,
   onToggleSectionLock,
   onLockMethodChange,
 }) {
@@ -107,9 +104,17 @@ export default function BlockedSitesSection({
 
   const renderLockToggle = () => {
     return (
-      <button onClick={onToggleSectionLock}>
-        {section.locked ? <GrUnlock /> : <FaLock />}
-      </button>
+      <>
+        <p className="toggle-text">{section.locked ? "Off" : "On"}</p>
+        <label className="toggle-switch">
+          <input
+            type="checkbox"
+            checked={section.unlocked}
+            onClick={onToggleSectionLock}
+          />
+          <span className="slider round"></span>
+        </label>
+      </>
     );
   };
 
@@ -193,15 +198,6 @@ export default function BlockedSitesSection({
           </div>
         </div>
       )}
-      <p className="toggle-text">{section.enabled ? "On" : "Off"}</p>
-      <label className="toggle-switch">
-        <input
-          type="checkbox"
-          checked={section.enabled}
-          onChange={() => onToggleSectionEnabled(index)}
-        />
-        <span className="slider round"></span>
-      </label>
     </div>
   );
 }
@@ -220,7 +216,6 @@ BlockedSitesSection.propTypes = {
   onEditSectionTitle: PropTypes.func.isRequired,
   onDeleteSection: PropTypes.func.isRequired,
   onDeleteWebsite: PropTypes.func.isRequired,
-  onToggleSectionEnabled: PropTypes.func.isRequired,
   onToggleSectionLock: PropTypes.func.isRequired,
   onLockMethodChange: PropTypes.func.isRequired,
 };
