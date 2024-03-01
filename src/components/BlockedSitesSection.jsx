@@ -65,6 +65,20 @@ export default function BlockedSitesSection({
 
   const handleLockMethodChange = (event) => {
     const newLockMethod = event.target.value;
+    onLockMethodChange(index, newLockMethod);
+  };
+
+  const renderLockMethodSelector = () => {
+    if (section.locked) {
+      return (
+        <select value={section.lockMethod} onChange={handleLockMethodChange}>
+          <option value="timer">Timer</option>
+          <option value="randomText">Random Text</option>
+          <option value="password">Password</option>{" "}
+        </select>
+      );
+    }
+    return null;
   };
 
   const renderLockInputs = () => {
@@ -76,21 +90,21 @@ export default function BlockedSitesSection({
           return (
             <input
               type="datetime-local"
-              onChange={(e) => HandleTimeRangeLock(e.target.value)}
+              onChange={(e) => handleTimeRangeLock(e.target.value)}
             />
           );
         case "randomText":
           return (
             <input
               type="text"
-              onChange={(e) => HandleRandomTextLock(e.target.value)}
+              onChange={(e) => handleRandomTextLock(e.target.value)}
             />
           );
         case "password":
           return (
             <input
               type="password"
-              onChange={(e) => HandlePasswordLock(e.target.value)}
+              onChange={(e) => handlePasswordLock(e.target.value)}
             />
           );
         default:
@@ -113,6 +127,9 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
+      {renderLockMethodSelector()}
+      {section.locked && renderLockInputs()}
+      {renderLockToggle()}
 
       {isModalOpen && (
         <ul>
