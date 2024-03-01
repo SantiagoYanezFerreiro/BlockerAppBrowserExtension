@@ -109,8 +109,8 @@ export default function BlockedSitesSection({
         <label className="toggle-switch">
           <input
             type="checkbox"
-            checked={section.unlocked}
-            onClick={onToggleSectionLock}
+            checked={!section.locked}
+            onChange={onToggleSectionLock}
           />
           <span className="slider round"></span>
         </label>
