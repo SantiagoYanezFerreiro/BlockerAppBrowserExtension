@@ -202,8 +202,6 @@ export default function BlockedSitesSection({
         />
         <span className="slider round"></span>
       </label>
-      {renderLockInputs()}
-      {renderLockToggle()}
     </div>
   );
 }
