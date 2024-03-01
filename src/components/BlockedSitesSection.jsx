@@ -29,9 +29,7 @@ export default function BlockedSitesSection({
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingValue, setEditingValue] = useState("");
-  const [unlockTime, setUnlockTime] = useState(null);
-  const [randomText, setRandomText] = useState("");
-  const [password, setPassword] = useState("");
+  const [lockInputValue, setLockInputValue] = useState("");
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -51,16 +49,8 @@ export default function BlockedSitesSection({
 
   //Handlers for Blocking Methods
 
-  const handleTimeRangeLock = (time) => {
-    setUnlockTime(time);
-  };
-
-  const handleRandomTextLock = (randomStr) => {
-    setRandomText(randomStr);
-  };
-
-  const handlePasswordLock = (pass) => {
-    setPassword(pass);
+  const handleLockInputValue = (value) => {
+    setLockInputValue(value);
   };
 
   const handleLockMethodChange = (event) => {
@@ -82,29 +72,30 @@ export default function BlockedSitesSection({
   };
 
   const renderLockInputs = () => {
-    console.log("renderLockInputs called, section.locked:", section.locked);
     if (section.locked) {
-      console.log("Lock method:", section.lockMethod);
       switch (section.lockMethod) {
         case "timer":
           return (
             <input
               type="datetime-local"
-              onChange={(e) => handleTimeRangeLock(e.target.value)}
+              value={lockInputValue}
+              onChange={(e) => handleLockInputValue(e.target.value)}
             />
           );
         case "randomText":
           return (
             <input
               type="text"
-              onChange={(e) => handleRandomTextLock(e.target.value)}
+              value={lockInputValue}
+              onChange={(e) => handleLockInputValue(e.target.value)}
             />
           );
         case "password":
           return (
             <input
               type="password"
-              onChange={(e) => handlePasswordLock(e.target.value)}
+              value={lockInputValue}
+              onChange={(e) => handleLockInputValue(e.target.value)}
             />
           );
         default:
