@@ -7,7 +7,7 @@ nav {
   top: 20px;
   right: 40px;
   width: 100%; /* Navbar spans the full width */
-  z-index: 1000; /* Ensures navbar is above other elements */
+  z-index: 1000;
 }
 
 nav a {

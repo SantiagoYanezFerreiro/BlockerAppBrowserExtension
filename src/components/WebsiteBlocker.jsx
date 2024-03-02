@@ -32,7 +32,7 @@ export default function WebsiteBlocker() {
           title: newSectionTitle,
           sites: [],
           enabled: true,
-          locked: false,
+          locked: true,
           lockMethod: null,
         },
       ];
