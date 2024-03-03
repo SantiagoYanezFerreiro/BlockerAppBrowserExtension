@@ -14,6 +14,10 @@ function App() {
   //Lifted state up to dispaly sections in overview
   const [sections, setSections] = useState([]);
 
+  const updateSections = (newSections) => {
+    setSections(newSections);
+  };
+
   useEffect(() => {
     getFromStorage(["sections"], (result) => {
       if (result.sections) {
@@ -29,8 +33,24 @@ function App() {
         <Navbar />
         {/* Show Content */}
         <Routes>
-          <Route exact path="/" element={<Overview sections={sections} />} />
-          <Route path="/blocks" element={<WebsiteBlocker />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <Overview sections={sections} updateSections={updateSections} />
+            }
+          />
+          <Route
+            path="/blocks"
+            element={
+              <WebsiteBlocker
+                sections={sections}
+                setSections={setSections}
+                updateSections={updateSections}
+                n
+              />
+            }
+          />
           <Route path="/stats" element={<Stats />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

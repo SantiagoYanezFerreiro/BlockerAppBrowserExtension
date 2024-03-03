@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import BlockedSitesSection from "./BlockedSitesSection";
 import { getFromStorage, saveToStorage } from "../utils/chromeAPI";
+import PropTypes from "prop-types";
 import "../WebsiteBlocker.css";
 import { VscDiffAdded } from "react-icons/vsc";
 
-export default function WebsiteBlocker() {
-  const [sections, setSections] = useState([]);
+export default function WebsiteBlocker({
+  sections,
+  setSections,
+  updateSections,
+}) {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
   const [newSectionTitle, setNewSectionTitle] = useState("");
   const [isAddingSection, setIsAddingNewSection] = useState(false);
@@ -21,7 +25,13 @@ export default function WebsiteBlocker() {
         })) || [];
       setSections(updatedSections);
     });
-  }, []);
+  }, [setSections]);
+
+  const handleSectionsUpdate = (updatedSection, index) => {
+    const newSections = [...sections];
+    newSections[index] = updatedSection;
+    updateSections(newSections);
+  };
 
   // Function to add a new section
   const handleAddSection = () => {
@@ -153,6 +163,9 @@ export default function WebsiteBlocker() {
           key={index}
           index={index}
           section={section}
+          onSectionUpdate={(updatedSection) =>
+            handleSectionsUpdate(updatedSection, index)
+          }
           onToggleSectionEnabled={() => toggleSectionEnabled(index)}
           onToggleSectionLock={() => toggleSectionLock(index)}
           onLockMethodChange={handleLockMethodChange}
@@ -198,3 +211,9 @@ export default function WebsiteBlocker() {
     </div>
   );
 }
+
+WebsiteBlocker.propTypes = {
+  sections: PropTypes.array.isRequired,
+  setSections: PropTypes.func.isRequired,
+  updateSections: PropTypes.func.isRequired,
+};
