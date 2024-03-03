@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "../Overview.css";
 
 export default function Overview({ sections }) {
   return (
@@ -6,6 +7,8 @@ export default function Overview({ sections }) {
       {sections.map((section, index) => (
         <div key={index} className="section-overview">
           <h3>{section.title}</h3>
+          <h3>Time Remaining</h3>
+          <h3>Blocked Until</h3>
         </div>
       ))}
     </div>

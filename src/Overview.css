@@ -1,0 +1,27 @@
+.overview-container {
+  width: 100%;
+  /* Styles for the container */
+}
+
+.section-overview {
+  display: flex;
+  justify-content: space-between; /* Aligns children with space between */
+  align-items: center; /* Aligns children vertically in the center */
+  padding: 20px; /* Add some padding */
+  border-bottom: 1px solid #ccc; /* Optional: adds a line between sections */
+  width: 100%;
+}
+
+.section-overview h3 {
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.section-overview h3:first-child {
+  text-align: left;
+}
+
+.section-overview h3:last-child {
+  text-align: right;
+}
