@@ -23,11 +23,13 @@ export default function BlockedSitesSection({
   onToggleSectionLock,
   onLockMethodChange,
   onLockSubmit,
+  onUnlockSection,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingValue, setEditingValue] = useState("");
   const [lockValue, setlockValue] = useState("");
+  const [unlockAttempt, setUnlockAttempt] = useState("");
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -58,6 +60,15 @@ export default function BlockedSitesSection({
   const handleLockMethodChange = (event) => {
     const newLockMethod = event.target.value;
     onLockMethodChange(index, newLockMethod);
+  };
+
+  const handleUnlockAttempt = () => {
+    if (unlockAttempt === section.lockValue) {
+      onUnlockSection(section.index);
+    } else {
+      alert("incorrect attempt");
+    }
+    setUnlockAttempt("");
   };
 
   const renderLockMethodSelector = () => {
@@ -228,4 +239,5 @@ BlockedSitesSection.propTypes = {
   onToggleSectionLock: PropTypes.func.isRequired,
   onLockMethodChange: PropTypes.func.isRequired,
   onLockSubmit: PropTypes.func.isRequired,
+  onUnlockSection: PropTypes.func.isRequired,
 };

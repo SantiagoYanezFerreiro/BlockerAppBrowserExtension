@@ -166,6 +166,16 @@ export default function WebsiteBlocker({
     saveToStorage({ sections: updatedSections });
   };
 
+  const handleUnlockSection = (index) => {
+    const newSections = sections.map((section, idx) => {
+      if (idx === index) {
+        return { ...section, locked: false };
+      }
+      return section;
+    });
+    setSections(newSections);
+  };
+
   return (
     <div className="blocker-container">
       <h1>Blocks</h1>
@@ -181,6 +191,7 @@ export default function WebsiteBlocker({
           onToggleSectionLock={() => toggleSectionLock(index)}
           onLockSubmit={onLockSubmit}
           onLockMethodChange={handleLockMethodChange}
+          onUnlockSection={handleUnlockSection}
           title={section.title}
           sites={section.sites}
           isModalOpen={activeModalIndex === index}
