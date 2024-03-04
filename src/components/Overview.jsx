@@ -5,7 +5,7 @@ import { IoLockClosedOutline } from "react-icons/io5";
 export default function Overview({ sections }) {
   return (
     <div className="overview-container">
-      <h1>Blocks</h1>
+      <h1>Active Blocks</h1>
       {sections.map((section, index) => (
         <div key={index} className="section-overview">
           <h3>{section.title}</h3>
