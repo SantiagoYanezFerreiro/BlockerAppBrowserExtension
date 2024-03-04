@@ -8,7 +8,12 @@ export default function Overview({ sections }) {
       {sections.map((section, index) => (
         <div key={index} className="section-overview">
           <h3>{section.title}</h3>
-          <h3>Time Remaining</h3>
+          <h3>
+            {section.lockMethod === "password" ||
+            section.lockMethod === "randomText"
+              ? "No breaks"
+              : "No Allowance Remaining"}
+          </h3>
           <h3>{section.lockMethod}</h3>
           <IoLockClosedOutline />
         </div>
