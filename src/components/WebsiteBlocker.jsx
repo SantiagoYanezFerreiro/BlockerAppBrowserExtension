@@ -149,6 +149,16 @@ export default function WebsiteBlocker({
     saveToStorage({ sections: updatedSections });
   };
 
+  const onLockSubmit = (index, lockMethod, lockValue) => {
+    const newSections = sections.map((section, idx) => {
+      if (idx === index) {
+        return { ...section, lockMethod, lockValue };
+      }
+      return section;
+    });
+    setSections(newSections);
+  };
+
   const handleLockMethodChange = (sectionIndex, lockMethod) => {
     const updatedSections = [...sections];
     updatedSections[sectionIndex].lockMethod = lockMethod;
@@ -169,6 +179,7 @@ export default function WebsiteBlocker({
           }
           onToggleSectionEnabled={() => toggleSectionEnabled(index)}
           onToggleSectionLock={() => toggleSectionLock(index)}
+          onLockSubmit={onLockSubmit}
           onLockMethodChange={handleLockMethodChange}
           title={section.title}
           sites={section.sites}

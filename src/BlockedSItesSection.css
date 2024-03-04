@@ -101,3 +101,9 @@ input:checked + .slider:before {
 .lock-methods {
   margin: 20px 0;
 }
+
+.save-lock-button {
+  margin-left: 10px;
+  border-radius: 10%;
+  font-size: 80%;
+}

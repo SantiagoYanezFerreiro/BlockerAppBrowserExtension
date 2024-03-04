@@ -22,11 +22,12 @@ export default function BlockedSitesSection({
   onDeleteWebsite,
   onToggleSectionLock,
   onLockMethodChange,
+  onLockSubmit,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingValue, setEditingValue] = useState("");
-  const [lockInputValue, setLockInputValue] = useState("");
+  const [lockValue, setlockValue] = useState("");
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -46,8 +47,12 @@ export default function BlockedSitesSection({
 
   //Handlers for Blocking Methods
 
-  const handleLockInputValue = (value) => {
-    setLockInputValue(value);
+  const handlelockValue = (value) => {
+    setlockValue(value);
+  };
+
+  const handleLockSubmit = () => {
+    onLockSubmit(index, section.lockMethod, lockValue);
   };
 
   const handleLockMethodChange = (event) => {
@@ -75,24 +80,24 @@ export default function BlockedSitesSection({
           return (
             <input
               type="datetime-local"
-              value={lockInputValue}
-              onChange={(e) => handleLockInputValue(e.target.value)}
+              value={lockValue}
+              onChange={(e) => handlelockValue(e.target.value)}
             />
           );
         case "randomText":
           return (
             <input
               type="text"
-              value={lockInputValue}
-              onChange={(e) => handleLockInputValue(e.target.value)}
+              value={lockValue}
+              onChange={(e) => handlelockValue(e.target.value)}
             />
           );
         case "password":
           return (
             <input
               type="password"
-              value={lockInputValue}
-              onChange={(e) => handleLockInputValue(e.target.value)}
+              value={lockValue}
+              onChange={(e) => handlelockValue(e.target.value)}
             />
           );
         default:
@@ -105,6 +110,9 @@ export default function BlockedSitesSection({
   const renderLockToggle = () => {
     return (
       <>
+        <button className="save-lock-button" onClick={handleLockSubmit}>
+          Submit
+        </button>
         <p className="toggle-text">{section.locked ? "Off" : "On"}</p>
         <label className="toggle-switch">
           <input
@@ -112,6 +120,7 @@ export default function BlockedSitesSection({
             checked={!section.locked}
             onChange={onToggleSectionLock}
           />
+
           <span className="slider round"></span>
         </label>
       </>
@@ -218,4 +227,5 @@ BlockedSitesSection.propTypes = {
   onDeleteWebsite: PropTypes.func.isRequired,
   onToggleSectionLock: PropTypes.func.isRequired,
   onLockMethodChange: PropTypes.func.isRequired,
+  onLockSubmit: PropTypes.func.isRequired,
 };
