@@ -44,6 +44,7 @@ export default function WebsiteBlocker({
           enabled: true,
           locked: true,
           lockMethod: null,
+          lockValue: null,
         },
       ];
       setSections(newSections);
