@@ -157,6 +157,7 @@ export default function WebsiteBlocker({
       return section;
     });
     setSections(newSections);
+    saveToStorage({ sections: newSections });
   };
 
   const handleLockMethodChange = (sectionIndex, lockMethod) => {

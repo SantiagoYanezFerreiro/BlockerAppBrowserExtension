@@ -30,6 +30,7 @@ export default function BlockedSitesSection({
   const [editingValue, setEditingValue] = useState("");
   const [lockValue, setlockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
+  const [unlockInput, setUnlockInput] = useState("");
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -55,6 +56,8 @@ export default function BlockedSitesSection({
 
   const handleLockSubmit = () => {
     onLockSubmit(index, section.lockMethod, lockValue);
+
+    setlockValue("");
   };
 
   const handleLockMethodChange = (event) => {
@@ -63,12 +66,13 @@ export default function BlockedSitesSection({
   };
 
   const handleUnlockAttempt = () => {
+    event.preventDefault();
     if (unlockAttempt === section.lockValue) {
-      onUnlockSection(section.index);
+      onUnlockSection(index);
+      setUnlockAttempt("");
     } else {
       alert("incorrect attempt");
     }
-    setUnlockAttempt("");
   };
 
   const renderLockMethodSelector = () => {
@@ -119,10 +123,14 @@ export default function BlockedSitesSection({
   };
 
   const renderLockToggle = () => {
+    const buttonText = section.locked ? "Submit" : "Unlock";
+    const clickHandler = section.locked
+      ? handleLockSubmit
+      : handleUnlockAttempt;
     return (
       <>
-        <button className="save-lock-button" onClick={handleLockSubmit}>
-          Submit
+        <button className="save-lock-button" onClick={clickHandler}>
+          {buttonText}
         </button>
         <p className="toggle-text">{section.locked ? "Off" : "On"}</p>
         <label className="toggle-switch">
