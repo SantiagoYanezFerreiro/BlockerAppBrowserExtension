@@ -89,37 +89,27 @@ export default function BlockedSitesSection({
   };
 
   const renderLockInputs = () => {
-    if (section.locked) {
-      switch (section.lockMethod) {
-        case "timer":
-          return (
-            <input
-              type="datetime-local"
-              value={lockValue}
-              onChange={(e) => handlelockValue(e.target.value)}
-            />
-          );
-        case "randomText":
-          return (
-            <input
-              type="text"
-              value={lockValue}
-              onChange={(e) => handlelockValue(e.target.value)}
-            />
-          );
-        case "password":
-          return (
-            <input
-              type="password"
-              value={lockValue}
-              onChange={(e) => handlelockValue(e.target.value)}
-            />
-          );
-        default:
-          return null;
-      }
+    let inputType;
+    switch (section.lockMethod) {
+      case "timer":
+        inputType = "datetime-local";
+        break;
+      case "randomText":
+        inputType = "text";
+        break;
+      case "password":
+        inputType = "password";
+        break;
+      default:
+        return null;
     }
-    return null;
+    return (
+      <input
+        type={inputType}
+        value={lockValue}
+        onChange={(e) => handlelockValue(e.target.value)}
+      />
+    );
   };
 
   const renderLockToggle = () => {
@@ -129,6 +119,7 @@ export default function BlockedSitesSection({
       : handleUnlockAttempt;
     return (
       <>
+        {renderLockInputs()}
         <button className="save-lock-button" onClick={clickHandler}>
           {buttonText}
         </button>
@@ -152,7 +143,6 @@ export default function BlockedSitesSection({
         {title}
       </h2>
       {renderLockMethodSelector()}
-      {section.locked && renderLockInputs()}
       {renderLockToggle()}
 
       {isModalOpen && (
