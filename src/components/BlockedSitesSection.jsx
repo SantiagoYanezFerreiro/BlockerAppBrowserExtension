@@ -56,7 +56,6 @@ export default function BlockedSitesSection({
 
   const handleLockSubmit = () => {
     onLockSubmit(index, section.lockMethod, lockValue);
-
     setlockValue("");
   };
 
