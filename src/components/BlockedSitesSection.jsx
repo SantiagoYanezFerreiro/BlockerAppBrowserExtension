@@ -62,6 +62,11 @@ export default function BlockedSitesSection({
   const handleLockMethodChange = (event) => {
     const newLockMethod = event.target.value;
     onLockMethodChange(index, newLockMethod);
+
+    if (newLockMethod === "randomText") {
+      const randomString = generateRandomString(20);
+      setlockValue(randomString);
+    }
   };
 
   const handleUnlockAttempt = () => {
@@ -135,6 +140,18 @@ export default function BlockedSitesSection({
       </>
     );
   };
+
+  function generateRandomString(length) {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return result;
+  }
 
   return (
     <div className="blocker-sites-section">
