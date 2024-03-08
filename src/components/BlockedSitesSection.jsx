@@ -56,7 +56,6 @@ export default function BlockedSitesSection({
 
   const handleLockSubmit = () => {
     onLockSubmit(index, section.lockMethod, lockValue);
-    setlockValue("");
   };
 
   const handleLockMethodChange = (event) => {
@@ -66,6 +65,8 @@ export default function BlockedSitesSection({
     if (newLockMethod === "randomText") {
       const randomString = generateRandomString(20);
       setlockValue(randomString);
+    } else {
+      setlockValue("");
     }
   };
 
