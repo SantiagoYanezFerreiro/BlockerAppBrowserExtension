@@ -30,7 +30,7 @@ export default function BlockedSitesSection({
   const [editingValue, setEditingValue] = useState("");
   const [lockValue, setlockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
-  const [unlockInput, setUnlockInput] = useState("");
+  const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -56,6 +56,9 @@ export default function BlockedSitesSection({
 
   const handleLockSubmit = () => {
     onLockSubmit(index, section.lockMethod, lockValue);
+    if (section.locked && section.lockMethod !== "randomText") {
+      setlockValue(""); // Clear the input when the section is locked
+    }
   };
 
   const handleLockMethodChange = (event) => {
@@ -75,6 +78,7 @@ export default function BlockedSitesSection({
     if (unlockAttempt === section.lockValue) {
       onUnlockSection(index);
       setUnlockAttempt("");
+      setWasSuccessfullyUnlocked(false);
     } else {
       alert("incorrect attempt");
     }

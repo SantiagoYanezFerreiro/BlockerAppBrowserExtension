@@ -139,12 +139,13 @@ export default function WebsiteBlocker({
   const toggleSectionLock = (index) => {
     const updatedSections = [...sections];
     const section = updatedSections[index];
-    section.locked = !updatedSections[index].locked;
+    section.locked = !section.locked;
 
     if (section.locked && !section.lockMethod) {
       section.lockMethod = "password";
+    } else if (!section.locked && section.lockMethod !== "randomText") {
+      section.lockValue = "";
     }
-
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections });
   };
