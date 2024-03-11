@@ -81,8 +81,12 @@ export default function BlockedSitesSection({
       onUnlockSection(index);
       setUnlockAttempt("");
       setWasSuccessfullyUnlocked(true);
+      // Optionally, log a success message or perform other actions
+      console.log("Unlock successful");
     } else {
-      alert("incorrect attempt");
+      // Log an error message
+      console.error("Incorrect unlock attempt");
+      alert("Incorrect password, please try again.");
     }
   };
 

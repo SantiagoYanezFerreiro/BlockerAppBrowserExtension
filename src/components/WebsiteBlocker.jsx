@@ -174,6 +174,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
       return section;
     });
     setSections(newSections);
+    saveToStorage({ sections: newSections });
   };
 
   return (
