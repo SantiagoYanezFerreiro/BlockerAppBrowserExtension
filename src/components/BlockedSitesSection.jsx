@@ -22,7 +22,7 @@ export default function BlockedSitesSection({
   onDeleteWebsite,
   onToggleSectionLock,
   onLockMethodChange,
-  onLockSubmit,
+  onSectionUpdate,
   onUnlockSection,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
@@ -55,10 +55,12 @@ export default function BlockedSitesSection({
   };
 
   const handleLockSubmit = () => {
-    onLockSubmit(index, section.lockMethod, lockValue);
-    if (section.locked && section.lockMethod !== "randomText") {
-      setlockValue(""); // Clear the input when the section is locked
-    }
+    // Assuming onLockSubmit function updates the section in the parent state and persists to storage
+    // Update local state to reflect the change if necessary
+    const updatedSection = { ...section, lockValue, locked: true };
+    // Call a function that updates the state in the parent component
+    // This function should handle saving the updated section to storage
+    onSectionUpdate(updatedSection, index);
   };
 
   const handleLockMethodChange = (event) => {
@@ -78,7 +80,7 @@ export default function BlockedSitesSection({
     if (unlockAttempt === section.lockValue) {
       onUnlockSection(index);
       setUnlockAttempt("");
-      setWasSuccessfullyUnlocked(false);
+      setWasSuccessfullyUnlocked(true);
     } else {
       alert("incorrect attempt");
     }
@@ -137,13 +139,22 @@ export default function BlockedSitesSection({
           <input
             type="checkbox"
             checked={!section.locked}
-            onChange={onToggleSectionLock}
+            onChange={onToggleSectionLockAdjusted}
           />
 
           <span className="slider round"></span>
         </label>
       </>
     );
+  };
+
+  const onToggleSectionLockAdjusted = () => {
+    if (section.locked) {
+      setWasSuccessfullyUnlocked(false);
+    } else if (wasSuccesfullyUnlocked) {
+      setlockValue(section.lockValue);
+    }
+    onToggleSectionLock(index);
   };
 
   function generateRandomString(length) {
@@ -259,4 +270,5 @@ BlockedSitesSection.propTypes = {
   onLockMethodChange: PropTypes.func.isRequired,
   onLockSubmit: PropTypes.func.isRequired,
   onUnlockSection: PropTypes.func.isRequired,
+  onSectionUpdate: PropTypes.func.isRequired,
 };

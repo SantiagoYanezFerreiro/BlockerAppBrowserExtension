@@ -5,11 +5,7 @@ import PropTypes from "prop-types";
 import "../WebsiteBlocker.css";
 import { VscDiffAdded } from "react-icons/vsc";
 
-export default function WebsiteBlocker({
-  sections,
-  setSections,
-  updateSections,
-}) {
+export default function WebsiteBlocker({ sections, setSections }) {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
   const [newSectionTitle, setNewSectionTitle] = useState("");
   const [isAddingSection, setIsAddingNewSection] = useState(false);
@@ -28,9 +24,11 @@ export default function WebsiteBlocker({
   }, [setSections]);
 
   const handleSectionsUpdate = (updatedSection, index) => {
-    const newSections = [...sections];
-    newSections[index] = updatedSection;
-    updateSections(newSections);
+    const newSections = sections.map((section, idx) =>
+      idx === index ? updatedSection : section
+    );
+    setSections(newSections);
+    saveToStorage({ sections: newSections });
   };
 
   // Function to add a new section
