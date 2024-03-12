@@ -191,18 +191,21 @@ export default function BlockedSitesSection({
                     onChange={(e) => setEditingValue(e.target.value)}
                   />
                   <TfiSave className="icon" onClick={handleSaveEdit} />
-                  <FaRegWindowClose
+                  <FaRegWindowClose />
+                  <div
                     className="icon"
                     onClick={() => setEditingIndex(null)}
-                  />
+                  ></div>
                 </div>
               ) : (
                 <div>
                   <p className="site-name">{site}</p>
+
                   <FaPencilAlt
                     className="icon"
                     onClick={() => handleEditWebsite(siteIndex, site)}
                   />
+
                   <AiOutlineDelete
                     className="icon"
                     onClick={() => onDeleteWebsite(siteIndex)}
@@ -224,13 +227,9 @@ export default function BlockedSitesSection({
                 onChange={(e) => setNewWebsite(e.target.value)}
                 placeholder="Enter new website"
               />
-              <VscDiffAdded
-                className="icon"
-                onClick={handleAddWebsite}
-                Add
-                Website
-              />
+              <VscDiffAdded className="icon" onClick={handleAddWebsite} />
             </div>
+
             <div className="add-edit-section">
               <input
                 type="text"
@@ -241,8 +240,6 @@ export default function BlockedSitesSection({
               <AiOutlineDelete
                 className="icon"
                 onClick={() => onDeleteSection(index)}
-                Delete
-                Section
               />
 
               <FaRegWindowClose className="icon" onClick={onCloseModal} Close />

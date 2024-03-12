@@ -219,18 +219,14 @@ export default function WebsiteBlocker({ sections, setSections }) {
             onChange={(e) => setNewSectionTitle(e.target.value)}
             placeholder="Enter Section Title"
           />
-          <VscDiffAdded
-            className="icon-website-blocker"
-            onClick={handleAddSection}
-          />
+          <div className="icon-button" onClick={handleAddSection}>
+            <VscDiffAdded className="icon-website-blocker" />
+          </div>
         </div>
       ) : (
-        <VscDiffAdded
-          className="icon-website-blocker"
-          onClick={() => setIsAddingNewSection(true)}
-        >
-          Add New Section
-        </VscDiffAdded>
+        <div onClick={() => setIsAddingNewSection(true)}>
+          <VscDiffAdded className="icon-website-blocker" />
+        </div>
       )}
     </div>
   );

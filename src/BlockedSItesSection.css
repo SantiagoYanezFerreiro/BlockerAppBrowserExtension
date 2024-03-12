@@ -41,7 +41,6 @@
   display: inline-block;
   width: 60px;
   height: 34px;
-  margin-bottom: 20px;
 }
 
 /* Hide default HTML checkbox */
@@ -100,7 +99,7 @@ input:checked + .slider:before {
 }
 
 .lock-section {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .lock-methods {
