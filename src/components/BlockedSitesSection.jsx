@@ -178,8 +178,6 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-      {renderLockMethodSelector()}
-      {renderLockToggle()}
 
       {isModalOpen && (
         <ul>
@@ -249,6 +247,10 @@ export default function BlockedSitesSection({
 
               <FaRegWindowClose className="icon" onClick={onCloseModal} Close />
             </div>
+          </div>
+          <div className="lock-section">
+            {renderLockMethodSelector()}
+            {renderLockToggle()}
           </div>
         </div>
       )}
