@@ -75,15 +75,13 @@ export default function BlockedSitesSection({
     }
   };
 
-  const handleUnlockAttempt = () => {
-    event.preventDefault();
+  const handleUnlockAttempt = (e) => {
+    e.preventDefault();
     console.log("Attempt:", unlockAttempt);
     console.log("Expected:", section.lockValue);
     if (unlockAttempt === section.lockValue) {
       onUnlockSection(index);
       setUnlockAttempt("");
-      setWasSuccessfullyUnlocked(true);
-      // Optionally, log a success message or perform other actions
       console.log("Unlock successful");
     } else {
       // Log an error message
@@ -133,10 +131,11 @@ export default function BlockedSitesSection({
   };
 
   const renderLockToggle = () => {
-    const buttonText = section.locked ? "Submit" : "Unlock";
+    const buttonText = section.locked ? "Unlock" : "Submit";
     const clickHandler = section.locked
-      ? handleLockSubmit
-      : handleUnlockAttempt;
+      ? handleUnlockAttempt
+      : handleLockSubmit;
+
     return (
       <>
         {renderLockInputs()}
