@@ -111,3 +111,7 @@ input:checked + .slider:before {
   border-radius: 10%;
   font-size: 80%;
 }
+
+.icon-button {
+  margin-top: 10px;
+}

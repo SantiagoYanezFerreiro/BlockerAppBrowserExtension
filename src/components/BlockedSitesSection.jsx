@@ -77,6 +77,8 @@ export default function BlockedSitesSection({
 
   const handleUnlockAttempt = () => {
     event.preventDefault();
+    console.log("Attempt:", unlockAttempt);
+    console.log("Expected:", section.lockValue);
     if (unlockAttempt === section.lockValue) {
       onUnlockSection(index);
       setUnlockAttempt("");
@@ -230,7 +232,9 @@ export default function BlockedSitesSection({
                 onChange={(e) => setNewWebsite(e.target.value)}
                 placeholder="Enter new website"
               />
-              <VscDiffAdded className="icon" onClick={handleAddWebsite} />
+              <div className="icon-button" onClick={handleAddWebsite}>
+                <VscDiffAdded className="icon" />
+              </div>
             </div>
 
             <div className="add-edit-section">
@@ -240,12 +244,14 @@ export default function BlockedSitesSection({
                 onChange={(e) => onEditSectionTitle(e.target.value)}
                 placeholder="Enter Section Title"
               />
-              <AiOutlineDelete
-                className="icon"
-                onClick={() => onDeleteSection(index)}
-              />
+              <div className="icon-button">
+                <AiOutlineDelete
+                  className="icon"
+                  onClick={() => onDeleteSection(index)}
+                />
 
-              <FaRegWindowClose className="icon" onClick={onCloseModal} />
+                <FaRegWindowClose className="icon" onClick={onCloseModal} />
+              </div>
             </div>
           </div>
           <div className="lock-section">
