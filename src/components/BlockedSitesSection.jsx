@@ -131,7 +131,7 @@ export default function BlockedSitesSection({
   };
 
   const renderLockToggle = () => {
-    const buttonText = section.locked ? "Unlock" : "Submit";
+    const buttonText = section.locked ? "Submit" : "Unlock";
     const clickHandler = section.locked
       ? handleUnlockAttempt
       : handleLockSubmit;
