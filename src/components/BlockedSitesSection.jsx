@@ -93,7 +93,10 @@ export default function BlockedSitesSection({
   const renderLockMethodSelector = () => {
     if (section.locked) {
       return (
-        <select value={section.lockMethod} onChange={handleLockMethodChange}>
+        <select
+          value={section.lockMethod || ""}
+          onChange={handleLockMethodChange}
+        >
           <option value="timer">Timer</option>
           <option value="randomText">Random Text</option>
           <option value="password">Password</option>{" "}
@@ -242,7 +245,7 @@ export default function BlockedSitesSection({
                 onClick={() => onDeleteSection(index)}
               />
 
-              <FaRegWindowClose className="icon" onClick={onCloseModal} Close />
+              <FaRegWindowClose className="icon" onClick={onCloseModal} />
             </div>
           </div>
           <div className="lock-section">
