@@ -31,6 +31,7 @@ export default function BlockedSitesSection({
   const [lockValue, setlockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
+  const [unlockSuccessful, setUnlockSuccessful] = useState(false);
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -82,9 +83,11 @@ export default function BlockedSitesSection({
     if (unlockAttempt === section.lockValue) {
       onUnlockSection(index);
       setUnlockAttempt("");
+      setUnlockSuccessful(true);
       console.log("Unlock successful");
     } else {
       // Log an error message
+      setUnlockSuccessful(false);
       console.error("Incorrect unlock attempt");
       alert("Incorrect password, please try again.");
     }
@@ -108,6 +111,8 @@ export default function BlockedSitesSection({
 
   const renderLockInputs = () => {
     let inputType;
+    let inputValue;
+    let inputChangeHandler;
     switch (section.lockMethod) {
       case "timer":
         inputType = "datetime-local";
@@ -121,20 +126,28 @@ export default function BlockedSitesSection({
       default:
         return null;
     }
+
+    if (section.locked) {
+      inputValue = unlockAttempt || "";
+      inputChangeHandler = (e) => setUnlockAttempt(e.target.value);
+    } else {
+      inputValue = lockValue || "";
+      inputChangeHandler = (e) => setlockValue(e.target.value);
+    }
+
     return (
       <input
         type={inputType}
-        value={lockValue}
-        onChange={(e) => handlelockValue(e.target.value)}
+        value={inputValue}
+        onChange={inputChangeHandler}
       />
     );
   };
 
   const renderLockToggle = () => {
-    const buttonText = section.locked ? "Submit" : "Unlock";
-    const clickHandler = section.locked
-      ? handleUnlockAttempt
-      : handleLockSubmit;
+    const isLocked = section.locked;
+    const buttonText = isLocked ? "Unlock" : "Submit";
+    const clickHandler = isLocked ? handleUnlockAttempt : handleLockSubmit;
 
     return (
       <>
@@ -142,11 +155,11 @@ export default function BlockedSitesSection({
         <button className="save-lock-button" onClick={clickHandler}>
           {buttonText}
         </button>
-        <p className="toggle-text">{section.locked ? "Off" : "On"}</p>
+        <p className="toggle-text">{section.locked ? "On" : "Off"}</p>
         <label className="toggle-switch">
           <input
             type="checkbox"
-            checked={!section.locked}
+            checked={section.locked}
             onChange={onToggleSectionLockAdjusted}
           />
 
@@ -157,6 +170,7 @@ export default function BlockedSitesSection({
   };
 
   const onToggleSectionLockAdjusted = () => {
+    setUnlockSuccessful(false);
     if (section.locked) {
       setWasSuccessfullyUnlocked(false);
     } else if (wasSuccesfullyUnlocked) {
