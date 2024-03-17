@@ -140,10 +140,31 @@ export default function BlockedSitesSection({
         }
       }
       case "randomText":
-        inputType = "text";
-        break;
-
-      case "password": {
+        if (section.locked) {
+          return (
+            <div
+              style={{ userSelect: "none" }}
+              onCopy={(e) => e.preventDefault()}
+            >
+              {lockValue}
+            </div>
+          );
+        } else {
+          inputType = "number";
+          inputValue = lockValue || "";
+          inputChangeHandler = (e) => setLockValue(e.target.value);
+          return (
+            <div>
+              <input
+                type={inputType}
+                placeholder="Number of characters"
+                value={inputValue}
+                onChange={inputChangeHandler}
+              />
+            </div>
+          );
+        }
+      case "password":
         inputType = "password";
         if (section.locked) {
           inputValue = unlockAttempt || "";
@@ -163,7 +184,7 @@ export default function BlockedSitesSection({
                 <input
                   type={inputType}
                   placeholder="Confirm Password"
-                  value={inputValue}
+                  value={confirmLockValue || ""}
                   onChange={(e) => setConfirmLockValue(e.target.value)}
                 />
               </div>
@@ -171,7 +192,6 @@ export default function BlockedSitesSection({
           );
         }
         break;
-      }
       default:
         return null;
     }
