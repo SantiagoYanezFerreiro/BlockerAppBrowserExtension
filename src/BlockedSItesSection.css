@@ -115,3 +115,7 @@ input:checked + .slider:before {
 .icon-button {
   margin-top: 10px;
 }
+
+input {
+  margin-bottom: 20px;
+}

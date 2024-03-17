@@ -124,18 +124,22 @@ export default function BlockedSitesSection({
         } else {
           return (
             <>
-              <input
-                type={inputType}
-                placeholder="Enter Password"
-                value={lockValue || ""}
-                onChange={(e) => setLockValue(e.target.value)}
-              />
-              <input
-                type={inputType}
-                placeholder="Confirm Password"
-                value={inputValue}
-                onChange={(e) => setConfirmLockValue(e.target.value)}
-              />
+              <div>
+                <input
+                  type={inputType}
+                  placeholder="Enter Password"
+                  value={lockValue || ""}
+                  onChange={(e) => setLockValue(e.target.value)}
+                />
+              </div>
+              <div>
+                <input
+                  type={inputType}
+                  placeholder="Confirm Password"
+                  value={inputValue}
+                  onChange={(e) => setConfirmLockValue(e.target.value)}
+                />
+              </div>
             </>
           );
         }
