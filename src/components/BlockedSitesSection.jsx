@@ -51,10 +51,6 @@ export default function BlockedSitesSection({
 
   //Handlers for Blocking Methods
 
-  const handlelockValue = (value) => {
-    setlockValue(value);
-  };
-
   const handleLockSubmit = () => {
     // Assuming onLockSubmit function updates the section in the parent state and persists to storage
     // Update local state to reflect the change if necessary
