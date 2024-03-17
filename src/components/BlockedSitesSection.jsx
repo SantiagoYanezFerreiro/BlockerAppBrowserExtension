@@ -31,6 +31,7 @@ export default function BlockedSitesSection({
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
+  const [confirmLockValue, setConfirmLockValue] = useState("");
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -115,19 +116,31 @@ export default function BlockedSitesSection({
         break;
       case "password":
         inputType = "password";
+        if (section.locked) {
+          inputValue = unlockAttempt || "";
+          inputChangeHandler = (e) => setUnlockAttempt(e.target.value);
+        } else {
+          return (
+            <>
+              <input
+                type={inputType}
+                placeholder="Enter Password"
+                value={lockValue || ""}
+                onChange={(e) => setLockValue(e.target.value)}
+              />
+              <input
+                type={inputType}
+                placeholder="Confirm Password"
+                value={inputValue}
+                onChange={(e) => setConfirmLockValue(e.target.value)}
+              />
+            </>
+          );
+        }
         break;
       default:
         return null;
     }
-
-    if (section.locked) {
-      inputValue = unlockAttempt || "";
-      inputChangeHandler = (e) => setUnlockAttempt(e.target.value);
-    } else {
-      inputValue = lockValue || "";
-      inputChangeHandler = (e) => setLockValue(e.target.value);
-    }
-
     return (
       <input
         type={inputType}
