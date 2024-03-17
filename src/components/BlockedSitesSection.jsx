@@ -28,7 +28,7 @@ export default function BlockedSitesSection({
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingValue, setEditingValue] = useState("");
-  const [lockValue, setlockValue] = useState("");
+  const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
 
@@ -65,9 +65,9 @@ export default function BlockedSitesSection({
 
     if (newLockMethod === "randomText") {
       const randomString = generateRandomString(20);
-      setlockValue(randomString);
+      setLockValue(randomString);
     } else {
-      setlockValue("");
+      setLockValue("");
     }
   };
 
@@ -125,7 +125,7 @@ export default function BlockedSitesSection({
       inputChangeHandler = (e) => setUnlockAttempt(e.target.value);
     } else {
       inputValue = lockValue || "";
-      inputChangeHandler = (e) => setlockValue(e.target.value);
+      inputChangeHandler = (e) => setLockValue(e.target.value);
     }
 
     return (
@@ -166,7 +166,7 @@ export default function BlockedSitesSection({
     if (section.locked) {
       setWasSuccessfullyUnlocked(false);
     } else if (wasSuccesfullyUnlocked) {
-      setlockValue(section.lockValue);
+      setLockValue(section.lockValue);
     }
     onToggleSectionLock(index);
   };
