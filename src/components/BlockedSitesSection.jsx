@@ -112,6 +112,20 @@ export default function BlockedSitesSection({
     switch (section.lockMethod) {
       case "timer":
         inputType = "datetime-local";
+        inputValue = lockValue || "";
+        inputChangeHandler = (e) => setLockValue(e.target.value);
+        const minDateTime = getCurrentDateTime();
+
+        return (
+          <div>
+            <input
+              type={inputType}
+              value={inputValue}
+              onChange={inputChangeHandler}
+              min={minDateTime}
+            />
+          </div>
+        );
         break;
       case "randomText":
         inputType = "text";
@@ -156,6 +170,11 @@ export default function BlockedSitesSection({
         />
       </div>
     );
+  };
+
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    return now.toISOString().substring(0, 16); // 'YYYY-MM-DDTHH:mm' format
   };
 
   const renderLockToggle = () => {
