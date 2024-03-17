@@ -163,7 +163,6 @@ export default function BlockedSitesSection({
   };
 
   const onToggleSectionLockAdjusted = () => {
-    setUnlockSuccessful(false);
     if (section.locked) {
       setWasSuccessfullyUnlocked(false);
     } else if (wasSuccesfullyUnlocked) {
