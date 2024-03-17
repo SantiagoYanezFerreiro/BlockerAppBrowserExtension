@@ -105,12 +105,18 @@ export default function BlockedSitesSection({
     return null;
   };
 
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    return now.toISOString().substring(0, 16); // 'YYYY-MM-DDTHH:mm' format
+  };
+
   const renderLockInputs = () => {
     let inputType;
     let inputValue;
     let inputChangeHandler;
+
     switch (section.lockMethod) {
-      case "timer":
+      case "timer": {
         inputType = "datetime-local";
         inputValue = lockValue || "";
         inputChangeHandler = (e) => setLockValue(e.target.value);
@@ -126,11 +132,12 @@ export default function BlockedSitesSection({
             />
           </div>
         );
-        break;
-      case "randomText":
+      }
+      case "randomText": {
         inputType = "text";
         break;
-      case "password":
+      }
+      case "password": {
         inputType = "password";
         if (section.locked) {
           inputValue = unlockAttempt || "";
@@ -158,6 +165,7 @@ export default function BlockedSitesSection({
           );
         }
         break;
+      }
       default:
         return null;
     }
@@ -170,11 +178,6 @@ export default function BlockedSitesSection({
         />
       </div>
     );
-  };
-
-  const getCurrentDateTime = () => {
-    const now = new Date();
-    return now.toISOString().substring(0, 16); // 'YYYY-MM-DDTHH:mm' format
   };
 
   const renderLockToggle = () => {
