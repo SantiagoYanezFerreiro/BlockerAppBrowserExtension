@@ -52,7 +52,7 @@ export default function BlockedSitesSection({
   //Handlers for Blocking Methods
 
   const handleLockSubmit = () => {
-    if (section.lockMethod && lockValue !== confirmLockValue) {
+    if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
       alert("incorrect pasword");
       return;
     }
