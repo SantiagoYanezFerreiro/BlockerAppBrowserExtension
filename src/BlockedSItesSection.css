@@ -117,5 +117,5 @@ input:checked + .slider:before {
 }
 
 input {
-  margin-bottom: 20px;
+  margin: 15px 0;
 }
