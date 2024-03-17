@@ -117,26 +117,32 @@ export default function BlockedSitesSection({
 
     switch (section.lockMethod) {
       case "timer": {
-        inputType = "datetime-local";
-        inputValue = lockValue || "";
-        inputChangeHandler = (e) => setLockValue(e.target.value);
-        const minDateTime = getCurrentDateTime();
+        if (section.locked) {
+          return (
+            <div className="timer-date-lock">Locked Until {lockValue}</div>
+          );
+        } else {
+          inputType = "datetime-local";
+          inputValue = lockValue || "";
+          inputChangeHandler = (e) => setLockValue(e.target.value);
+          const minDateTime = getCurrentDateTime();
 
-        return (
-          <div>
-            <input
-              type={inputType}
-              value={inputValue}
-              onChange={inputChangeHandler}
-              min={minDateTime}
-            />
-          </div>
-        );
+          return (
+            <div>
+              <input
+                type={inputType}
+                value={inputValue}
+                onChange={inputChangeHandler}
+                min={minDateTime}
+              />
+            </div>
+          );
+        }
       }
-      case "randomText": {
+      case "randomText":
         inputType = "text";
         break;
-      }
+
       case "password": {
         inputType = "password";
         if (section.locked) {

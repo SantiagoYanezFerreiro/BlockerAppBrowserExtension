@@ -119,3 +119,7 @@ input:checked + .slider:before {
 input {
   margin: 15px 0;
 }
+
+.timer-date-lock {
+  margin-bottom: 15px;
+}
