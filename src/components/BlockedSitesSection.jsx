@@ -52,8 +52,10 @@ export default function BlockedSitesSection({
   //Handlers for Blocking Methods
 
   const handleLockSubmit = () => {
-    // Assuming onLockSubmit function updates the section in the parent state and persists to storage
-    // Update local state to reflect the change if necessary
+    if (section.lockMethod && lockValue !== confirmLockValue) {
+      alert("incorrect pasword");
+      return;
+    }
     const updatedSection = { ...section, lockValue, locked: true };
     // Call a function that updates the state in the parent component
     // This function should handle saving the updated section to storage
