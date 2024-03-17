@@ -148,11 +148,13 @@ export default function BlockedSitesSection({
         return null;
     }
     return (
-      <input
-        type={inputType}
-        value={inputValue}
-        onChange={inputChangeHandler}
-      />
+      <div>
+        <input
+          type={inputType}
+          value={inputValue}
+          onChange={inputChangeHandler}
+        />
+      </div>
     );
   };
 
