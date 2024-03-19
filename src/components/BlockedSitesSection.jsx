@@ -32,6 +32,7 @@ export default function BlockedSitesSection({
   const [unlockAttempt, setUnlockAttempt] = useState("");
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
   const [confirmLockValue, setConfirmLockValue] = useState("");
+  const [numChars, setNumChars] = useState(0);
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -67,8 +68,7 @@ export default function BlockedSitesSection({
     onLockMethodChange(index, newLockMethod);
 
     if (newLockMethod === "randomText") {
-      const randomString = generateRandomString(20);
-      setLockValue(randomString);
+      setLockValue(generateRandomString(20));
     } else {
       setLockValue("");
     }
@@ -151,8 +151,8 @@ export default function BlockedSitesSection({
           );
         } else {
           inputType = "number";
-          inputValue = lockValue || "";
-          inputChangeHandler = (e) => setLockValue(e.target.value);
+          inputValue = "";
+          inputChangeHandler = (e) => setNumChars(e.target.value);
           return (
             <div>
               <input
@@ -161,6 +161,11 @@ export default function BlockedSitesSection({
                 value={inputValue}
                 onChange={inputChangeHandler}
               />
+              <button
+                onClick={() => setLockValue(generateRandomString(numChars))}
+              >
+                Generate
+              </button>
             </div>
           );
         }
