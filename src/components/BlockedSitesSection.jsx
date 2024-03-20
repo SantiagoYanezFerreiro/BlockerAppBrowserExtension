@@ -151,8 +151,17 @@ export default function BlockedSitesSection({
           );
         } else {
           inputType = "number";
-          inputValue = "";
-          inputChangeHandler = (e) => setNumChars(e.target.value);
+          inputValue = numChars;
+          inputChangeHandler = (e) => {
+            const newNumChars = e.target.value;
+            setNumChars(newNumChars);
+            if (newNumChars > 0) {
+              setLockValue(generateRandomString(newNumChars));
+            } else {
+              setLockValue("");
+            }
+          };
+
           return (
             <div>
               <input
@@ -161,11 +170,6 @@ export default function BlockedSitesSection({
                 value={inputValue}
                 onChange={inputChangeHandler}
               />
-              <button
-                onClick={() => setLockValue(generateRandomString(numChars))}
-              >
-                Generate
-              </button>
             </div>
           );
         }
