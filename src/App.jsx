@@ -47,7 +47,6 @@ function App() {
                 sections={sections}
                 setSections={setSections}
                 updateSections={updateSections}
-                n
               />
             }
           />
