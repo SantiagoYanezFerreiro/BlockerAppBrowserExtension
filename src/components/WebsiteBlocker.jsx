@@ -226,6 +226,9 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onDeleteWebsite={(websiteIndex) =>
             deleteWebsiteFromSection(index, websiteIndex)
           }
+          onUpdateTimeRange={(newTimeRange) =>
+            updateTimeRange(index, newTimeRange)
+          }
         />
       ))}
 
