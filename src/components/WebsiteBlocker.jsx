@@ -9,15 +9,25 @@ export default function WebsiteBlocker({ sections, setSections }) {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
   const [newSectionTitle, setNewSectionTitle] = useState("");
   const [isAddingSection, setIsAddingNewSection] = useState(false);
-  // Load sections from storage when the component mounts
+
   useEffect(() => {
+    const initialSectionStructure = {
+      enabled: true,
+      locked: false,
+      lockMethod: null,
+      timeRange: {
+        startTime: "",
+        endtime: "",
+        days: [],
+      },
+      restartLock: false,
+    };
+    // Load sections from storage when the component mounts
     getFromStorage(["sections"], (result) => {
       const updatedSections =
         result.sections?.map((section) => ({
+          ...initialSectionStructure,
           ...section,
-          enabled: section.enabled ?? true,
-          locked: section.locked ?? false,
-          lockMethod: section.lockMethod ?? null,
         })) || [];
       setSections(updatedSections);
     });

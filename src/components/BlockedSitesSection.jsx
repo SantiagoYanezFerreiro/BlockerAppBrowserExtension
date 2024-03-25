@@ -54,7 +54,7 @@ export default function BlockedSitesSection({
 
   const handleLockSubmit = () => {
     if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
-      alert("incorrect pasword");
+      alert("incorrect password");
       return;
     }
     const updatedSection = { ...section, lockValue, locked: true };
