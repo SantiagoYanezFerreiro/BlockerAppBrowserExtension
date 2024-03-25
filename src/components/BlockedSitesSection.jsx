@@ -239,9 +239,25 @@ export default function BlockedSitesSection({
             </>
           );
         }
-        break;
-      default:
-        return null;
+      case "timeRange":
+        if (section.locked) {
+          return (
+            <div className="time-range-lock">
+              Locked from {section.timeRange.startTime} to{" "}
+              {section.timeRange.endTime} on {section.TimeRange.days.join("")}
+            </div>
+          );
+        }else{
+          return(
+          <div>
+            <label>Start Time</label>
+            <input type="time" value={section.timeRange.startTime}
+            onChange={(e)=> handleStartTimeChange()}/>
+          </div>;
+          break;
+        default:
+          return null;
+          )
     }
     return (
       <div>

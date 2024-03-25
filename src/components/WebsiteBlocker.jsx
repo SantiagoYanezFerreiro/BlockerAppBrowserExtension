@@ -128,6 +128,14 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
   };
 
+  const updateTimeRange = (sectionIndex, newTimeRange) => {
+    const updatedSections = sections.map((section, idx) =>
+      idx === sectionIndex ? { ...section, timeRange: newTimeRange } : section
+    );
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
+
   const toggleModal = (index) => {
     setActiveModalIndex(activeModalIndex === index ? null : index);
   };
