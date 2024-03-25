@@ -34,7 +34,7 @@ export default function BlockedSitesSection({
   const [confirmLockValue, setConfirmLockValue] = useState("");
   const [numChars, setNumChars] = useState(0);
   const [restartLock, setRestartLock] = useState(false);
-  const [timeRange, setTimeRange] = useState({
+  const [timeRangeLock, setTimeRangeLock] = useState({
     startTime: "",
     endTime: "",
     days: [],
@@ -57,6 +57,37 @@ export default function BlockedSitesSection({
   };
 
   //Handlers for Blocking Methods
+
+  const handleStartTimeChange = (event) => {
+    setTimeRangeLock((prevState) => ({
+      ...prevState,
+      starTime: event.target.value,
+    }));
+  };
+
+  const handleEndTimeChange = (event) => {
+    setTimeRangeLock((prevState) => ({
+      ...prevState,
+      endTime: event.target.value,
+    }));
+  };
+
+  const handleDaySelectionChange = (day) => {
+    setTimeRangeLock((prevState) => {
+      const dayExists = prevState.days.includes(day);
+      if (dayExists) {
+        return {
+          ...prevState,
+          days: prevState.days.filter((d) => d !== day),
+        };
+      } else {
+        return {
+          ...prevState,
+          days: [...prevState.days, day],
+        };
+      }
+    });
+  };
 
   const handleLockSubmit = () => {
     if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
