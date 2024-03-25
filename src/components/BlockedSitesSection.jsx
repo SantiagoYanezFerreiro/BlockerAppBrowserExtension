@@ -33,6 +33,12 @@ export default function BlockedSitesSection({
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
   const [confirmLockValue, setConfirmLockValue] = useState("");
   const [numChars, setNumChars] = useState(0);
+  const [restartLock, setRestartLock] = useState(false);
+  const [timeRange, setTimeRange] = useState({
+    startTime: "",
+    endTime: "",
+    days: [],
+  });
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -99,6 +105,8 @@ export default function BlockedSitesSection({
           <option value="timer">Timer</option>
           <option value="randomText">Random Text</option>
           <option value="password">Password</option>{" "}
+          <option value="timeRange">Time Range</option>
+          <option value="restart">Restart</option>
         </select>
       );
     }
