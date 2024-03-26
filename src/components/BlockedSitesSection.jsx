@@ -234,6 +234,7 @@ export default function BlockedSitesSection({
             </>
           );
         }
+        break;
       case "timeRange":
         if (section.locked) {
           return (
