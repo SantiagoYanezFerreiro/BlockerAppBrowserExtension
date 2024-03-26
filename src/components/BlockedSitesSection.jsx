@@ -61,32 +61,26 @@ export default function BlockedSitesSection({
 
   const handleStartTimeChange = (event) => {
     const newStartTime = event.target.value;
-    const newTimeRange = {...timeRangeLock, startTime:newStartTime}
+    const newTimeRange = { ...timeRangeLock, startTime: newStartTime };
     setTimeRangeLock(newTimeRange);
-    props.onUpdateChange(newTimeRange);
+    onUpdateTimeRange(newTimeRange);
   };
 
   const handleEndTimeChange = (event) => {
     const newEndTime = event.target.value;
-    const newTimeRange = {...timeRangeLock, endTime:newEndTime}
+    const newTimeRange = { ...timeRangeLock, endTime: newEndTime };
     setTimeRangeLock(newTimeRange);
     props.onUpdateChange(newTimeRange);
   };
 
   const handleDaySelectionChange = (day) => {
     setTimeRangeLock((prevState) => {
-      const dayExists = prevState.days.includes(day);
-      if (dayExists) {
-        return {
-          ...prevState,
-          days: prevState.days.filter((d) => d !== day),
-        };
-      } else {
-        return {
-          ...prevState,
-          days: [...prevState.days, day],
-        };
-      }
+      const updatedDays = prevState.days.includes(day)
+        ? prevState.days.filter((d) => d !== day)
+        : [...prevState.days, day];
+      const newTimeRange = { ...prevState, days: updatedDays };
+      props.onUpdateChange(newTimeRange);
+      return newTimeRange;
     });
   };
 
@@ -244,32 +238,30 @@ export default function BlockedSitesSection({
         if (section.locked) {
           return (
             <div className="time-range-lock">
-              Locked from {section.timeRange.startTime} to{" "}
-              {section.timeRange.endTime} on {section.TimeRange.days.join("")}
+                      Locked from {section.timeRange.startTime} to {section.timeRange.endTime} on {section.timeRange.days.join(", ")}
             </div>
           );
-        }else{
-          return(
-          <div>
-            <label>Start Time</label>
-            <input type="time" value={section.timeRange.startTime}
-            onChange={(e)=> handleStartTimeChange()}/>
-          </div>;
-          break;
-        default:
-          return null;
-          )
+        } else {
+          return (
+            <div>
+              <label>Start Time</label>
+              <input
+                type="time"
+                value={section.timeRange.startTime}
+                onChange={(e) => handleStartTimeChange(e)}
+              />
+              <label>End Time</label>
+              <input
+                type="time"
+                value={section.timeRange.endTime}
+                onChange={(e) => handleEndTimeChange(e)}
+              />
+            </div>
+          );
+        }
+        break;
     }
-    return (
-      <div>
-        <input
-          type={inputType}
-          value={inputValue}
-          onChange={inputChangeHandler}
-        />
-      </div>
-    );
-  };
+  };}
 
   const renderLockToggle = () => {
     const isLocked = section.locked;
