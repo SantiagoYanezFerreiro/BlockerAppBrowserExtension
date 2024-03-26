@@ -70,7 +70,7 @@ export default function BlockedSitesSection({
     const newEndTime = event.target.value;
     const newTimeRange = { ...timeRangeLock, endTime: newEndTime };
     setTimeRangeLock(newTimeRange);
-    props.onUpdateChange(newTimeRange);
+    onUpdateTimeRange(newTimeRange);
   };
 
   const handleDaySelectionChange = (day) => {
