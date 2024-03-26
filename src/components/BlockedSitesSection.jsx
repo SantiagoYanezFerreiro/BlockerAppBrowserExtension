@@ -79,7 +79,7 @@ export default function BlockedSitesSection({
         ? prevState.days.filter((d) => d !== day)
         : [...prevState.days, day];
       const newTimeRange = { ...prevState, days: updatedDays };
-      props.onUpdateChange(newTimeRange);
+      onUpdateTimeRange(newTimeRange);
       return newTimeRange;
     });
   };
