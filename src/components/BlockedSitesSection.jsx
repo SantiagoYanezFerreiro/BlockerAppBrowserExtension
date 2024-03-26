@@ -238,7 +238,8 @@ export default function BlockedSitesSection({
         if (section.locked) {
           return (
             <div className="time-range-lock">
-              Locked from {section.timeRange.startTime} to {section.timeRange.endTime} on {section.timeRange.days.join(", ")}
+              Locked from {section.timeRange.startTime} to{" "}
+              {section.timeRange.endTime} on {section.timeRange.days.join(", ")}
             </div>
           );
         } else {
@@ -259,140 +260,139 @@ export default function BlockedSitesSection({
             </div>
           );
         }
-        break;
     }
-  };}
 
-  const renderLockToggle = () => {
-    const isLocked = section.locked;
-    const buttonText = isLocked ? "Unlock" : "Submit";
-    const clickHandler = isLocked ? handleUnlockAttempt : handleLockSubmit;
+    const renderLockToggle = () => {
+      const isLocked = section.locked;
+      const buttonText = isLocked ? "Unlock" : "Submit";
+      const clickHandler = isLocked ? handleUnlockAttempt : handleLockSubmit;
+
+      return (
+        <>
+          {renderLockInputs()}
+          <button className="save-lock-button" onClick={clickHandler}>
+            {buttonText}
+          </button>
+          <p className="toggle-text">{section.locked ? "On" : "Off"}</p>
+          <label className="toggle-switch">
+            <input
+              type="checkbox"
+              checked={section.locked}
+              onChange={onToggleSectionLockAdjusted}
+            />
+
+            <span className="slider round"></span>
+          </label>
+        </>
+      );
+    };
+
+    const onToggleSectionLockAdjusted = () => {
+      if (section.locked) {
+        setWasSuccessfullyUnlocked(false);
+      } else if (wasSuccesfullyUnlocked) {
+        setLockValue(section.lockValue);
+      }
+      onToggleSectionLock(index);
+    };
+
+    function generateRandomString(length) {
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+      }
+      return result;
+    }
 
     return (
-      <>
-        {renderLockInputs()}
-        <button className="save-lock-button" onClick={clickHandler}>
-          {buttonText}
-        </button>
-        <p className="toggle-text">{section.locked ? "On" : "Off"}</p>
-        <label className="toggle-switch">
-          <input
-            type="checkbox"
-            checked={section.locked}
-            onChange={onToggleSectionLockAdjusted}
-          />
+      <div className="blocker-sites-section">
+        <h2 className="section-name" onClick={() => onToggleModal(index)}>
+          {title}
+        </h2>
 
-          <span className="slider round"></span>
-        </label>
-      </>
-    );
-  };
+        {isModalOpen && (
+          <ul>
+            {sites.map((site, siteIndex) => (
+              <li key={siteIndex} className="site-item">
+                {editingIndex === siteIndex ? (
+                  <div>
+                    <input
+                      type="text"
+                      value={editingValue}
+                      onChange={(e) => setEditingValue(e.target.value)}
+                    />
+                    <TfiSave className="icon" onClick={handleSaveEdit} />
+                    <FaRegWindowClose />
+                    <div
+                      className="icon"
+                      onClick={() => setEditingIndex(null)}
+                    ></div>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="site-name">{site}</p>
 
-  const onToggleSectionLockAdjusted = () => {
-    if (section.locked) {
-      setWasSuccessfullyUnlocked(false);
-    } else if (wasSuccesfullyUnlocked) {
-      setLockValue(section.lockValue);
-    }
-    onToggleSectionLock(index);
-  };
+                    <FaPencilAlt
+                      className="icon"
+                      onClick={() => handleEditWebsite(siteIndex, site)}
+                    />
 
-  function generateRandomString(length) {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
-    let result = "";
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
-    return result;
-  }
+                    <AiOutlineDelete
+                      className="icon"
+                      onClick={() => onDeleteWebsite(siteIndex)}
+                    />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
 
-  return (
-    <div className="blocker-sites-section">
-      <h2 className="section-name" onClick={() => onToggleModal(index)}>
-        {title}
-      </h2>
-
-      {isModalOpen && (
-        <ul>
-          {sites.map((site, siteIndex) => (
-            <li key={siteIndex} className="site-item">
-              {editingIndex === siteIndex ? (
-                <div>
-                  <input
-                    type="text"
-                    value={editingValue}
-                    onChange={(e) => setEditingValue(e.target.value)}
-                  />
-                  <TfiSave className="icon" onClick={handleSaveEdit} />
-                  <FaRegWindowClose />
-                  <div
-                    className="icon"
-                    onClick={() => setEditingIndex(null)}
-                  ></div>
+        {isModalOpen && (
+          <div className="modal">
+            <div className="modal-content ">
+              <div className="add-edit-website">
+                <input
+                  type="text"
+                  value={newWebsite}
+                  onChange={(e) => setNewWebsite(e.target.value)}
+                  placeholder="Enter new website"
+                />
+                <div className="icon-button" onClick={handleAddWebsite}>
+                  <VscDiffAdded className="icon" />
                 </div>
-              ) : (
-                <div>
-                  <p className="site-name">{site}</p>
+              </div>
 
-                  <FaPencilAlt
-                    className="icon"
-                    onClick={() => handleEditWebsite(siteIndex, site)}
-                  />
-
+              <div className="add-edit-section">
+                <input
+                  type="text"
+                  value={title} // Use title from props directly
+                  onChange={(e) => onEditSectionTitle(e.target.value)}
+                  placeholder="Enter Section Title"
+                />
+                <div className="icon-button">
                   <AiOutlineDelete
                     className="icon"
-                    onClick={() => onDeleteWebsite(siteIndex)}
+                    onClick={() => onDeleteSection(index)}
                   />
+
+                  <FaRegWindowClose className="icon" onClick={onCloseModal} />
                 </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content ">
-            <div className="add-edit-website">
-              <input
-                type="text"
-                value={newWebsite}
-                onChange={(e) => setNewWebsite(e.target.value)}
-                placeholder="Enter new website"
-              />
-              <div className="icon-button" onClick={handleAddWebsite}>
-                <VscDiffAdded className="icon" />
               </div>
             </div>
-
-            <div className="add-edit-section">
-              <input
-                type="text"
-                value={title} // Use title from props directly
-                onChange={(e) => onEditSectionTitle(e.target.value)}
-                placeholder="Enter Section Title"
-              />
-              <div className="icon-button">
-                <AiOutlineDelete
-                  className="icon"
-                  onClick={() => onDeleteSection(index)}
-                />
-
-                <FaRegWindowClose className="icon" onClick={onCloseModal} />
-              </div>
+            <div className="lock-section">
+              {renderLockMethodSelector()}
+              {renderLockToggle()}
             </div>
           </div>
-          <div className="lock-section">
-            {renderLockMethodSelector()}
-            {renderLockToggle()}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+        )}
+      </div>
+    );
+  };
 }
 
 BlockedSitesSection.propTypes = {
