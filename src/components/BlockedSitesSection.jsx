@@ -60,17 +60,17 @@ export default function BlockedSitesSection({
   //Handlers for Blocking Methods
 
   const handleStartTimeChange = (event) => {
-    setTimeRangeLock((prevState) => ({
-      ...prevState,
-      starTime: event.target.value,
-    }));
+    const newStartTime = event.target.value;
+    const newTimeRange = {...timeRangeLock, startTime:newStartTime}
+    setTimeRangeLock(newTimeRange);
+    props.onUpdateChange(newTimeRange);
   };
 
   const handleEndTimeChange = (event) => {
-    setTimeRangeLock((prevState) => ({
-      ...prevState,
-      endTime: event.target.value,
-    }));
+    const newEndTime = event.target.value;
+    const newTimeRange = {...timeRangeLock, endTime:newEndTime}
+    setTimeRangeLock(newTimeRange);
+    props.onUpdateChange(newTimeRange);
   };
 
   const handleDaySelectionChange = (day) => {
