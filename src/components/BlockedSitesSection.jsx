@@ -38,7 +38,6 @@ export default function BlockedSitesSection({
   const [timeRangeLock, setTimeRangeLock] = useState({
     startTime: "",
     endTime: "",
-    days: [],
   });
 
   const handleAddWebsite = () => {
@@ -71,17 +70,6 @@ export default function BlockedSitesSection({
     const newTimeRange = { ...timeRangeLock, endTime: newEndTime };
     setTimeRangeLock(newTimeRange);
     onUpdateTimeRange(newTimeRange);
-  };
-
-  const handleDaySelectionChange = (day) => {
-    setTimeRangeLock((prevState) => {
-      const updatedDays = prevState.days.includes(day)
-        ? prevState.days.filter((d) => d !== day)
-        : [...prevState.days, day];
-      const newTimeRange = { ...prevState, days: updatedDays };
-      onUpdateTimeRange(newTimeRange);
-      return newTimeRange;
-    });
   };
 
   const handleLockSubmit = () => {
@@ -258,17 +246,18 @@ export default function BlockedSitesSection({
         } else {
           return (
             <div>
+              <p>Lock this Block between the following times every day</p>
               <label>Start Time</label>
               <input
                 type="time"
                 value={section.timeRange.startTime}
-                onChange={(e) => handleStartTimeChange(e)}
+                onChange={handleStartTimeChange}
               />
               <label>End Time</label>
               <input
                 type="time"
                 value={section.timeRange.endTime}
-                onChange={(e) => handleEndTimeChange(e)}
+                onChange={handleEndTimeChange}
               />
             </div>
           );
@@ -283,7 +272,6 @@ export default function BlockedSitesSection({
 
     return (
       <>
-        {renderLockInputs()}
         <button className="save-lock-button" onClick={clickHandler}>
           {buttonText}
         </button>
