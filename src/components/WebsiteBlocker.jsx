@@ -8,7 +8,11 @@ import { VscDiffAdded } from "react-icons/vsc";
 export default function WebsiteBlocker({ sections, setSections }) {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
   const [newSectionTitle, setNewSectionTitle] = useState("");
-  const [isAddingSection, setIsAddingNewSection] = useState(false);
+  const [isAddingNewSection, setIsAddingNewSection] = useState(false);
+
+  useEffect(() => {
+    console.log("Sections updated:", sections);
+  }, [sections]);
 
   useEffect(() => {
     const initialSectionStructure = {
@@ -44,6 +48,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
   // Function to add a new section
   const handleAddSection = () => {
     if (newSectionTitle.trim()) {
+      console.log("Adding new section:", newSectionTitle);
       const newSections = [
         ...sections,
         {
@@ -55,6 +60,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
           lockValue: "",
         },
       ];
+      console.log("New sections state:", newSections);
       setSections(newSections);
       saveToStorage({ sections: newSections });
       setNewSectionTitle("");
@@ -200,7 +206,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
       <h1>Blocks</h1>
       {sections.map((section, index) => (
         <BlockedSitesSection
-          key={index}
+          key={section.id || index}
           index={index}
           section={section}
           onSectionUpdate={(updatedSection) =>
@@ -232,7 +238,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
         />
       ))}
 
-      {isAddingSection ? (
+      {isAddingNewSection ? (
         <div>
           <input
             type="text"
