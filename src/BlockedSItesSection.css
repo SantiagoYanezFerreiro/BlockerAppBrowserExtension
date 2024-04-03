@@ -142,3 +142,8 @@ input:checked + .slider:before {
 .timer-date-lock {
   margin-bottom: 15px;
 }
+
+.input-time {
+  margin: 20px 10px;
+  width: 10%;
+}

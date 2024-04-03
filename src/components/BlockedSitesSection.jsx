@@ -201,7 +201,7 @@ export default function BlockedSitesSection({
             <div>
               <input
                 type={inputType}
-                placeholder="Number of characters"
+                placeholder="Characters Number"
                 value={inputValue}
                 onChange={inputChangeHandler}
               />
@@ -248,14 +248,16 @@ export default function BlockedSitesSection({
           return (
             <div>
               <p>Lock this Block between the following times every day</p>
-              <label>Start Time</label>
+              <label className="label-time">Start Time</label>
               <input
+                className="input-time"
                 type="time"
                 value={section.timeRange.startTime}
                 onChange={handleStartTimeChange}
               />
-              <label>End Time</label>
+              <label className="label-time">End Time</label>
               <input
+                className="input-time"
                 type="time"
                 value={section.timeRange.endTime}
                 onChange={handleEndTimeChange}
