@@ -37,6 +37,10 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
   }, [setSections]);
 
+  useEffect(() => {
+    checkForSystemRestart();
+  }, []);
+
   const handleSectionsUpdate = (updatedSection, index) => {
     const newSections = sections.map((section, idx) =>
       idx === index ? updatedSection : section

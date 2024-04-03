@@ -34,7 +34,6 @@ export default function BlockedSitesSection({
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
   const [confirmLockValue, setConfirmLockValue] = useState("");
   const [numChars, setNumChars] = useState(0);
-  const [restartLock, setRestartLock] = useState(false);
   const [timeRangeLock, setTimeRangeLock] = useState({
     startTime: "",
     endTime: "",
