@@ -24,7 +24,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
         endtime: "",
         days: [],
       },
-      restartLock: false,
     };
     // Load sections from storage when the component mounts
     getFromStorage(["sections"], (result) => {
@@ -36,10 +35,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
       setSections(updatedSections);
     });
   }, [setSections]);
-
-  useEffect(() => {
-    checkForSystemRestart();
-  }, []);
 
   const handleSectionsUpdate = (updatedSection, index) => {
     const newSections = sections.map((section, idx) =>
