@@ -75,6 +75,11 @@
   transition: 0.4s;
 }
 
+input {
+  margin: 15px 0;
+  width: 14%;
+}
+
 input:checked + .slider {
   background-color: green;
 }
@@ -132,10 +137,6 @@ input:checked + .slider:before {
 
 .icon-button {
   margin-top: 10px;
-}
-
-input {
-  margin: 15px 0;
 }
 
 .timer-date-lock {
