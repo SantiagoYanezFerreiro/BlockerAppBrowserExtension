@@ -106,6 +106,24 @@ input:checked + .slider:before {
   margin: 20px 0;
 }
 
+.lock-method-selector {
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.lock-method-selector:hover {
+  border-color: #888;
+}
+
+.lock-method-selector:focus {
+  outline: none;
+  border-color: #555;
+}
+
 .save-lock-button {
   margin-left: 10px;
   border-radius: 10%;

@@ -112,6 +112,7 @@ export default function BlockedSitesSection({
     if (!section.locked) {
       return (
         <select
+          className="lock-method-selector"
           value={section.lockMethod || ""}
           onChange={handleLockMethodChange}
         >
