@@ -115,10 +115,10 @@ export default function BlockedSitesSection({
           value={section.lockMethod || ""}
           onChange={handleLockMethodChange}
         >
-          <option value="timer">Timer</option>
-          <option value="randomText">Random Text</option>
           <option value="password">Password</option>{" "}
+          <option value="randomText">Random Text</option>
           <option value="timeRange">Time Range</option>
+          <option value="timer">Timer</option>
         </select>
       );
     }
@@ -186,7 +186,9 @@ export default function BlockedSitesSection({
           inputValue = numChars;
           inputChangeHandler = (e) => {
             const newNumChars = e.target.value;
-            setNumChars(newNumChars);
+            if (newNumChars >= 0) {
+              setNumChars(newNumChars);
+            }
             if (newNumChars > 0) {
               setLockValue(generateRandomString(newNumChars));
             } else {
