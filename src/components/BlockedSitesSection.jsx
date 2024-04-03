@@ -285,7 +285,6 @@ export default function BlockedSitesSection({
             checked={section.locked}
             onChange={onToggleSectionLockAdjusted}
           />
-
           <span className="slider round"></span>
         </label>
       </>
