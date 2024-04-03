@@ -119,7 +119,6 @@ export default function BlockedSitesSection({
           <option value="randomText">Random Text</option>
           <option value="password">Password</option>{" "}
           <option value="timeRange">Time Range</option>
-          <option value="restart">Restart</option>
         </select>
       );
     }
