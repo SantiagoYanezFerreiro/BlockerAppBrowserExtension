@@ -180,6 +180,14 @@ export default function BlockedSitesSection({
               onCopy={(e) => e.preventDefault()}
             >
               {lockValue}
+              <div>
+                <input
+                  type="randomText"
+                  placeholder="Enter Text"
+                  value={unlockAttempt || ""}
+                  onChange={(e) => setUnlockAttempt(e.target.value)}
+                />
+              </div>
             </div>
           );
         } else {
