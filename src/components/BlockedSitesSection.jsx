@@ -213,6 +213,16 @@ export default function BlockedSitesSection({
         if (section.locked) {
           inputValue = unlockAttempt || "";
           inputChangeHandler = (e) => setUnlockAttempt(e.target.value);
+          return (
+            <div>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                value={unlockAttempt || ""}
+                onChange={(e) => setUnlockAttempt(e.target.value)}
+              />
+            </div>
+          );
         } else {
           return (
             <>
@@ -235,7 +245,6 @@ export default function BlockedSitesSection({
             </>
           );
         }
-        break;
       case "timeRange":
         if (section.locked) {
           return (
