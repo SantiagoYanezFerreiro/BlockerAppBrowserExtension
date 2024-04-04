@@ -54,7 +54,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
           title: newSectionTitle,
           sites: [],
           enabled: true,
-          locked: true,
+          locked: false,
           lockMethod: null,
           lockValue: "",
         },
