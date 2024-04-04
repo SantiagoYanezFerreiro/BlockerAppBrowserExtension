@@ -258,7 +258,7 @@ export default function BlockedSitesSection({
           return (
             <div className="time-range-lock">
               Locked from {section.timeRange.startTime} to{" "}
-              {section.timeRange.endTime} on {section.timeRange.days.join(", ")}
+              {section.timeRange.endTime}
             </div>
           );
         } else {
