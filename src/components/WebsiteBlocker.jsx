@@ -56,6 +56,10 @@ export default function WebsiteBlocker({ sections, setSections }) {
           locked: false,
           lockMethod: null,
           lockValue: "",
+          timeRange: {
+            startTime: "09:00",
+            endTime: "24:00",
+          },
         },
       ];
       console.log("New sections state:", newSections);
