@@ -257,7 +257,7 @@ export default function BlockedSitesSection({
         if (section.locked) {
           return (
             <div className="time-range-lock">
-              Locked from {section.timeRange.startTime} to{" "}
+              Locked from {section.timeRange.startTime} to
               {section.timeRange.endTime}
             </div>
           );
@@ -322,7 +322,6 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (
@@ -360,7 +359,6 @@ export default function BlockedSitesSection({
           ))}
         </ul>
       )}
-
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content ">

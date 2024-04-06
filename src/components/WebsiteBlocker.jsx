@@ -21,8 +21,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
       lockMethod: null,
       timeRange: {
         startTime: "",
-        endtime: "",
-        days: [],
+        endTime: "",
       },
     };
     // Load sections from storage when the component mounts
