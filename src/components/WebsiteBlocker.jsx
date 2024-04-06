@@ -58,7 +58,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
           lockValue: "",
           timeRange: {
             startTime: "09:00",
-            endTime: "24:00",
+            endTime: "23:59",
           },
         },
       ];
