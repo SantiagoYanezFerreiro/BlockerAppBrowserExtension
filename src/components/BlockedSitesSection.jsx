@@ -168,7 +168,9 @@ export default function BlockedSitesSection({
 
           return (
             <div>
-              <p>Lock this Block until this day/time</p>
+              <div className="timer-date-lock">
+                Lock this Block until this day/time
+              </div>
               <input
                 type={inputType}
                 value={inputValue}
@@ -273,7 +275,9 @@ export default function BlockedSitesSection({
         } else {
           return (
             <div>
-              <p>Lock this Block between the following times every day</p>
+              <div className="timer-date-lock">
+                Lock this Block between the following times every day
+              </div>
               <label className="label-time">Start Time</label>
               <input
                 className="input-time"
