@@ -29,6 +29,7 @@ export default function BlockedSitesSection({
   const [newWebsite, setNewWebsite] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingValue, setEditingValue] = useState("");
+  const [showLockOptions, setShowLockOptions] = useState(false);
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
@@ -53,6 +54,10 @@ export default function BlockedSitesSection({
     onEditWebsite(editingIndex, editingValue);
     setEditingIndex(null);
     setEditingValue("");
+  };
+
+  const toggleLockOptions = () => {
+    setShowLockOptions(!showLockOptions);
   };
 
   //Handlers for Blocking Methods
@@ -399,16 +404,20 @@ export default function BlockedSitesSection({
                   className="icon"
                   onClick={() => onDeleteSection(index)}
                 />
-
                 <FaRegWindowClose className="icon" onClick={onCloseModal} />
               </div>
+              <button onClick={toggleLockOptions}>
+                {showLockOptions ? "Hide Lock Options" : "Show Lock Options"}
+              </button>
             </div>
           </div>
-          <div className="lock-section">
-            {renderLockMethodSelector()}
-            {renderLockInputs()} {/* Render Lock Inputs */}
-            {renderLockToggle()} {/* Render Lock Toggle */}
-          </div>
+          {showLockOptions && (
+            <div className="lock-section">
+              {renderLockMethodSelector()}
+              {renderLockInputs()} {/* Render Lock Inputs */}
+              {renderLockToggle()} {/* Render Lock Toggle */}
+            </div>
+          )}
         </div>
       )}
     </div>
