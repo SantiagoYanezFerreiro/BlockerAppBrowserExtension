@@ -33,7 +33,7 @@ export default function BlockedSitesSection({
   const [unlockAttempt, setUnlockAttempt] = useState("");
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
   const [confirmLockValue, setConfirmLockValue] = useState("");
-  const [numChars, setNumChars] = useState(0);
+  const [numChars, setNumChars] = useState(1);
   const [timeRangeLock, setTimeRangeLock] = useState({
     startTime: "",
     endTime: "",
@@ -88,6 +88,9 @@ export default function BlockedSitesSection({
 
     if (newLockMethod === "randomText") {
       setLockValue(generateRandomString(20));
+    } else if (newLockMethod === "password") {
+      setLockValue("");
+      setConfirmLockValue("");
     } else {
       setLockValue("");
     }
@@ -132,6 +135,9 @@ export default function BlockedSitesSection({
   };
 
   function generateRandomString(length) {
+    if (length <= 0) {
+      return "";
+    }
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
     let result = "";
@@ -186,6 +192,7 @@ export default function BlockedSitesSection({
                   placeholder="Enter Text"
                   value={unlockAttempt || ""}
                   onChange={(e) => setUnlockAttempt(e.target.value)}
+                  min="1"
                 />
               </div>
             </div>
