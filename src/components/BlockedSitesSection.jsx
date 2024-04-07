@@ -168,6 +168,7 @@ export default function BlockedSitesSection({
 
           return (
             <div>
+              <p>Lock this Block until this day/time</p>
               <input
                 type={inputType}
                 value={inputValue}
