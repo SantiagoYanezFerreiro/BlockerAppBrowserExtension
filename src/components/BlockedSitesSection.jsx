@@ -6,6 +6,8 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { VscDiffAdded } from "react-icons/vsc";
 import { FaRegWindowClose } from "react-icons/fa";
 import { TfiSave } from "react-icons/tfi";
+import { FaLock } from "react-icons/fa";
+import { FaLockOpen } from "react-icons/fa";
 
 export default function BlockedSitesSection({
   index,
@@ -405,10 +407,19 @@ export default function BlockedSitesSection({
                   onClick={() => onDeleteSection(index)}
                 />
                 <FaRegWindowClose className="icon" onClick={onCloseModal} />
+                <div className="icon-button" onClick={toggleLockOptions}>
+                  {showLockOptions ? (
+                    <div className="icon">
+                      <FaLockOpen />{" "}
+                    </div>
+                  ) : (
+                    <div>
+                      {" "}
+                      <FaLock />
+                    </div>
+                  )}
+                </div>
               </div>
-              <button onClick={toggleLockOptions}>
-                {showLockOptions ? "Hide Lock Options" : "Show Lock Options"}
-              </button>
             </div>
           </div>
           {showLockOptions && (
