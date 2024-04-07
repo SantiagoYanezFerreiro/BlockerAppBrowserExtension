@@ -136,8 +136,15 @@ input:checked + .slider:before {
   font-size: 80%;
 }
 
-.icon-button {
-  margin-top: 10px;
+.icon-button-container {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: center; /* Spreads the items evenly */
+}
+
+.icon {
+  margin: 0 5px; /* Adds some space between the buttons */
+  cursor: pointer; /* Changes the cursor to a pointer on hover */
 }
 
 .timer-date-lock {

@@ -401,23 +401,14 @@ export default function BlockedSitesSection({
                 onChange={(e) => onEditSectionTitle(e.target.value)}
                 placeholder="Enter Section Title"
               />
-              <div className="icon-button">
+              <div className="icon-button-container">
                 <AiOutlineDelete
                   className="icon"
                   onClick={() => onDeleteSection(index)}
                 />
                 <FaRegWindowClose className="icon" onClick={onCloseModal} />
-                <div className="icon-button" onClick={toggleLockOptions}>
-                  {showLockOptions ? (
-                    <div className="icon">
-                      <FaLockOpen />{" "}
-                    </div>
-                  ) : (
-                    <div>
-                      {" "}
-                      <FaLock />
-                    </div>
-                  )}
+                <div className="icon" onClick={toggleLockOptions}>
+                  {showLockOptions ? <FaLockOpen /> : <FaLock />}
                 </div>
               </div>
             </div>
