@@ -266,7 +266,7 @@ export default function BlockedSitesSection({
         if (section.locked) {
           return (
             <div className="time-range-lock">
-              Locked from {section?.timeRange?.startTime || ""} to
+              Locked from {section?.timeRange?.startTime || ""} to{" "}
               {section?.timeRange?.endTime || ""}
             </div>
           );
