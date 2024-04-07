@@ -33,7 +33,7 @@ export default function BlockedSitesSection({
   const [unlockAttempt, setUnlockAttempt] = useState("");
   const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
   const [confirmLockValue, setConfirmLockValue] = useState("");
-  const [numChars, setNumChars] = useState(1);
+  const [numChars, setNumChars] = useState(10);
   const [timeRangeLock, setTimeRangeLock] = useState({
     startTime: "",
     endTime: "",
@@ -91,6 +91,9 @@ export default function BlockedSitesSection({
     } else if (newLockMethod === "password") {
       setLockValue("");
       setConfirmLockValue("");
+    } else if (newLockMethod === "timer") {
+      const initialTimerValue = getCurrentDateTime();
+      setLockValue(initialTimerValue);
     } else {
       setLockValue("");
     }
@@ -135,9 +138,6 @@ export default function BlockedSitesSection({
   };
 
   function generateRandomString(length) {
-    if (length <= 0) {
-      return "";
-    }
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
     let result = "";
@@ -201,14 +201,14 @@ export default function BlockedSitesSection({
           inputType = "number";
           inputValue = numChars;
           inputChangeHandler = (e) => {
-            const newNumChars = e.target.value;
-            if (newNumChars >= 0) {
+            const newNumChars = parseInt(e.target.value, 10);
+            if (!isNaN(newNumChars)) {
               setNumChars(newNumChars);
-            }
-            if (newNumChars > 0) {
-              setLockValue(generateRandomString(newNumChars));
-            } else {
-              setLockValue("");
+              if (newNumChars > 0) {
+                setLockValue(generateRandomString(newNumChars));
+              } else {
+                setLockValue("");
+              }
             }
           };
 
@@ -219,6 +219,7 @@ export default function BlockedSitesSection({
                 placeholder="Characters Number"
                 value={inputValue}
                 onChange={inputChangeHandler}
+                min="1"
               />
             </div>
           );
