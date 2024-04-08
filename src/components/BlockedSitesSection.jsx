@@ -134,6 +134,7 @@ export default function BlockedSitesSection({
           value={section.lockMethod || ""}
           onChange={handleLockMethodChange}
         >
+          <option value="none">None</option>
           <option value="password">Password</option>{" "}
           <option value="randomText">Random Text</option>
           <option value="timeRange">Time Range</option>
@@ -193,6 +194,9 @@ export default function BlockedSitesSection({
           );
         }
       }
+      case "none":
+        return <p>Do not lock this block and allow to make changes</p>;
+
       case "randomText":
         if (section.locked) {
           return (
