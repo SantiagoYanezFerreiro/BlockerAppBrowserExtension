@@ -311,6 +311,8 @@ export default function BlockedSitesSection({
             </div>
           );
         }
+      default:
+        return <p>Do not lock this block and allow to make changes</p>;
     }
   }
 
