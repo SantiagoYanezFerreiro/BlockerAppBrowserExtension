@@ -58,6 +58,11 @@ export default function BlockedSitesSection({
     setEditingValue("");
   };
 
+  const handleCloseEditMenu = () => {
+    setEditingIndex(null);
+    setEditingValue("");
+  };
+
   const toggleLockOptions = () => {
     setShowLockOptions(!showLockOptions);
   };
@@ -354,7 +359,10 @@ export default function BlockedSitesSection({
                     onChange={(e) => setEditingValue(e.target.value)}
                   />
                   <TfiSave className="icon" onClick={handleSaveEdit} />
-                  <FaRegWindowClose />
+                  <FaRegWindowClose
+                    className="icon"
+                    onClick={handleCloseEditMenu}
+                  />
                   <div
                     className="icon"
                     onClick={() => setEditingIndex(null)}
