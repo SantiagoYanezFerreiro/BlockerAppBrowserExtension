@@ -307,22 +307,10 @@ export default function LockOptions({
 
   LockOptions.propTypes = {
     index: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    sites: PropTypes.array.isRequired,
     section: PropTypes.object.isRequired,
-    isModalOpen: PropTypes.bool.isRequired,
-    onOpenModal: PropTypes.func.isRequired,
-    onCloseModal: PropTypes.func.isRequired,
-    onToggleModal: PropTypes.func.isRequired,
-    onAddWebsite: PropTypes.func.isRequired,
-    onEditWebsite: PropTypes.func.isRequired,
-    onEditSectionTitle: PropTypes.func.isRequired,
-    onDeleteSection: PropTypes.func.isRequired,
-    onDeleteWebsite: PropTypes.func.isRequired,
     onUpdateTimeRange: PropTypes.func.isRequired,
     onToggleSectionLock: PropTypes.func.isRequired,
     onLockMethodChange: PropTypes.func.isRequired,
-    onLockSubmit: PropTypes.func.isRequired,
     onUnlockSection: PropTypes.func.isRequired,
     onSectionUpdate: PropTypes.func.isRequired,
   };
