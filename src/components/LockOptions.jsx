@@ -83,25 +83,6 @@ export default function LockOptions({
     }
   };
 
-  const renderLockMethodSelector = () => {
-    if (!section.locked) {
-      return (
-        <select
-          className="lock-method-selector"
-          value={section.lockMethod || ""}
-          onChange={handleLockMethodChange}
-        >
-          <option value="none">None</option>
-          <option value="password">Password</option>{" "}
-          <option value="randomText">Random Text</option>
-          <option value="timeRange">Time Range</option>
-          <option value="timer">Timer</option>
-        </select>
-      );
-    }
-    return null;
-  };
-
   const getCurrentDateTime = () => {
     const now = new Date();
     return now.toISOString().substring(0, 16); // 'YYYY-MM-DDTHH:mm' format
@@ -313,5 +294,6 @@ export default function LockOptions({
     onLockMethodChange: PropTypes.func.isRequired,
     onUnlockSection: PropTypes.func.isRequired,
     onSectionUpdate: PropTypes.func.isRequired,
+    onRenderLockMethodSelector: PropTypes.func.isRequired,
   };
 }
