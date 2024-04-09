@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "../BlockedSitesSection.css";
-import LockOptions from "../LockOptions";
+import LockOptions from "../components/LockOptions.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { VscDiffAdded } from "react-icons/vsc";
@@ -431,17 +431,20 @@ export default function BlockedSitesSection({
           {showLockOptions && (
             <div className="lock-section">
               <LockOptions
-                section ={section}
-                index = {index}
-                onLockMethodChange = {onLockMethodChange}
-                onUpdateTimeRange ={onUpdateTimeRange}
-                onToggleSectionLock = {onToggleSectionLock}
-                onSectionUpdate = {onSectionUpdate}
-                onUnlockSection ={onUnlockSection}
-                {renderLockMethodSelector()} 
-                {renderLockInputs()} {/* Render Lock Inputs */}
-                {renderLockToggle()} {/* Render Lock Toggle */}
+                section={section}
+                index={index}
+                onLockMethodChange={onLockMethodChange}
+                onUpdateTimeRange={onUpdateTimeRange}
+                onToggleSectionLock={onToggleSectionLock}
+                onSectionUpdate={onSectionUpdate}
+                onUnlockSection={onUnlockSection}
+                renderLockMethodSelector={renderLockMethodSelector}
+                renderLockInputs={renderLockInputs}
+                renderLockToggle={renderLockToggle}
               />
+              {renderLockMethodSelector()}
+              {renderLockInputs()}
+              {renderLockToggle()}
             </div>
           )}
         </div>
