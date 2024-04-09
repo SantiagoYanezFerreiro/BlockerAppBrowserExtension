@@ -20,25 +20,7 @@ export default function LockOptions({
     endTime: "",
   });
 
-  const toggleLockOptions = () => {
-    setShowLockOptions(!showLockOptions);
-  };
-
   //Handlers for Blocking Methods
-
-  const handleStartTimeChange = (event) => {
-    const newStartTime = event.target.value;
-    const newTimeRange = { ...timeRangeLock, startTime: newStartTime };
-    setTimeRangeLock(newTimeRange);
-    onUpdateTimeRange(newTimeRange);
-  };
-
-  const handleEndTimeChange = (event) => {
-    const newEndTime = event.target.value;
-    const newTimeRange = { ...timeRangeLock, endTime: newEndTime };
-    setTimeRangeLock(newTimeRange);
-    onUpdateTimeRange(newTimeRange);
-  };
 
   const handleLockSubmit = () => {
     if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
@@ -68,6 +50,22 @@ export default function LockOptions({
     }
   };
 
+  //Handlers for Blocking Methods
+
+  const handleStartTimeChange = (event) => {
+    const newStartTime = event.target.value;
+    const newTimeRange = { ...timeRangeLock, startTime: newStartTime };
+    setTimeRangeLock(newTimeRange);
+    onUpdateTimeRange(newTimeRange);
+  };
+
+  const handleEndTimeChange = (event) => {
+    const newEndTime = event.target.value;
+    const newTimeRange = { ...timeRangeLock, endTime: newEndTime };
+    setTimeRangeLock(newTimeRange);
+    onUpdateTimeRange(newTimeRange);
+  };
+
   const handleUnlockAttempt = (e) => {
     e.preventDefault();
     console.log("Attempt:", unlockAttempt);
@@ -81,6 +79,25 @@ export default function LockOptions({
       console.error("Incorrect unlock attempt");
       alert("Incorrect password, please try again.");
     }
+  };
+
+  const renderLockMethodSelector = () => {
+    if (!section.locked) {
+      return (
+        <select
+          className="lock-method-selector"
+          value={section.lockMethod || ""}
+          onChange={handleLockMethodChange}
+        >
+          <option value="none">None</option>
+          <option value="password">Password</option>{" "}
+          <option value="randomText">Random Text</option>
+          <option value="timeRange">Time Range</option>
+          <option value="timer">Timer</option>
+        </select>
+      );
+    }
+    return null;
   };
 
   const getCurrentDateTime = () => {
@@ -286,14 +303,21 @@ export default function LockOptions({
     onToggleSectionLock(index);
   };
 
-  LockOptions.propTypes = {
-    index: PropTypes.number.isRequired,
-    section: PropTypes.object.isRequired,
-    onUpdateTimeRange: PropTypes.func.isRequired,
-    onToggleSectionLock: PropTypes.func.isRequired,
-    onLockMethodChange: PropTypes.func.isRequired,
-    onUnlockSection: PropTypes.func.isRequired,
-    onSectionUpdate: PropTypes.func.isRequired,
-    onRenderLockMethodSelector: PropTypes.func.isRequired,
-  };
+  return (
+    <div>
+      {renderLockMethodSelector()}
+      {renderLockInputs()}
+      {renderLockToggle()}
+    </div>
+  );
 }
+
+LockOptions.propTypes = {
+  index: PropTypes.number.isRequired,
+  section: PropTypes.object.isRequired,
+  onUpdateTimeRange: PropTypes.func.isRequired,
+  onToggleSectionLock: PropTypes.func.isRequired,
+  onLockMethodChange: PropTypes.func.isRequired,
+  onUnlockSection: PropTypes.func.isRequired,
+  onSectionUpdate: PropTypes.func.isRequired,
+};
