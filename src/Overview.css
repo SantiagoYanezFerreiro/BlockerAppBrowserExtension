@@ -1,27 +1,27 @@
-.overview-container {
-  width: 100%;
-  /* Styles for the container */
-}
-
 .section-overview {
   display: flex;
-  justify-content: space-between; /* Aligns children with space between */
-  align-items: center; /* Aligns children vertically in the center */
-  padding: 20px; /* Add some padding */
-  border-bottom: 1px solid #ccc; /* Optional: adds a line between sections */
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
   width: 100%;
 }
 
 .section-overview h3 {
-  margin: 0;
+  margin: 10px 20px;
   text-align: center;
-  flex-grow: 1;
 }
 
-.section-overview h3:first-child {
+.section-overview h3 {
   text-align: left;
 }
 
 .section-overview h3:last-child {
   text-align: right;
+}
+
+.lock-icon-container {
+  flex: 1;
+  text-align: right; /* Aligns the icon to the right */
+  /* Additional styling for the icon container */
 }

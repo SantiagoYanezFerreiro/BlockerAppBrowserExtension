@@ -12,11 +12,13 @@ export default function Overview({ sections }) {
           <h3>
             {section.lockMethod === "password" ||
             section.lockMethod === "randomText"
-              ? "No breaks"
-              : "No Allowance Remaining"}
+              ? "No Breaks"
+              : "No Allowance"}
           </h3>
           <h3>{section.lockMethod}</h3>
-          <IoLockClosedOutline />
+          <div className="lock-icon-container">
+            <IoLockClosedOutline />
+          </div>
         </div>
       ))}
     </div>
