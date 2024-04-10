@@ -3,14 +3,13 @@
 }
 
 .blocker-container {
-  width: 1000px;
+  width: 850px;
 }
-
 .blocker-sites-section {
   text-align: center;
   border: 10px solid white;
   margin-bottom: 30px;
-  padding: 15px; /* Center-align the section content */
+  padding: 0 100px; /* Center-align the section content */
 }
 
 .blocker-sites-section ul {
@@ -27,8 +26,7 @@
 }
 
 .section-name {
-  text-align: left;
-  margin-left: 30px;
+  margin-bottom: 40px;
 }
 
 .icon {
