@@ -33,6 +33,21 @@ export default function LockOptions({
     onSectionUpdate(updatedSection, index);
   };
 
+  const handleUnlockAttempt = (e) => {
+    e.preventDefault();
+    console.log("Attempt:", unlockAttempt);
+    console.log("Expected:", section.lockValue);
+    if (unlockAttempt === section.lockValue) {
+      onUnlockSection(index);
+      setUnlockAttempt("");
+      console.log("Unlock successful");
+    } else {
+      // Log an error message
+      console.error("Incorrect unlock attempt");
+      alert("Incorrect password, please try again.");
+    }
+  };
+
   const handleLockMethodChange = (event) => {
     const newLockMethod = event.target.value;
     onLockMethodChange(index, newLockMethod);
@@ -66,20 +81,22 @@ export default function LockOptions({
     onUpdateTimeRange(newTimeRange);
   };
 
-  const handleUnlockAttempt = (e) => {
-    e.preventDefault();
-    console.log("Attempt:", unlockAttempt);
-    console.log("Expected:", section.lockValue);
-    if (unlockAttempt === section.lockValue) {
-      onUnlockSection(index);
-      setUnlockAttempt("");
-      console.log("Unlock successful");
-    } else {
-      // Log an error message
-      console.error("Incorrect unlock attempt");
-      alert("Incorrect password, please try again.");
-    }
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    return now.toISOString().substring(0, 16); // 'YYYY-MM-DDTHH:mm' format
   };
+
+  function generateRandomString(length) {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return result;
+  }
 
   const renderLockMethodSelector = () => {
     if (!section.locked) {
@@ -99,23 +116,6 @@ export default function LockOptions({
     }
     return null;
   };
-
-  const getCurrentDateTime = () => {
-    const now = new Date();
-    return now.toISOString().substring(0, 16); // 'YYYY-MM-DDTHH:mm' format
-  };
-
-  function generateRandomString(length) {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
-    let result = "";
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
-    return result;
-  }
 
   function renderLockInputs() {
     let inputType;
