@@ -35,14 +35,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
   }, [setSections]);
 
-  const handleSectionsUpdate = (updatedSection, index) => {
-    const newSections = sections.map((section, idx) =>
-      idx === index ? updatedSection : section
-    );
-    setSections(newSections);
-    saveToStorage({ sections: newSections });
-  };
-
   // Function to add a new section
   const handleAddSection = () => {
     if (newSectionTitle.trim()) {
@@ -68,6 +60,32 @@ export default function WebsiteBlocker({ sections, setSections }) {
       setNewSectionTitle("");
       setIsAddingNewSection(false);
     }
+  };
+
+  const handleSectionsUpdate = (updatedSection, index) => {
+    const newSections = sections.map((section, idx) =>
+      idx === index ? updatedSection : section
+    );
+    setSections(newSections);
+    saveToStorage({ sections: newSections });
+  };
+
+  const handleLockMethodChange = (sectionIndex, lockMethod) => {
+    const updatedSections = [...sections];
+    updatedSections[sectionIndex].lockMethod = lockMethod;
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
+
+  const handleUnlockSection = (index) => {
+    const newSections = sections.map((section, idx) => {
+      if (idx === index) {
+        return { ...section, locked: false };
+      }
+      return section;
+    });
+    setSections(newSections);
+    saveToStorage({ sections: newSections });
   };
 
   // Function to edit a section title
@@ -178,24 +196,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
     const newSections = sections.map((section, idx) => {
       if (idx === index) {
         return { ...section, lockMethod, lockValue };
-      }
-      return section;
-    });
-    setSections(newSections);
-    saveToStorage({ sections: newSections });
-  };
-
-  const handleLockMethodChange = (sectionIndex, lockMethod) => {
-    const updatedSections = [...sections];
-    updatedSections[sectionIndex].lockMethod = lockMethod;
-    setSections(updatedSections);
-    saveToStorage({ sections: updatedSections });
-  };
-
-  const handleUnlockSection = (index) => {
-    const newSections = sections.map((section, idx) => {
-      if (idx === index) {
-        return { ...section, locked: false };
       }
       return section;
     });
