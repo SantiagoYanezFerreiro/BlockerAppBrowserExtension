@@ -33,6 +33,7 @@ export default function BlockedSitesSection({
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingValue, setEditingValue] = useState("");
   const [showLockOptions, setShowLockOptions] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -67,9 +68,14 @@ export default function BlockedSitesSection({
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (
-            <li key={siteIndex} className="site-item">
+            <li
+              key={siteIndex}
+              className="site-item"
+              onMouseEnter={() => setHoveredIndex(siteIndex)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
               {editingIndex === siteIndex ? (
-                <div>
+                <div className="site-editing">
                   <input
                     type="text"
                     value={editingValue}
@@ -78,26 +84,30 @@ export default function BlockedSitesSection({
                   <TfiSave className="icon" onClick={handleSaveEdit} />
                   <FaRegWindowClose
                     className="icon"
-                    onClick={handleCloseEditMenu}
+                    onClick={() => {
+                      setEditingIndex(null);
+                      setHoveredIndex(null);
+                    }}
                   />
-                  <div
-                    className="icon"
-                    onClick={() => setEditingIndex(null)}
-                  ></div>
                 </div>
               ) : (
-                <div>
+                <div className="site-content">
                   <p className="site-name">{site}</p>
-
-                  <FaPencilAlt
-                    className="icon"
-                    onClick={() => handleEditWebsite(siteIndex, site)}
-                  />
-
-                  <AiOutlineDelete
-                    className="icon"
-                    onClick={() => onDeleteWebsite(siteIndex)}
-                  />
+                  {hoveredIndex === siteIndex && (
+                    <div className="site-actions">
+                      <FaPencilAlt
+                        className="icon edit-icon"
+                        onClick={() => {
+                          handleEditWebsite(siteIndex, site);
+                          setEditingIndex(siteIndex);
+                        }}
+                      />
+                      <AiOutlineDelete
+                        className="icon delete-icon"
+                        onClick={() => onDeleteWebsite(siteIndex)}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </li>
