@@ -7,6 +7,17 @@ export default function Settings() {
   const [firstDayOfWeek, setFirstDayOfWeek] = useState("Monday");
   const [applicationTheme, setApplicationTheme] = useState("Light");
   const [openOnStartup, setOpenOnStartup] = useState(false);
+  const [lockStartsNotification, setLockStartsNotification] = useState(false);
+  const [lockEndsNotification, setLockEndsNotification] = useState(false);
+  const [ShowWarningBeforeLockStarts, setShowWarningBeforeLockStars] =
+    useState(false);
+  const [
+    WarningLockStartsMinutesInAdvanceWarning,
+    setWarningLockStartsMinutesInAdvanceWarning,
+  ] = useState(0);
+  const [ShowWarningBeforeAllowanceEnds, setShowWarningBeforeAllowanceEnds] =
+    useState(false);
+
   return (
     <div className="settings-container">
       <div className="tabs">
