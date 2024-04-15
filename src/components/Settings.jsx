@@ -3,6 +3,10 @@ import "../Settings.css";
 
 export default function Settings() {
   const [activeTab, setActiveTab] = useState("general");
+  const [use24HourNotation, setUse24HourNotation] = useState(true);
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState("Monday");
+  const [applicationTheme, setApplicationTheme] = useState("Light");
+  const [openOnStartup, setOpenOnStartup] = useState(false);
   return (
     <div className="settings-container">
       <div className="tabs">
