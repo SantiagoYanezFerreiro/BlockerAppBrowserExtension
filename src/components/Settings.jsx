@@ -10,7 +10,7 @@ export default function Settings() {
           onClick={() => setActiveTab("general")}
           className={activeTab === "general" ? "active" : ""}
         >
-          General
+          Preferences
         </button>
         <button
           onClick={() => setActiveTab("notifications")}
