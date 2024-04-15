@@ -1,0 +1,26 @@
+.tabs {
+  display: flex;
+  justify-content: center; /* Align items horizontally in the center */
+  text-align: center;
+  align-items: center;
+  position: fixed;
+  top: 250px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.tabs button {
+  background-color: white;
+  color: black;
+  font-weight: 500;
+}
+
+.tabs button:hover {
+  background-color: grey; /* Slightly darker shade on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+.tab-content {
+  font-size: 25px;
+}
