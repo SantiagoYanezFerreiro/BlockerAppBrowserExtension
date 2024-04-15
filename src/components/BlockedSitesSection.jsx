@@ -51,10 +51,11 @@ export default function BlockedSitesSection({
     setEditingValue("");
   };
 
+  /* Not needed for now
   const handleCloseEditMenu = () => {
     setEditingIndex(null);
     setEditingValue("");
-  };
+  };*/
 
   const toggleLockOptions = () => {
     setShowLockOptions(!showLockOptions);
