@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Toggle from "../components/Toggle.jsx";
 import "../Settings.css";
 
 export default function Settings() {
@@ -61,9 +62,11 @@ function Preferences() {
     <div className="settings-section">
       <h2>Preferences</h2>
       <p>Use 24 Hour Notation</p>
+      <Toggle />
       <p>First Day of the Week</p>
       <p>Application Theme</p>
       <p>Open Blocker App on Startup</p>
+      <Toggle />
     </div>
   );
 }

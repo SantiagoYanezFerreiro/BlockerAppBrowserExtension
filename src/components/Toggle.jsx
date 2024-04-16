@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Toggle.css";
+import "../Toggle.css";
 
 export default function Toggle({ isEnabled, onToggle, label }) {
   return (
