@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Toggle from "../components/Toggle";
 import PropTypes from "prop-types";
 
 export default function LockOptions({
