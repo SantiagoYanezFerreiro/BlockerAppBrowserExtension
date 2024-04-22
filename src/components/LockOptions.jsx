@@ -13,7 +13,7 @@ export default function LockOptions({
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
-  const [wasSuccesfullyUnlocked, setWasSuccessfullyUnlocked] = useState(false);
+
   const [confirmLockValue, setConfirmLockValue] = useState("");
   const [numChars, setNumChars] = useState(20);
   const [timeRangeLock, setTimeRangeLock] = useState({
@@ -64,6 +64,10 @@ export default function LockOptions({
     } else {
       setLockValue("");
     }
+  };
+
+  const handleToggleLock = () => {
+    onToggleSectionLock(index, !section.locked);
   };
 
   //Handlers for Blocking Methods
@@ -283,25 +287,13 @@ export default function LockOptions({
           {buttonText}
         </button>
         <p className="toggle-text">{section.locked ? "On" : "Off"}</p>
-        <label className="toggle-switch">
-          <input
-            type="checkbox"
-            checked={section.locked}
-            onChange={onToggleSectionLockAdjusted}
-          />
-          <span className="slider round"></span>
-        </label>
+        <Toggle
+          isEnabled={section.locked}
+          onToggle={handleToggleLock}
+          label="Lock Section"
+        />
       </>
     );
-  };
-
-  const onToggleSectionLockAdjusted = () => {
-    if (section.locked) {
-      setWasSuccessfullyUnlocked(false);
-    } else if (wasSuccesfullyUnlocked) {
-      setLockValue(section.lockValue);
-    }
-    onToggleSectionLock(index);
   };
 
   return (

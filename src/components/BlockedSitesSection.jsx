@@ -144,7 +144,7 @@ export default function BlockedSitesSection({
                 />
                 <FaRegWindowClose className="icon" onClick={onCloseModal} />
                 <div className="icon" onClick={toggleLockOptions}>
-                  {showLockOptions ? <FaLockOpen /> : <FaLock />}
+                  {section.locked ? <FaLockOpen /> : <FaLock />}
                 </div>
               </div>
             </div>
