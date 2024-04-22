@@ -63,6 +63,17 @@ function Preferences() {
       <p>Use 24 Hour Notation</p>
       <Toggle />
       <p>First Day of the Week</p>
+      <select value={firstDayOfWeek} onChange={handleDayChange}>
+        <option value="Sunday">Sunday</option>
+        <option value="Monday" default>
+          Monday
+        </option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+      </select>
       <p>Application Theme</p>
       <p>Open Blocker App on Startup</p>
       <Toggle />
