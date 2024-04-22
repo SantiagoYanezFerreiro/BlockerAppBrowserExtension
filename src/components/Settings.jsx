@@ -4,20 +4,6 @@ import "../Settings.css";
 
 export default function Settings() {
   const [activeTab, setActiveTab] = useState("general");
-  const [use24HourNotation, setUse24HourNotation] = useState(true);
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState("Monday");
-  const [applicationTheme, setApplicationTheme] = useState("Light");
-  const [openOnStartup, setOpenOnStartup] = useState(false);
-  const [lockStartsNotification, setLockStartsNotification] = useState(false);
-  const [lockEndsNotification, setLockEndsNotification] = useState(false);
-  const [ShowWarningBeforeLockStarts, setShowWarningBeforeLockStars] =
-    useState(false);
-  const [
-    WarningLockStartsMinutesInAdvanceWarning,
-    setWarningLockStartsMinutesInAdvanceWarning,
-  ] = useState(0);
-  const [ShowWarningBeforeAllowanceEnds, setShowWarningBeforeAllowanceEnds] =
-    useState(false);
 
   return (
     <div className="settings-container">
@@ -58,6 +44,19 @@ export default function Settings() {
 }
 
 function Preferences() {
+  const [use24HourNotation, setUse24HourNotation] = useState(true);
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState("Monday");
+  const [applicationTheme, setApplicationTheme] = useState("Light");
+  const [openOnStartup, setOpenOnStartup] = useState(false);
+
+  const handleDayChange = (event) => {
+    setFirstDayOfWeek(event.target.value);
+  };
+
+  const toggleTheme = () => {
+    setApplicationTheme(applicationTheme === "Light" ? "Dark" : "Light");
+  };
+
   return (
     <div className="settings-section">
       <h2>Preferences</h2>
