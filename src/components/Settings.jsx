@@ -106,6 +106,10 @@ function Preferences() {
 }
 
 function Notifications() {
+  const [NotificationLockStarts, setNotificationLockStarts] = useState(false);
+  const [NotificationLockEnds, setNotificationLockEnds] = useState(false);
+  const [WarningBeforeLockStarts, setWarningBeforeLockStarts] = useState(false);
+  const [MinutesWarningBeforeLock, setMinutesWarningBeforeLock] = useState(0);
   return (
     <div className="settings-section">
       <h2>Notifications</h2>
