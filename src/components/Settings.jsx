@@ -110,6 +110,19 @@ function Notifications() {
   const [NotificationLockEnds, setNotificationLockEnds] = useState(false);
   const [WarningBeforeLockStarts, setWarningBeforeLockStarts] = useState(false);
   const [MinutesWarningBeforeLock, setMinutesWarningBeforeLock] = useState(0);
+
+  const handleNotificationLockStarts = () => {
+    setNotificationLockStarts(!NotificationLockStarts);
+  };
+  const handleNotificationLockEnds = () => {
+    setNotificationLockEnds(!NotificationLockStarts);
+  };
+  const handleWarningBeforeLockStarts = () => {
+    setWarningBeforeLockStarts(!WarningBeforeLockStarts);
+  };
+  const handleMinutesWarningBeforeLock = () => {
+    setMinutesWarningBeforeLock(!MinutesWarningBeforeLock);
+  };
   return (
     <div className="settings-section">
       <h2>Notifications</h2>
@@ -120,7 +133,7 @@ function Notifications() {
         <Toggle
           label="Notification Lock Starts"
           isEnabled={NotificationLockStarts}
-          onToggle={setNotificationLockStarts}
+          onToggle={handleNotificationLockStarts}
         />
       </div>
       <div className="settings-preferences-section">
@@ -130,7 +143,7 @@ function Notifications() {
         <Toggle
           label="Notification Lock Ends"
           isEnabled={NotificationLockEnds}
-          onToggle={setNotificationLockEnds}
+          onToggle={handleNotificationLockEnds}
         />
       </div>
       <div className="settings-preferences-section">
@@ -140,7 +153,7 @@ function Notifications() {
         <Toggle
           label="ShowWarningBeforeLockStarts"
           isEnabled={WarningBeforeLockStarts}
-          onToggle={setWarningBeforeLockStarts}
+          onToggle={handleWarningBeforeLockStarts}
         />
       </div>
       <div className="settings-preferences-section">
@@ -150,7 +163,7 @@ function Notifications() {
         <Toggle
           label="MinutesBeforeLockStarts"
           isEnabled={MinutesWarningBeforeLock}
-          onToggle={setMinutesWarningBeforeLock}
+          onToggle={handleMinutesWarningBeforeLock}
         />
       </div>
     </div>
