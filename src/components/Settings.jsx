@@ -113,10 +113,46 @@ function Notifications() {
   return (
     <div className="settings-section">
       <h2>Notifications</h2>
-      <p>Show Notification when a lock starts</p>
-      <p>Show Notifications when a lock ends</p>
-      <p>Show Warning before a lock starts</p>
-      <p>Minutes of advance warning before lock starts</p>
+      <div className="settings-preferences-section">
+        <label htmlFor="Notification Lock Starts">
+          Notification Lock Starts
+        </label>
+        <Toggle
+          label="Notification Lock Starts"
+          isEnabled={NotificationLockStarts}
+          onToggle={setNotificationLockStarts}
+        />
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="ShowNotificationsWhenLockEnds">
+          Show Notifications when a lock ends
+        </label>
+        <Toggle
+          label="Notification Lock Ends"
+          isEnabled={NotificationLockEnds}
+          onToggle={setNotificationLockEnds}
+        />
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="ShowWarningBeforeLockStarts">
+          Show Warning before a lock starts
+        </label>
+        <Toggle
+          label="ShowWarningBeforeLockStarts"
+          isEnabled={WarningBeforeLockStarts}
+          onToggle={setWarningBeforeLockStarts}
+        />
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="MinutesBeforeLockStarts">
+          Minutes of advance warning before lock starts
+        </label>
+        <Toggle
+          label="MinutesBeforeLockStarts"
+          isEnabled={MinutesWarningBeforeLock}
+          onToggle={setMinutesWarningBeforeLock}
+        />
+      </div>
     </div>
   );
 }
