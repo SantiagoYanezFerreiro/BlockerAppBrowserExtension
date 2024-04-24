@@ -111,11 +111,8 @@ function Notifications() {
       <h2>Notifications</h2>
       <p>Show Notification when a lock starts</p>
       <p>Show Notifications when a lock ends</p>
-      <p>Show Notification when an app is blocked</p>
-      <p>Show Warning before lock starts</p>
+      <p>Show Warning before a lock starts</p>
       <p>Minutes of advance warning before lock starts</p>
-      <p>Show Warning before an allowance runs out</p>
-      <p>Minutes of advance warning before allowance runs out</p>
     </div>
   );
 }
