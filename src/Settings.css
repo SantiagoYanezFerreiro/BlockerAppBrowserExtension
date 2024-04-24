@@ -24,3 +24,11 @@
 .tab-content {
   font-size: 25px;
 }
+
+.settings-preferences-section {
+  margin: 25px 0;
+}
+
+.settings-preferences-section label {
+  margin-top: 25px;
+}

@@ -53,30 +53,54 @@ function Preferences() {
     setFirstDayOfWeek(event.target.value);
   };
 
-  const toggleTheme = () => {
+  const handleThemeChange = () => {
     setApplicationTheme(applicationTheme === "Light" ? "Dark" : "Light");
+  };
+
+  const handle24HourToggle = () => {
+    setUse24HourNotation(!use24HourNotation);
+  };
+
+  const handleStartupToggle = () => {
+    setOpenOnStartup(!openOnStartup);
   };
 
   return (
     <div className="settings-section">
       <h2>Preferences</h2>
-      <p>Use 24 Hour Notation</p>
-      <Toggle />
-      <p>First Day of the Week</p>
-      <select value={firstDayOfWeek} onChange={handleDayChange}>
-        <option value="Sunday">Sunday</option>
-        <option value="Monday" default>
-          Monday
-        </option>
-        <option value="Tuesday">Tuesday</option>
-        <option value="Wednesday">Wednesday</option>
-        <option value="Thursday">Thursday</option>
-        <option value="Friday">Friday</option>
-        <option value="Saturday">Saturday</option>
-      </select>
-      <p>Application Theme</p>
-      <p>Open Blocker App on Startup</p>
-      <Toggle />
+      <div className="settings-preferences-section">
+        <label htmlFor="Use 24 Hour Notation">Use 24 Hour Notation</label>
+        <Toggle isEnabled={use24HourNotation} onToggle={handle24HourToggle} />
+      </div>
+      <div className="settings-preferences-section">
+        <label>First Day of the Week</label>
+        <select value={firstDayOfWeek} onChange={handleDayChange}>
+          <option value="Sunday">Sunday</option>
+          <option value="Monday" default>
+            Monday
+          </option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+        </select>
+      </div>
+      <div className="settings-preferences-section">
+        <label>Application Theme</label>
+        <select value={applicationTheme} onChange={handleThemeChange}>
+          <option value="Light">Light</option>
+          <option value="Dark">Dark</option>
+        </select>
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="Open on Startup">Open on Startup</label>
+        <Toggle
+          label="Open on Startup"
+          isEnabled={openOnStartup}
+          onToggle={handleStartupToggle}
+        />
+      </div>
     </div>
   );
 }
