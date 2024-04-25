@@ -160,10 +160,13 @@ function Notifications() {
         <label htmlFor="MinutesBeforeLockStarts">
           Minutes of advance warning before lock starts
         </label>
-        <Toggle
-          label="MinutesBeforeLockStarts"
-          isEnabled={MinutesWarningBeforeLock}
-          onToggle={handleMinutesWarningBeforeLock}
+        <input
+          type="number"
+          id="minutes-before-lock"
+          value={MinutesWarningBeforeLock}
+          onChange={handleMinutesWarningBeforeLock}
+          min="0"
+          step="1"
         />
       </div>
     </div>
