@@ -120,8 +120,8 @@ function Notifications() {
   const handleWarningBeforeLockStarts = () => {
     setWarningBeforeLockStarts(!WarningBeforeLockStarts);
   };
-  const handleMinutesWarningBeforeLock = () => {
-    setMinutesWarningBeforeLock(!MinutesWarningBeforeLock);
+  const handleMinutesWarningBeforeLock = (event) => {
+    setMinutesWarningBeforeLock(event.target.value);
   };
   return (
     <div className="settings-section">
