@@ -171,36 +171,84 @@ function Notifications() {
 }
 
 function BlockingRules() {
+  const [BlockTimeLangSettings, setBlockTimeLangSettings] = useState(false);
+  const [BlockTaskManager, setBlockTaskManager] = useState(false);
+  const [ApplicationPassword, setApplicationPassword] = useState();
   return (
     <div className="settings-section">
       <h2>Blocking Rules</h2>
-      <p>Block Time & Language Setting when a block is enabled</p>
-      <p>Block Window Task Manager when a Lock is Enabled</p>
-      <p>
-        Set an Application Password (not to be confused with blocks password) to
-        protect your privacy by limiting the acess to Blocks Statistics and
-        Settings tabs. This password cannot be recovered
-      </p>
-      <p></p>
-      <p></p>
+      <div className="settings-preferences-section">
+        <label htmlFor="BlockTimeLanguage">
+          Block Time & Language Setting when a block is enabled
+        </label>
+        <Toggle
+          label="BlockTimeLanguage"
+          isEnabled={BlockTimeLangSettings}
+          onToggle={setBlockTimeLangSettings}
+        />
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="BlockTaskManager">
+          Block Window Task Manager when a Lock is Enabled
+        </label>
+        <Toggle
+          label="BlockTaskManager"
+          isEnabled={BlockTaskManager}
+          onToggle={setBlockTaskManager}
+        />
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="SetAppPassword">
+          Set an Application Password to protect your privacy by limiting the
+          acess to Blocks Statistics and Settings tabs.Cannot be recovered.
+        </label>
+        <Toggle
+          label="SetAppPassword"
+          isEnabled={ApplicationPassword}
+          onToggle={setApplicationPassword}
+        />
+      </div>
     </div>
   );
 }
 
 function Statistics() {
+  const [EnableStats, setEnableStats] = useState(false);
+  const [CountInactiveTime, setCountInactiveTime] = useState(false);
+  const [DeleteStats, setDeleteStats] = useState(false);
   return (
     <div className="settings-section">
       <h2>Statistics</h2>
-      <p>Enable Statistics</p>
-      <p>
-        Count time towards any blocked site or app even if the tab is inactive
-        or minimized
-      </p>
-      <p>
-        Delete all statistics. You cannot delete them while a locked block has
-        an allowance for a break
-      </p>
-      <p></p>
+      <div className="settings-preferences-section">
+        <label htmlFor="Enable Statistics">Enable Statistics</label>
+        <Toggle
+          label="Enable Stats"
+          isEnabled={EnableStats}
+          onToggle={setEnableStats}
+        />
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="Count Inactive Time">
+          Count time towards any blocked site or app even if the tab is inactive
+          or minimized
+        </label>
+        <Toggle
+          label="CountInactiveTime"
+          isEnabled={CountInactiveTime}
+          onToggle={setCountInactiveTime}
+        />
+      </div>
+      <div className="settings-preferences-section">
+        <label htmlFor="Delete Statistics">
+          Delete all statistics. You cannot delete them while a locked block has
+          an allowance for a break
+        </label>
+        <Toggle
+          label="DeleteStats"
+          isEnabled={DeleteStats}
+          onToggle={setDeleteStats}
+        />
+      </div>
     </div>
   );
 }
