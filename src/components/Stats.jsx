@@ -17,6 +17,13 @@ export default function Stats() {
     { name: "Website 2", blocked: 7 },
   ];
 
+  const usageData = [
+    { name: "App 1", timeSpent: 14 },
+    { name: "App 2", timeSpent: 5 },
+    { name: "Website 1", timeSpent: 8 },
+    { name: "Website 2", timeSpent: 12 },
+  ];
+
   const BlockedStats = ({ data }) => (
     <BarChart
       width={500}
@@ -32,6 +39,21 @@ export default function Stats() {
       <Bar dataKey="blocked" fill="#82ca9d" />
     </BarChart>
   );
+  const UsageStats = ({ data }) => (
+    <BarChart
+      width={500}
+      height={300}
+      data={data}
+      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis label={{ value: "Hours", angle: -90, position: "insideLeft" }} />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey="timeSpent" fill="#82ca9d" />
+    </BarChart>
+  );
 
   return (
     <div>
@@ -39,6 +61,7 @@ export default function Stats() {
       <h2>Blocked Websites/Apps</h2>
       <BlockedStats data={blockedData} />
       <h2>Websites/Apps Usage Statistics</h2>
+      <UsageStats data={usageData} />
     </div>
   );
 }
