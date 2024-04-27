@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "../Stats.css";
 import {
   BarChart,
   Bar,
@@ -25,34 +26,38 @@ export default function Stats() {
   ];
 
   const BlockedStats = ({ data }) => (
-    <BarChart
-      width={500}
-      height={300}
-      data={data}
-      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis label={{ value: "Hours", angle: -90, position: "insideLeft" }} />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="blocked" fill="#82ca9d" />
-    </BarChart>
+    <div className="stats-chart">
+      <BarChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis label={{ value: "Hours", angle: -90, position: "insideLeft" }} />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="blocked" fill="#82ca9d" />
+      </BarChart>
+    </div>
   );
   const UsageStats = ({ data }) => (
-    <BarChart
-      width={500}
-      height={300}
-      data={data}
-      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis label={{ value: "Hours", angle: -90, position: "insideLeft" }} />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="timeSpent" fill="#8a8013" />
-    </BarChart>
+    <div className="stats-chart">
+      <BarChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis label={{ value: "Hours", angle: -90, position: "insideLeft" }} />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="timeSpent" fill="#8a8013" />
+      </BarChart>
+    </div>
   );
 
   return (
