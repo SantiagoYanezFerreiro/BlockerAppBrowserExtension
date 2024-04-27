@@ -51,7 +51,7 @@ export default function Stats() {
       <YAxis label={{ value: "Hours", angle: -90, position: "insideLeft" }} />
       <Tooltip />
       <Legend />
-      <Bar dataKey="timeSpent" fill="#82ca9d" />
+      <Bar dataKey="timeSpent" fill="#8a8013" />
     </BarChart>
   );
 
