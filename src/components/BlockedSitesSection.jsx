@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import "../BlockedSitesSection.css";
 import LockOptions from "../components/LockOptions.jsx";
+import BlocksModal from "../components/BlocksModal.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { VscDiffAdded } from "react-icons/vsc";
@@ -34,6 +35,15 @@ export default function BlockedSitesSection({
   const [editingValue, setEditingValue] = useState("");
   const [showLockOptions, setShowLockOptions] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -66,6 +76,8 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
+      <button onClick={openModal}>Edit{title}</button>
+      {showModal && <BlocksModal closeModal={closeModal}></BlocksModal>}
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (

@@ -31,7 +31,7 @@ export default function BlocksModal({
         <button onClick={handleAddWebsite}>Add</button>
       </div>
       <ul>
-        {section.sties.map((site, index) => {
+        {section.sites.map((site, index) => {
           <li key={index}>
             {site}
             <button
@@ -52,7 +52,7 @@ export default function BlocksModal({
 
 BlocksModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  section: PropTypes.Object.isRequired,
+  section: PropTypes.object.isRequired,
   addWebsitesToSection: PropTypes.func.isRequired,
   editWebsitesInSection: PropTypes.func.isRequired,
   deleteWebsiteFromSection: PropTypes.func.isRequired,
