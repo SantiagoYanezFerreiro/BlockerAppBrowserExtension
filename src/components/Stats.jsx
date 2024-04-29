@@ -76,6 +76,7 @@ Stats.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       blocked: PropTypes.number.isRequired,
+      timeSpent: PropTypes.number.isRequired,
     })
-  ).isRequired,
+  ),
 };
