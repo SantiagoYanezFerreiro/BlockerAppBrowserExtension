@@ -17,11 +17,11 @@ export default function BlocksModal({
   return (
     <div className="modal-backdrop">
       <div className="modal-content"></div>
-      <span className="model-close" onClick={closeModal}>
+      <span className="modal-close" onClick={closeModal}>
         &times;
       </span>
       <h2>Edit Sites for {section.title}</h2>
-      <div className="modal-setion">
+      <div className="modal-section">
         <input
           type="text"
           placeholder="Enter Website URL.."
@@ -31,7 +31,7 @@ export default function BlocksModal({
         <button onClick={handleAddWebsite}>Add</button>
       </div>
       <ul>
-        {section.sites.map((site, index) => {
+        {section?.sites?.map((site, index) => (
           <li key={index}>
             {site}
             <button
@@ -41,9 +41,11 @@ export default function BlocksModal({
             </button>
             <button
               onClick={() => deleteWebsiteFromSection(section.index, index)}
-            ></button>
-          </li>;
-        })}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
       </ul>
       <button onClick={closeModal}>Close</button>
     </div>

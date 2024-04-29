@@ -77,7 +77,15 @@ export default function BlockedSitesSection({
         {title}
       </h2>
       <button onClick={openModal}>Edit{title}</button>
-      {showModal && <BlocksModal closeModal={closeModal}></BlocksModal>}
+      {showModal && (
+        <BlocksModal
+          section={section}
+          closeModal={closeModal}
+          addWebsitesToSection={onAddWebsite}
+          editWebsitesInSection={onEditWebsite}
+          deleteWebsiteFromSection={onDeleteWebsite}
+        ></BlocksModal>
+      )}
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (
