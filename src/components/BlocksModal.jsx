@@ -4,14 +4,23 @@ import PropTypes from "prop-types";
 export default function BlocksModal({
   closeModal,
   section,
+  sectionIndex,
   addWebsitesToSection,
   editWebsiteInSection,
   deleteWebsiteFromSection,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
 
+  console.log("Current section in BlocksModal:", section);
+
   const handleAddWebsite = () => {
-    addWebsitesToSection(section.index, newWebsite);
+    console.log(
+      "Adding website:",
+      newWebsite,
+      "to section index:",
+      section.index
+    );
+    addWebsitesToSection(sectionIndex, newWebsite);
     setNewWebsite("");
   };
   return (
@@ -35,12 +44,12 @@ export default function BlocksModal({
           <li key={index}>
             {site}
             <button
-              onClick={() => editWebsiteInSection(section.index, index, site)}
+              onClick={() => editWebsiteInSection(sectionIndex, index, site)}
             >
               Edit
             </button>
             <button
-              onClick={() => deleteWebsiteFromSection(section.index, index)}
+              onClick={() => deleteWebsiteFromSection(sectionIndex, index)}
             >
               Delete
             </button>
@@ -55,6 +64,7 @@ export default function BlocksModal({
 BlocksModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   section: PropTypes.object.isRequired,
+  sectionIndex: PropTypes.number.isRequired,
   addWebsitesToSection: PropTypes.func.isRequired,
   editWebsiteInSection: PropTypes.func.isRequired,
   deleteWebsiteFromSection: PropTypes.func.isRequired,

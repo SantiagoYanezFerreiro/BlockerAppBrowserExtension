@@ -80,6 +80,7 @@ export default function BlockedSitesSection({
       {showModal && (
         <BlocksModal
           section={section}
+          sectionIndex={index}
           closeModal={closeModal}
           addWebsitesToSection={onAddWebsite}
           editWebsiteInSection={onEditWebsite}
