@@ -14,12 +14,7 @@ export default function BlocksModal({
   console.log("Current section in BlocksModal:", section);
 
   const handleAddWebsite = () => {
-    console.log(
-      "Adding website:",
-      newWebsite,
-      "to section index:",
-      section.index
-    );
+    console.log("Adding website:", newWebsite);
     addWebsitesToSection(sectionIndex, newWebsite);
     setNewWebsite("");
   };
@@ -64,7 +59,7 @@ export default function BlocksModal({
 BlocksModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   section: PropTypes.object.isRequired,
-  sectionIndex: PropTypes.number.isRequired,
+  sectionIndex: PropTypes.object.isRequired,
   addWebsitesToSection: PropTypes.func.isRequired,
   editWebsiteInSection: PropTypes.func.isRequired,
   deleteWebsiteFromSection: PropTypes.func.isRequired,
