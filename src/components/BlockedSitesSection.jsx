@@ -82,7 +82,7 @@ export default function BlockedSitesSection({
           section={section}
           closeModal={closeModal}
           addWebsitesToSection={onAddWebsite}
-          editWebsitesInSection={onEditWebsite}
+          editWebsiteInSection={onEditWebsite}
           deleteWebsiteFromSection={onDeleteWebsite}
         ></BlocksModal>
       )}

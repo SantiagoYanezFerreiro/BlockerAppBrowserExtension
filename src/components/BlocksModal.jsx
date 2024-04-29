@@ -5,7 +5,7 @@ export default function BlocksModal({
   closeModal,
   section,
   addWebsitesToSection,
-  editWebsitesInSection,
+  editWebsiteInSection,
   deleteWebsiteFromSection,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
@@ -35,7 +35,7 @@ export default function BlocksModal({
           <li key={index}>
             {site}
             <button
-              onClick={() => editWebsitesInSection(section.index, index, site)}
+              onClick={() => editWebsiteInSection(section.index, index, site)}
             >
               Edit
             </button>
@@ -56,6 +56,6 @@ BlocksModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   section: PropTypes.object.isRequired,
   addWebsitesToSection: PropTypes.func.isRequired,
-  editWebsitesInSection: PropTypes.func.isRequired,
+  editWebsiteInSection: PropTypes.func.isRequired,
   deleteWebsiteFromSection: PropTypes.func.isRequired,
 };
