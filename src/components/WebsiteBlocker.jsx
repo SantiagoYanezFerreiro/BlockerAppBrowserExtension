@@ -4,6 +4,7 @@ import { getFromStorage, saveToStorage } from "../utils/chromeAPI";
 import PropTypes from "prop-types";
 import "../WebsiteBlocker.css";
 import { VscDiffAdded } from "react-icons/vsc";
+import { v4 as uuidv4 } from "uuid";
 
 export default function WebsiteBlocker({ sections, setSections }) {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
@@ -100,26 +101,15 @@ export default function WebsiteBlocker({ sections, setSections }) {
   };
 
   // Function to add a website to a section
-  const addWebsiteToSection = (sectionIndex, website) => {
-    const updatedSections = sections.map((section, idx) =>
-      idx === sectionIndex
-        ? { ...section, sites: [...section.sites, website] }
-        : section
-    );
-    setSections(updatedSections);
-    saveToStorage({ sections: updatedSections }, () => {
-      console.log("sections saved correctly");
-    });
-  };
-
-  // Function to edit a website within a section
-  const editWebsiteInSection = (sectionIndex, websiteIndex, newWebsite) => {
+  const addWebsiteToSection = (sectionIndex, websiteName) => {
     const updatedSections = sections.map((section, idx) => {
       if (idx === sectionIndex) {
-        const updatedSites = section.sites.map((site, sIdx) => {
-          return sIdx === websiteIndex ? newWebsite : site;
-        });
-        return { ...section, sites: updatedSites };
+        const newWebsite = {
+          id: uuidv4(),
+          name: websiteName,
+        };
+
+        return { ...section, sites: [...section.sites, newWebsite] };
       }
       return section;
     });
@@ -129,7 +119,39 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
   };
 
-  // Function to delete a section
+  // Function to edit a website within a section
+  // Adjust the function to handle edits based on unique IDs
+  const editWebsiteInSection = (sectionIndex, websiteId, newWebsiteName) => {
+    const updatedSections = sections.map((section, idx) => {
+      if (idx === sectionIndex) {
+        const updatedSites = section.sites.map((site) => {
+          return site.id === websiteId
+            ? { ...site, name: newWebsiteName }
+            : site;
+        });
+        return { ...section, sites: updatedSites };
+      }
+      return section;
+    });
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
+
+  // Function to delete a website from a section
+  const deleteWebsiteFromSection = (sectionIndex, websiteId) => {
+    const updatedSections = sections.map((section, idx) => {
+      if (idx === sectionIndex) {
+        const filteredSites = section.sites.filter(
+          (site) => site.id !== websiteId
+        );
+        return { ...section, sites: filteredSites };
+      }
+      return section;
+    });
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
+  // Adjust the function to handle deletes based on unique IDs
   const deleteSection = (index) => {
     const updatedSections = sections.filter((_, i) => i !== index);
     setSections(updatedSections);
@@ -137,23 +159,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
       console.log("sections saved correctly");
     });
   };
-
-  // Function to delete a website from a section
-  const deleteWebsiteFromSection = (sectionIndex, websiteIndex) => {
-    const updatedSections = sections.map((section, idx) =>
-      idx === sectionIndex
-        ? {
-            ...section,
-            sites: section.sites.filter((_, sIdx) => sIdx !== websiteIndex),
-          }
-        : section
-    );
-    setSections(updatedSections);
-    saveToStorage({ sections: updatedSections }, () => {
-      console.log("sections saved correctly");
-    });
-  };
-
   const updateTimeRange = (sectionIndex, newTimeRange) => {
     const updatedSections = sections.map((section, idx) =>
       idx === sectionIndex ? { ...section, timeRange: newTimeRange } : section

@@ -34,21 +34,26 @@ export default function BlocksModal({
           type="text"
           placeholder="Enter Website URL.."
           value={newWebsite}
-          onChange={(e) => setNewWebsite(e.target.value)}
+          onChange={(e) => {
+            console.log("Current input value:", e.target.value);
+            setNewWebsite(e.target.value);
+          }}
         />
         <button onClick={handleAddWebsite}>Add</button>
       </div>
       <ul>
         {section?.sites?.map((site, index) => (
-          <li key={index}>
-            {site}
+          <li key={site.id || index}>
+            {site.name}
             <button
-              onClick={() => editWebsiteInSection(sectionIndex, index, site)}
+              onClick={() =>
+                editWebsiteInSection(sectionIndex, site.id, site.name)
+              }
             >
               Edit
             </button>
             <button
-              onClick={() => deleteWebsiteFromSection(sectionIndex, index)}
+              onClick={() => deleteWebsiteFromSection(sectionIndex, site.id)}
             >
               Delete
             </button>
