@@ -59,7 +59,7 @@ export default function BlocksModal({
 BlocksModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   section: PropTypes.object.isRequired,
-  sectionIndex: PropTypes.object.isRequired,
+  sectionIndex: PropTypes.number.isRequired,
   addWebsitesToSection: PropTypes.func.isRequired,
   editWebsiteInSection: PropTypes.func.isRequired,
   deleteWebsiteFromSection: PropTypes.func.isRequired,
