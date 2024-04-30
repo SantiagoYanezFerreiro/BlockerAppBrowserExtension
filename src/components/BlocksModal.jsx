@@ -14,9 +14,13 @@ export default function BlocksModal({
   console.log("Current section in BlocksModal:", section);
 
   const handleAddWebsite = () => {
-    console.log("Adding website:", newWebsite);
-    addWebsitesToSection(sectionIndex, newWebsite);
-    setNewWebsite("");
+    console.log("Attempting to add website:", newWebsite); // Check what's being added
+    if (newWebsite) {
+      addWebsitesToSection(sectionIndex, newWebsite);
+      setNewWebsite(""); // Clear the input field
+    } else {
+      console.error("No website name entered");
+    }
   };
   return (
     <div className="modal-backdrop">

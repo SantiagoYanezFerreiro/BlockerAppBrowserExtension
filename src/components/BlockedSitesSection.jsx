@@ -77,6 +77,7 @@ export default function BlockedSitesSection({
         {title}
       </h2>
       <button onClick={openModal}>Edit{title}</button>
+
       {showModal && (
         <BlocksModal
           section={section}
