@@ -23,5 +23,16 @@
       "matches": ["<all_urls>"],
       "js": ["contentScript.js"]
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "../dist/*",
+        "dist/assets/*",
+        "dist/assets/styles.css",
+        "dist/assets/locales/en/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
   ]
 }

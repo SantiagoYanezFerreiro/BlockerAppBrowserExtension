@@ -116,6 +116,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections }, () => {
       console.log("sections saved correctly");
+      console.log("Updated sections:", updatedSections);
     });
   };
 
