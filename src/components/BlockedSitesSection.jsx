@@ -45,14 +45,21 @@ export default function BlockedSitesSection({
     setShowModal(false);
   };
 
-  const handleAddWebsite = () => {
-    onAddWebsite(newWebsite);
-    setNewWebsite("");
+  const handleAddWebsite = (event) => {
+    event.preventDefault();
+    console.log("Adding website:", newWebsite); // Log the new website
+    console.log("Type of newWebsite:", typeof newWebsite);
+    if (newWebsite.trim() !== "") {
+      onAddWebsite(newWebsite); // Pass the website name
+      setNewWebsite("");
+    } else {
+      console.warn("Website name is empty");
+    }
   };
 
   const handleEditWebsite = (siteIndex, site) => {
     setEditingIndex(siteIndex);
-    setEditingValue(site);
+    setEditingValue(site.name);
   };
 
   const handleSaveEdit = () => {

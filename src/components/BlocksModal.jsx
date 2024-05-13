@@ -15,8 +15,9 @@ export default function BlocksModal({
 
   const handleAddWebsite = () => {
     console.log("Attempting to add website:", newWebsite); // Check what's being added
+    console.log("Type of newWebsite before adding:", typeof newWebsite);
     if (newWebsite) {
-      addWebsitesToSection(sectionIndex, newWebsite);
+      addWebsitesToSection(sectionIndex, String(newWebsite));
       setNewWebsite(""); // Clear the input field
     } else {
       console.error("No website name entered");
@@ -36,6 +37,7 @@ export default function BlocksModal({
           value={newWebsite}
           onChange={(e) => {
             console.log("Current input value:", e.target.value);
+            console.log("Type of input value:", typeof e.target.value);
             setNewWebsite(e.target.value);
           }}
         />

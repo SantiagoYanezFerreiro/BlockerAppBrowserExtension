@@ -102,17 +102,20 @@ export default function WebsiteBlocker({ sections, setSections }) {
 
   // Function to add a website to a section
   const addWebsiteToSection = (sectionIndex, websiteName) => {
+    console.log("Received websiteName:", websiteName); // Log the website name received
+    console.log("Type of received websiteName:", typeof websiteName);
     const updatedSections = sections.map((section, idx) => {
       if (idx === sectionIndex) {
         const newWebsite = {
           id: uuidv4(),
-          name: websiteName,
+          name: websiteName.toString(),
         };
-
+        console.log("New website object:", newWebsite);
         return { ...section, sites: [...section.sites, newWebsite] };
       }
       return section;
     });
+    console.log("Updated sections before setting state:", updatedSections); // Log updated sections before setting state
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections }, () => {
       console.log("sections saved correctly");
