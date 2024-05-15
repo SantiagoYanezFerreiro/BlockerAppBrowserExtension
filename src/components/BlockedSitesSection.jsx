@@ -47,10 +47,15 @@ export default function BlockedSitesSection({
 
   const handleAddWebsite = (event) => {
     event.preventDefault();
-    console.log("Adding website:", newWebsite); // Log the new website
-    console.log("Type of newWebsite:", typeof newWebsite);
+    console.log("Adding website in BlockedSitesSection:", newWebsite); // Log the new website
+    console.log(
+      "Type of newWebsite in BlockedSitesSection:",
+      typeof newWebsite
+    );
     if (newWebsite.trim() !== "") {
-      onAddWebsite(newWebsite); // Pass the website name
+      const websiteString = String(newWebsite);
+      console.log("Calling onAddWebsite with:", websiteString);
+      onAddWebsite(websiteString); // Pass the website name as a string
       setNewWebsite("");
     } else {
       console.warn("Website name is empty");
@@ -67,12 +72,6 @@ export default function BlockedSitesSection({
     setEditingIndex(null);
     setEditingValue("");
   };
-
-  /* Not needed for now
-  const handleCloseEditMenu = () => {
-    setEditingIndex(null);
-    setEditingValue("");
-  };*/
 
   const toggleLockOptions = () => {
     setShowLockOptions(!showLockOptions);
@@ -93,7 +92,7 @@ export default function BlockedSitesSection({
           addWebsitesToSection={onAddWebsite}
           editWebsiteInSection={onEditWebsite}
           deleteWebsiteFromSection={onDeleteWebsite}
-        ></BlocksModal>
+        />
       )}
       {isModalOpen && (
         <ul>
@@ -146,7 +145,7 @@ export default function BlockedSitesSection({
       )}
       {isModalOpen && (
         <div className="modal">
-          <div className="modal-content ">
+          <div className="modal-content">
             <div className="add-edit-website">
               <input
                 type="text"

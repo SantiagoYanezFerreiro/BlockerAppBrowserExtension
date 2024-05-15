@@ -14,15 +14,22 @@ export default function BlocksModal({
   console.log("Current section in BlocksModal:", section);
 
   const handleAddWebsite = () => {
-    console.log("Attempting to add website:", newWebsite); // Check what's being added
-    console.log("Type of newWebsite before adding:", typeof newWebsite);
-    if (newWebsite) {
-      addWebsitesToSection(sectionIndex, String(newWebsite));
+    console.log("Attempting to add website in BlocksModal:", newWebsite); // Check what's being added
+    console.log(
+      "Type of newWebsite before adding in BlocksModal:",
+      typeof newWebsite
+    );
+    const websiteString = String(newWebsite);
+    console.log("Website as string in BlocksModal:", websiteString);
+    if (websiteString.trim()) {
+      console.log("Calling addWebsitesToSection with:", websiteString);
+      addWebsitesToSection(sectionIndex, websiteString);
       setNewWebsite(""); // Clear the input field
     } else {
       console.error("No website name entered");
     }
   };
+
   return (
     <div className="modal-backdrop">
       <div className="modal-content"></div>

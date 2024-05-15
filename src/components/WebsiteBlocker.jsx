@@ -102,19 +102,29 @@ export default function WebsiteBlocker({ sections, setSections }) {
 
   // Function to add a website to a section
   const addWebsiteToSection = (sectionIndex, websiteName) => {
-    console.log("Received websiteName:", websiteName); // Log the website name received
-    console.log("Type of received websiteName:", typeof websiteName);
+    console.log("Received websiteName in addWebsiteToSection:", websiteName); // Log the website name received
+    console.log(
+      "Type of received websiteName in addWebsiteToSection:",
+      typeof websiteName
+    );
+
+    if (typeof websiteName !== "string") {
+      console.error("Received websiteName is not a string, converting...");
+      websiteName = String(websiteName);
+    }
+
     const updatedSections = sections.map((section, idx) => {
       if (idx === sectionIndex) {
         const newWebsite = {
           id: uuidv4(),
-          name: String(websiteName),
+          name: websiteName,
         };
         console.log("New website object:", newWebsite);
         return { ...section, sites: [...section.sites, newWebsite] };
       }
       return section;
     });
+
     console.log("Updated sections before setting state:", updatedSections); // Log updated sections before setting state
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections }, () => {
@@ -122,7 +132,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
       console.log("Updated sections:", updatedSections);
     });
   };
-
   // Function to edit a website within a section
   // Adjust the function to handle edits based on unique IDs
   const editWebsiteInSection = (sectionIndex, websiteId, newWebsiteName) => {
@@ -234,7 +243,10 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onOpenModal={() => toggleModal(index)}
           onCloseModal={() => setActiveModalIndex(null)}
           onToggleModal={toggleModal}
-          onAddWebsite={(website) => addWebsiteToSection(index, website)}
+          onAddWebsite={(website) => {
+            console.log("onAddWebsite called with:", website);
+            addWebsiteToSection(index, website);
+          }}
           onEditWebsite={(websiteIndex, newWebsite) =>
             editWebsiteInSection(index, websiteIndex, newWebsite)
           }
