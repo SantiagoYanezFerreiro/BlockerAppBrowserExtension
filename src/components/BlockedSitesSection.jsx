@@ -68,7 +68,11 @@ export default function BlockedSitesSection({
   };
 
   const handleSaveEdit = () => {
-    onEditWebsite(editingIndex, editingValue);
+    const site = section.sites[editingIndex];
+    console.log("Saving edit with values:", site, editingValue);
+    if (site) {
+      onEditWebsite(site.id, editingValue);
+    }
     setEditingIndex(null);
     setEditingValue("");
   };
@@ -89,9 +93,28 @@ export default function BlockedSitesSection({
           section={section}
           sectionIndex={index}
           closeModal={closeModal}
-          addWebsitesToSection={onAddWebsite}
-          editWebsiteInSection={onEditWebsite}
-          deleteWebsiteFromSection={onDeleteWebsite}
+          addWebsitesToSection={(website) => {
+            console.log(
+              "Passing website to addWebsitesToSection from BlocksModal:",
+              website
+            );
+            onAddWebsite(website);
+          }}
+          editWebsiteInSection={(websiteId, newWebsite) => {
+            console.log(
+              "Passing websiteId and newWebsite to editWebsiteInSection from BlocksModal:",
+              websiteId,
+              newWebsite
+            );
+            onEditWebsite(websiteId, newWebsite);
+          }}
+          deleteWebsiteFromSection={(websiteId) => {
+            console.log(
+              "Passing websiteId to deleteWebsiteFromSection from BlocksModal:",
+              websiteId
+            );
+            onDeleteWebsite(websiteId);
+          }}
         />
       )}
       {isModalOpen && (
@@ -133,7 +156,10 @@ export default function BlockedSitesSection({
                       />
                       <AiOutlineDelete
                         className="icon delete-icon"
-                        onClick={() => onDeleteWebsite(siteIndex)}
+                        onClick={() => {
+                          console.log("Deleting website with ID:", site.id);
+                          onDeleteWebsite(site.id);
+                        }}
                       />
                     </div>
                   )}

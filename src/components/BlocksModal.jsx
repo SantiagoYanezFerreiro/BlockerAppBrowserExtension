@@ -30,6 +30,16 @@ export default function BlocksModal({
     }
   };
 
+  const handleEditWebsite = (websiteId, newWebsite) => {
+    console.log("Editing website in BlocksModal:", websiteId, newWebsite);
+    editWebsiteInSection(sectionIndex, websiteId, newWebsite);
+  };
+
+  const handleDeleteWebsite = (websiteId) => {
+    console.log("Deleting website in BlocksModal:", websiteId);
+    deleteWebsiteFromSection(sectionIndex, websiteId);
+  };
+
   return (
     <div className="modal-backdrop">
       <div className="modal-content"></div>
@@ -54,18 +64,10 @@ export default function BlocksModal({
         {section?.sites?.map((site, index) => (
           <li key={site.id || index}>
             {site.name}
-            <button
-              onClick={() =>
-                editWebsiteInSection(sectionIndex, site.id, site.name)
-              }
-            >
+            <button onClick={() => handleEditWebsite(site.id, site.name)}>
               Edit
             </button>
-            <button
-              onClick={() => deleteWebsiteFromSection(sectionIndex, site.id)}
-            >
-              Delete
-            </button>
+            <button onClick={() => handleDeleteWebsite(site.id)}>Delete</button>
           </li>
         ))}
       </ul>

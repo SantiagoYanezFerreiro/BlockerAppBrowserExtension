@@ -247,14 +247,16 @@ export default function WebsiteBlocker({ sections, setSections }) {
             console.log("onAddWebsite called with:", website);
             addWebsiteToSection(index, website);
           }}
-          onEditWebsite={(websiteIndex, newWebsite) =>
-            editWebsiteInSection(index, websiteIndex, newWebsite)
-          }
+          onEditWebsite={(websiteId, newWebsite) => {
+            console.log("onEditWebsite called with:", websiteId, newWebsite);
+            editWebsiteInSection(index, websiteId, newWebsite);
+          }}
+          onDeleteWebsite={(websiteId) => {
+            console.log("onDeleteWebsite called with:", websiteId);
+            deleteWebsiteFromSection(index, websiteId);
+          }}
           onEditSectionTitle={(newTitle) => editSectionTitle(index, newTitle)}
           onDeleteSection={() => deleteSection(index)}
-          onDeleteWebsite={(websiteIndex) =>
-            deleteWebsiteFromSection(index, websiteIndex)
-          }
           onUpdateTimeRange={(newTimeRange) =>
             updateTimeRange(index, newTimeRange)
           }
