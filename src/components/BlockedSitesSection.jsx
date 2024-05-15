@@ -37,17 +37,13 @@ export default function BlockedSitesSection({
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => {
-    setShowModal(true);
-  };
+  const openModal = () => setShowModal(true);
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const closeModal = () => setShowModal(false);
 
   const handleAddWebsite = (event) => {
     event.preventDefault();
-    console.log("Adding website in BlockedSitesSection:", newWebsite); // Log the new website
+    console.log("Adding website in BlockedSitesSection:", newWebsite);
     console.log(
       "Type of newWebsite in BlockedSitesSection:",
       typeof newWebsite
@@ -77,16 +73,14 @@ export default function BlockedSitesSection({
     setEditingValue("");
   };
 
-  const toggleLockOptions = () => {
-    setShowLockOptions(!showLockOptions);
-  };
+  const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
 
   return (
     <div className="blocker-sites-section">
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-      <button onClick={openModal}>Edit{title}</button>
+      <button onClick={openModal}>Edit {title}</button>
 
       {showModal && (
         <BlocksModal
@@ -117,6 +111,7 @@ export default function BlockedSitesSection({
           }}
         />
       )}
+
       {isModalOpen && (
         <ul>
           {sites.map((site, siteIndex) => (
@@ -169,6 +164,7 @@ export default function BlockedSitesSection({
           ))}
         </ul>
       )}
+
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
@@ -187,7 +183,7 @@ export default function BlockedSitesSection({
             <div className="add-edit-section">
               <input
                 type="text"
-                value={title} // Use title from props directly
+                value={title}
                 onChange={(e) => onEditSectionTitle(e.target.value)}
                 placeholder="Enter Section Title"
               />
@@ -202,20 +198,21 @@ export default function BlockedSitesSection({
                 </div>
               </div>
             </div>
+
+            {showLockOptions && (
+              <div className="lock-section">
+                <LockOptions
+                  section={section}
+                  index={index}
+                  onLockMethodChange={onLockMethodChange}
+                  onUpdateTimeRange={onUpdateTimeRange}
+                  onToggleSectionLock={onToggleSectionLock}
+                  onSectionUpdate={onSectionUpdate}
+                  onUnlockSection={onUnlockSection}
+                />
+              </div>
+            )}
           </div>
-          {showLockOptions && (
-            <div className="lock-section">
-              <LockOptions
-                section={section}
-                index={index}
-                onLockMethodChange={onLockMethodChange}
-                onUpdateTimeRange={onUpdateTimeRange}
-                onToggleSectionLock={onToggleSectionLock}
-                onSectionUpdate={onSectionUpdate}
-                onUnlockSection={onUnlockSection}
-              />
-            </div>
-          )}
         </div>
       )}
     </div>
