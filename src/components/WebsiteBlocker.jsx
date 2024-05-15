@@ -108,7 +108,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
       if (idx === sectionIndex) {
         const newWebsite = {
           id: uuidv4(),
-          name: websiteName.toString(),
+          name: String(websiteName),
         };
         console.log("New website object:", newWebsite);
         return { ...section, sites: [...section.sites, newWebsite] };

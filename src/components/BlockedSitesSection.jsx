@@ -99,7 +99,7 @@ export default function BlockedSitesSection({
         <ul>
           {sites.map((site, siteIndex) => (
             <li
-              key={siteIndex}
+              key={site.id || siteIndex}
               className="site-item"
               onMouseEnter={() => setHoveredIndex(siteIndex)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -122,7 +122,7 @@ export default function BlockedSitesSection({
                 </div>
               ) : (
                 <div className="site-content">
-                  <p className="site-name">{site}</p>
+                  <p className="site-name">{site.name}</p>
                   {hoveredIndex === siteIndex && (
                     <div className="site-actions">
                       <FaPencilAlt
