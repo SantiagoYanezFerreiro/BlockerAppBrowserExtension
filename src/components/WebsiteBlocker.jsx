@@ -25,7 +25,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
         endTime: "",
       },
     };
-    // Load sections from storage when the component mounts
     getFromStorage(["sections"], (result) => {
       const updatedSections =
         result.sections?.map((section) => ({
@@ -36,7 +35,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
   }, [setSections]);
 
-  // Function to add a new section
   const handleAddSection = () => {
     if (newSectionTitle.trim()) {
       console.log("Adding new section:", newSectionTitle);
@@ -89,7 +87,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
     saveToStorage({ sections: newSections });
   };
 
-  // Function to edit a section title
   const editSectionTitle = (index, newTitle) => {
     const updatedSections = sections.map((section, idx) =>
       idx === index ? { ...section, title: newTitle } : section
@@ -100,7 +97,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
   };
 
-  // Function to add a website to a section
   const addWebsiteToSection = (sectionIndex, websiteName) => {
     console.log("Received websiteName in addWebsiteToSection:", websiteName); // Log the website name received
     console.log(
@@ -125,15 +121,14 @@ export default function WebsiteBlocker({ sections, setSections }) {
       return section;
     });
 
-    console.log("Updated sections before setting state:", updatedSections); // Log updated sections before setting state
+    console.log("Updated sections before setting state:", updatedSections);
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections }, () => {
       console.log("sections saved correctly");
       console.log("Updated sections:", updatedSections);
     });
   };
-  // Function to edit a website within a section
-  // Adjust the function to handle edits based on unique IDs
+
   const editWebsiteInSection = (sectionIndex, websiteId, newWebsiteName) => {
     const updatedSections = sections.map((section, idx) => {
       if (idx === sectionIndex) {
@@ -150,7 +145,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
     saveToStorage({ sections: updatedSections });
   };
 
-  // Function to delete a website from a section
   const deleteWebsiteFromSection = (sectionIndex, websiteId) => {
     const updatedSections = sections.map((section, idx) => {
       if (idx === sectionIndex) {
@@ -164,7 +158,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections });
   };
-  // Adjust the function to handle deletes based on unique IDs
+
   const deleteSection = (index) => {
     const updatedSections = sections.filter((_, i) => i !== index);
     setSections(updatedSections);
@@ -172,6 +166,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
       console.log("sections saved correctly");
     });
   };
+
   const updateTimeRange = (sectionIndex, newTimeRange) => {
     const updatedSections = sections.map((section, idx) =>
       idx === sectionIndex ? { ...section, timeRange: newTimeRange } : section
@@ -287,5 +282,4 @@ export default function WebsiteBlocker({ sections, setSections }) {
 WebsiteBlocker.propTypes = {
   sections: PropTypes.array.isRequired,
   setSections: PropTypes.func.isRequired,
-  updateSections: PropTypes.func.isRequired,
 };

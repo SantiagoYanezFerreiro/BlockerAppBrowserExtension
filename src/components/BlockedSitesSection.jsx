@@ -15,7 +15,6 @@ export default function BlockedSitesSection({
   index,
   title,
   section,
-  sites,
   isModalOpen,
   onCloseModal,
   onToggleModal,
@@ -30,48 +29,7 @@ export default function BlockedSitesSection({
   onSectionUpdate,
   onUnlockSection,
 }) {
-  const [newWebsite, setNewWebsite] = useState("");
-  const [editingIndex, setEditingIndex] = useState(null);
-  const [editingValue, setEditingValue] = useState("");
   const [showLockOptions, setShowLockOptions] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => setShowModal(true);
-
-  const closeModal = () => setShowModal(false);
-
-  const handleAddWebsite = (event) => {
-    event.preventDefault();
-    console.log("Adding website in BlockedSitesSection:", newWebsite);
-    console.log(
-      "Type of newWebsite in BlockedSitesSection:",
-      typeof newWebsite
-    );
-    if (newWebsite.trim() !== "") {
-      const websiteString = String(newWebsite);
-      console.log("Calling onAddWebsite with:", websiteString);
-      onAddWebsite(websiteString); // Pass the website name as a string
-      setNewWebsite("");
-    } else {
-      console.warn("Website name is empty");
-    }
-  };
-
-  const handleEditWebsite = (siteIndex, site) => {
-    setEditingIndex(siteIndex);
-    setEditingValue(site.name);
-  };
-
-  const handleSaveEdit = () => {
-    const site = section.sites[editingIndex];
-    console.log("Saving edit with values:", site, editingValue);
-    if (site) {
-      onEditWebsite(site.id, editingValue);
-    }
-    setEditingIndex(null);
-    setEditingValue("");
-  };
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
 
@@ -80,106 +38,21 @@ export default function BlockedSitesSection({
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {title}
       </h2>
-      <button onClick={openModal}>Edit {title}</button>
 
-      {showModal && (
+      {isModalOpen && (
         <BlocksModal
           section={section}
           sectionIndex={index}
-          closeModal={closeModal}
-          addWebsitesToSection={(website) => {
-            console.log(
-              "Passing website to addWebsitesToSection from BlocksModal:",
-              website
-            );
-            onAddWebsite(website);
-          }}
-          editWebsiteInSection={(websiteId, newWebsite) => {
-            console.log(
-              "Passing websiteId and newWebsite to editWebsiteInSection from BlocksModal:",
-              websiteId,
-              newWebsite
-            );
-            onEditWebsite(websiteId, newWebsite);
-          }}
-          deleteWebsiteFromSection={(websiteId) => {
-            console.log(
-              "Passing websiteId to deleteWebsiteFromSection from BlocksModal:",
-              websiteId
-            );
-            onDeleteWebsite(websiteId);
-          }}
+          closeModal={onCloseModal}
+          addWebsitesToSection={onAddWebsite}
+          editWebsiteInSection={onEditWebsite}
+          deleteWebsiteFromSection={onDeleteWebsite}
         />
-      )}
-
-      {isModalOpen && (
-        <ul>
-          {sites.map((site, siteIndex) => (
-            <li
-              key={site.id || siteIndex}
-              className="site-item"
-              onMouseEnter={() => setHoveredIndex(siteIndex)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {editingIndex === siteIndex ? (
-                <div className="site-editing">
-                  <input
-                    type="text"
-                    value={editingValue}
-                    onChange={(e) => setEditingValue(e.target.value)}
-                  />
-                  <TfiSave className="icon" onClick={handleSaveEdit} />
-                  <FaRegWindowClose
-                    className="icon"
-                    onClick={() => {
-                      setEditingIndex(null);
-                      setHoveredIndex(null);
-                    }}
-                  />
-                </div>
-              ) : (
-                <div className="site-content">
-                  <p className="site-name">{site.name}</p>
-                  {hoveredIndex === siteIndex && (
-                    <div className="site-actions">
-                      <FaPencilAlt
-                        className="icon edit-icon"
-                        onClick={() => {
-                          handleEditWebsite(siteIndex, site);
-                          setEditingIndex(siteIndex);
-                        }}
-                      />
-                      <AiOutlineDelete
-                        className="icon delete-icon"
-                        onClick={() => {
-                          console.log("Deleting website with ID:", site.id);
-                          onDeleteWebsite(site.id);
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
       )}
 
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <div className="add-edit-website">
-              <input
-                type="text"
-                value={newWebsite}
-                onChange={(e) => setNewWebsite(e.target.value)}
-                placeholder="Enter new website"
-              />
-              <div className="icon-button" onClick={handleAddWebsite}>
-                <VscDiffAdded className="icon" />
-              </div>
-            </div>
-
             <div className="add-edit-section">
               <input
                 type="text"

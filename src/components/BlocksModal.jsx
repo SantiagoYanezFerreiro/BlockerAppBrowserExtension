@@ -19,9 +19,14 @@ export default function BlocksModal({
       "Type of newWebsite before adding in BlocksModal:",
       typeof newWebsite
     );
-    const websiteString = String(newWebsite);
+    let websiteString = newWebsite;
+    if (typeof newWebsite !== "string") {
+      console.error("The newWebsite is not a string, converting...");
+      websiteString = String(newWebsite);
+    }
+    websiteString = websiteString.trim();
     console.log("Website as string in BlocksModal:", websiteString);
-    if (websiteString.trim()) {
+    if (websiteString) {
       console.log("Calling addWebsitesToSection with:", websiteString);
       addWebsitesToSection(sectionIndex, websiteString);
       setNewWebsite(""); // Clear the input field
@@ -42,36 +47,39 @@ export default function BlocksModal({
 
   return (
     <div className="modal-backdrop">
-      <div className="modal-content"></div>
-      <span className="modal-close" onClick={closeModal}>
-        &times;
-      </span>
-      <h2>Edit Sites for {section.title}</h2>
-      <div className="modal-section">
-        <input
-          type="text"
-          placeholder="Enter Website URL.."
-          value={newWebsite}
-          onChange={(e) => {
-            console.log("Current input value:", e.target.value);
-            console.log("Type of input value:", typeof e.target.value);
-            setNewWebsite(e.target.value);
-          }}
-        />
-        <button onClick={handleAddWebsite}>Add</button>
+      <div className="modal-content">
+        <span className="modal-close" onClick={closeModal}>
+          &times;
+        </span>
+        <h2>Edit Sites for {section.title}</h2>
+        <div className="modal-section">
+          <input
+            type="text"
+            placeholder="Enter Website URL.."
+            value={newWebsite}
+            onChange={(e) => {
+              console.log("Current input value:", e.target.value);
+              console.log("Type of input value:", typeof e.target.value);
+              setNewWebsite(e.target.value);
+            }}
+          />
+          <button onClick={handleAddWebsite}>Add</button>
+        </div>
+        <ul>
+          {section?.sites?.map((site, index) => (
+            <li key={site.id || index}>
+              {site.name}
+              <button onClick={() => handleEditWebsite(site.id, site.name)}>
+                Edit
+              </button>
+              <button onClick={() => handleDeleteWebsite(site.id)}>
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button onClick={closeModal}>Close</button>
       </div>
-      <ul>
-        {section?.sites?.map((site, index) => (
-          <li key={site.id || index}>
-            {site.name}
-            <button onClick={() => handleEditWebsite(site.id, site.name)}>
-              Edit
-            </button>
-            <button onClick={() => handleDeleteWebsite(site.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={closeModal}>Close</button>
     </div>
   );
 }
