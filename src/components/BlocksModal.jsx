@@ -9,6 +9,8 @@ export default function BlocksModal({
   deleteWebsiteFromSection,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
+  const [editingWebsiteId, setEditingWebsiteId] = useState(null);
+  const [editingWebsiteName, setEditingWebsiteName] = useState("");
 
   console.log("Current section in BlocksModal:", section);
 
@@ -29,9 +31,15 @@ export default function BlocksModal({
     }
   };
 
-  const handleEditWebsite = (websiteId, newWebsite) => {
-    console.log("Editing website in BlocksModal:", websiteId, newWebsite);
-    editWebsiteInSection(websiteId, newWebsite);
+  const handleEditWebsite = () => {
+    console.log(
+      "Editing website in BlocksModal:",
+      editingWebsiteId,
+      editingWebsiteName
+    );
+    editWebsiteInSection(editingWebsiteId, editingWebsiteName);
+    setEditingWebsiteId(null);
+    setEditingWebsiteName("");
   };
 
   const handleDeleteWebsite = (websiteId) => {
@@ -39,13 +47,14 @@ export default function BlocksModal({
     deleteWebsiteFromSection(websiteId);
   };
 
+  const startEditingWebsite = (websiteId, websiteName) => {
+    setEditingWebsiteId(websiteId);
+    setEditingWebsiteName(websiteName);
+  };
+
   return (
     <div className="modal-backdrop">
       <div className="modal-content"></div>
-      <span className="modal-close" onClick={closeModal}>
-        &times;
-      </span>
-      <h2>Edit Sites for {section.title}</h2>
       <div className="modal-section">
         <input
           type="text"
@@ -62,11 +71,29 @@ export default function BlocksModal({
       <ul>
         {section?.sites?.map((site, index) => (
           <li key={site.id || index}>
-            {site.name}
-            <button onClick={() => handleEditWebsite(site.id, site.name)}>
-              Edit
-            </button>
-            <button onClick={() => handleDeleteWebsite(site.id)}>Delete</button>
+            {editingWebsiteId === site.id ? (
+              <div>
+                <input
+                  type="text"
+                  value={editingWebsiteName}
+                  onChange={(e) => setEditingWebsiteName(e.target.value)}
+                />
+                <button onClick={handleEditWebsite}>Save</button>
+                <button onClick={() => setEditingWebsiteId(null)}>
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <div>
+                {site.name}
+                <button onClick={() => startEditingWebsite(site.id, site.name)}>
+                  Edit
+                </button>
+                <button onClick={() => handleDeleteWebsite(site.id)}>
+                  Delete
+                </button>
+              </div>
+            )}
           </li>
         ))}
       </ul>

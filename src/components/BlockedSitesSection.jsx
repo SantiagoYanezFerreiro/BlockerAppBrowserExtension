@@ -36,7 +36,7 @@ export default function BlockedSitesSection({
   return (
     <div className="blocker-sites-section">
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
-        {title}
+        {isModalOpen ? `Editing ${title}` : `${title}`}
       </h2>
 
       {isModalOpen && (
