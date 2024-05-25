@@ -98,7 +98,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
   };
 
   const addWebsiteToSection = (sectionIndex, websiteName) => {
-    console.log("Received websiteName in addWebsiteToSection:", websiteName); // Log the website name received
+    console.log("Received websiteName in addWebsiteToSection:", websiteName);
     console.log(
       "Type of received websiteName in addWebsiteToSection:",
       typeof websiteName
