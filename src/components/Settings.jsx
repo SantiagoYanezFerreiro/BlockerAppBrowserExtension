@@ -58,11 +58,11 @@ function Preferences() {
   };
 
   const handle24HourToggle = () => {
-    setUse24HourNotation(!use24HourNotation);
+    setUse24HourNotation((prev) => !prev);
   };
 
   const handleStartupToggle = () => {
-    setOpenOnStartup(!openOnStartup);
+    setOpenOnStartup((prev) => !prev);
   };
 
   return (
@@ -107,18 +107,14 @@ function Preferences() {
 
 function Notifications() {
   const [NotificationLockStarts, setNotificationLockStarts] = useState(false);
-  const [NotificationLockEnds, setNotificationLockEnds] = useState(false);
   const [WarningBeforeLockStarts, setWarningBeforeLockStarts] = useState(false);
   const [MinutesWarningBeforeLock, setMinutesWarningBeforeLock] = useState(0);
 
   const handleNotificationLockStarts = () => {
-    setNotificationLockStarts(!NotificationLockStarts);
-  };
-  const handleNotificationLockEnds = () => {
-    setNotificationLockEnds(!NotificationLockStarts);
+    setNotificationLockStarts((prev) => !prev);
   };
   const handleWarningBeforeLockStarts = () => {
-    setWarningBeforeLockStarts(!WarningBeforeLockStarts);
+    setWarningBeforeLockStarts((prev) => !prev);
   };
   const handleMinutesWarningBeforeLock = (event) => {
     setMinutesWarningBeforeLock(event.target.value);
@@ -136,16 +132,7 @@ function Notifications() {
           onToggle={handleNotificationLockStarts}
         />
       </div>
-      <div className="settings-preferences-section">
-        <label htmlFor="ShowNotificationsWhenLockEnds">
-          Show Notifications when a lock ends
-        </label>
-        <Toggle
-          label="Notification Lock Ends"
-          isEnabled={NotificationLockEnds}
-          onToggle={handleNotificationLockEnds}
-        />
-      </div>
+
       <div className="settings-preferences-section">
         <label htmlFor="ShowWarningBeforeLockStarts">
           Show Warning before a lock starts
@@ -177,6 +164,16 @@ function BlockingRules() {
   const [BlockTimeLangSettings, setBlockTimeLangSettings] = useState(false);
   const [BlockTaskManager, setBlockTaskManager] = useState(false);
   const [ApplicationPassword, setApplicationPassword] = useState();
+
+  const handleBlockTimeLangSettings = () => {
+    setBlockTimeLangSettings((prev) => !prev);
+  };
+  const handleBlockTaskManager = () => {
+    setBlockTaskManager((prev) => !prev);
+  };
+  const handleApplicationPassword = (event) => {
+    setApplicationPassword(event.target.value);
+  };
   return (
     <div className="settings-section">
       <h2>Blocking Rules</h2>
@@ -187,7 +184,7 @@ function BlockingRules() {
         <Toggle
           label="BlockTimeLanguage"
           isEnabled={BlockTimeLangSettings}
-          onToggle={setBlockTimeLangSettings}
+          onToggle={handleBlockTimeLangSettings}
         />
       </div>
       <div className="settings-preferences-section">
@@ -197,7 +194,7 @@ function BlockingRules() {
         <Toggle
           label="BlockTaskManager"
           isEnabled={BlockTaskManager}
-          onToggle={setBlockTaskManager}
+          onToggle={handleBlockTaskManager}
         />
       </div>
       <div className="settings-preferences-section">
@@ -205,10 +202,13 @@ function BlockingRules() {
           Set an Application Password to protect your privacy by limiting the
           acess to Blocks Statistics and Settings tabs.Cannot be recovered.
         </label>
-        <Toggle
-          label="SetAppPassword"
-          isEnabled={ApplicationPassword}
-          onToggle={setApplicationPassword}
+        <input
+          type="text"
+          id="app-password"
+          value={ApplicationPassword}
+          onChange={handleApplicationPassword}
+          min="0"
+          step="1"
         />
       </div>
     </div>
@@ -219,6 +219,17 @@ function Statistics() {
   const [EnableStats, setEnableStats] = useState(false);
   const [CountInactiveTime, setCountInactiveTime] = useState(false);
   const [DeleteStats, setDeleteStats] = useState(false);
+
+  const handleEnableStats = () => {
+    setEnableStats((prev) => !prev);
+  };
+  const handleCountInactiveTime = () => {
+    setCountInactiveTime((prev) => !prev);
+  };
+  const handleDeleteStats = () => {
+    setDeleteStats((prev) => !prev);
+  };
+
   return (
     <div className="settings-section">
       <h2>Statistics</h2>
@@ -227,7 +238,7 @@ function Statistics() {
         <Toggle
           label="Enable Stats"
           isEnabled={EnableStats}
-          onToggle={setEnableStats}
+          onToggle={handleEnableStats}
         />
       </div>
       <div className="settings-preferences-section">
@@ -238,7 +249,7 @@ function Statistics() {
         <Toggle
           label="CountInactiveTime"
           isEnabled={CountInactiveTime}
-          onToggle={setCountInactiveTime}
+          onToggle={handleCountInactiveTime}
         />
       </div>
       <div className="settings-preferences-section">
@@ -249,7 +260,7 @@ function Statistics() {
         <Toggle
           label="DeleteStats"
           isEnabled={DeleteStats}
-          onToggle={setDeleteStats}
+          onToggle={handleDeleteStats}
         />
       </div>
     </div>
