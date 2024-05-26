@@ -74,7 +74,11 @@ function Preferences() {
       </div>
       <div className="settings-preferences-section">
         <label>First Day of the Week</label>
-        <select value={firstDayOfWeek} onChange={handleDayChange}>
+        <select
+          className="settings-select"
+          value={firstDayOfWeek}
+          onChange={handleDayChange}
+        >
           <option value="Sunday">Sunday</option>
           <option value="Monday" default>
             Monday
@@ -88,7 +92,11 @@ function Preferences() {
       </div>
       <div className="settings-preferences-section">
         <label>Application Theme</label>
-        <select value={applicationTheme} onChange={handleThemeChange}>
+        <select
+          className="settings-select"
+          value={applicationTheme}
+          onChange={handleThemeChange}
+        >
           <option value="Light">Light</option>
           <option value="Dark">Dark</option>
         </select>
@@ -148,6 +156,7 @@ function Notifications() {
           Minutes of advance warning before lock starts
         </label>
         <input
+          className="settings-input minutes-input"
           type="number"
           id="minutes-before-lock"
           value={MinutesWarningBeforeLock}
@@ -203,6 +212,7 @@ function BlockingRules() {
           acess to Blocks Statistics and Settings tabs.Cannot be recovered.
         </label>
         <input
+          className="settings-input"
           type="text"
           id="app-password"
           value={ApplicationPassword}

@@ -32,3 +32,18 @@
 .settings-preferences-section label {
   margin-top: 25px;
 }
+
+.settings-select {
+  margin: 10px;
+  height: 30px;
+  width: 100px;
+}
+
+.settings-input {
+  margin: 20px;
+  width: 120px;
+}
+
+.minutes-input {
+  width: 60px;
+}
