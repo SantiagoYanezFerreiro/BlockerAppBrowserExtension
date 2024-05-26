@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import "../Overview.css";
 import { IoLockClosedOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function Overview({ sections }) {
   return (
@@ -22,6 +23,9 @@ export default function Overview({ sections }) {
             </div>
           </div>
         ))}
+      </div>
+      <div className="blocks-link">
+        <Link to="/blocks">Start a new Block</Link>
       </div>
     </div>
   );
