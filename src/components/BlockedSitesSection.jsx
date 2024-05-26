@@ -5,9 +5,9 @@ import LockOptions from "../components/LockOptions.jsx";
 import BlocksModal from "../components/BlocksModal.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
-import { VscDiffAdded } from "react-icons/vsc";
+//import { VscDiffAdded } from "react-icons/vsc";
 import { FaRegWindowClose } from "react-icons/fa";
-import { TfiSave } from "react-icons/tfi";
+//import { TfiSave } from "react-icons/tfi";
 import { FaLock } from "react-icons/fa";
 import { FaLockOpen } from "react-icons/fa";
 
@@ -37,8 +37,17 @@ export default function BlockedSitesSection({
     <div className="blocker-sites-section">
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
         {isModalOpen ? `Editing ${title}` : `${title}`}
+        {!isModalOpen && (
+          <>
+            <FaPencilAlt onClick={() => onEditSectionTitle(index)}>
+              Edit
+            </FaPencilAlt>
+            <AiOutlineDelete onClick={() => onDeleteSection(index)}>
+              Delete
+            </AiOutlineDelete>
+          </>
+        )}
       </h2>
-
       {isModalOpen && (
         <BlocksModal
           section={section}
@@ -49,7 +58,6 @@ export default function BlockedSitesSection({
           deleteWebsiteFromSection={onDeleteWebsite}
         />
       )}
-
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
