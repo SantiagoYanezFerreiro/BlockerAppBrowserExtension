@@ -12,10 +12,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
   const [isAddingNewSection, setIsAddingNewSection] = useState(false);
 
   useEffect(() => {
-    console.log("Sections updated:", sections);
-  }, [sections]);
-
-  useEffect(() => {
     const initialSectionStructure = {
       enabled: true,
       locked: false,
@@ -37,7 +33,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
 
   const handleAddSection = () => {
     if (newSectionTitle.trim()) {
-      console.log("Adding new section:", newSectionTitle);
       const newSections = [
         ...sections,
         {
@@ -53,7 +48,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
           },
         },
       ];
-      console.log("New sections state:", newSections);
       setSections(newSections);
       saveToStorage({ sections: newSections });
       setNewSectionTitle("");
@@ -92,18 +86,10 @@ export default function WebsiteBlocker({ sections, setSections }) {
       idx === index ? { ...section, title: newTitle } : section
     );
     setSections(updatedSections);
-    saveToStorage({ sections: updatedSections }, () => {
-      console.log("sections saved correctly");
-    });
+    saveToStorage({ sections: updatedSections });
   };
 
   const addWebsiteToSection = (sectionIndex, websiteName) => {
-    console.log("Received websiteName in addWebsiteToSection:", websiteName);
-    console.log(
-      "Type of received websiteName in addWebsiteToSection:",
-      typeof websiteName
-    );
-
     if (typeof websiteName !== "string") {
       console.error("Received websiteName is not a string, converting...");
       websiteName = String(websiteName);
@@ -115,18 +101,12 @@ export default function WebsiteBlocker({ sections, setSections }) {
           id: uuidv4(),
           name: websiteName,
         };
-        console.log("New website object:", newWebsite);
         return { ...section, sites: [...section.sites, newWebsite] };
       }
       return section;
     });
-
-    console.log("Updated sections before setting state:", updatedSections);
     setSections(updatedSections);
-    saveToStorage({ sections: updatedSections }, () => {
-      console.log("sections saved correctly");
-      console.log("Updated sections:", updatedSections);
-    });
+    saveToStorage({ sections: updatedSections });
   };
 
   const editWebsiteInSection = (sectionIndex, websiteId, newWebsiteName) => {
@@ -162,9 +142,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
   const deleteSection = (index) => {
     const updatedSections = sections.filter((_, i) => i !== index);
     setSections(updatedSections);
-    saveToStorage({ sections: updatedSections }, () => {
-      console.log("sections saved correctly");
-    });
+    saveToStorage({ sections: updatedSections });
   };
 
   const duplicateSection = (index) => {
@@ -180,9 +158,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
     };
     const updatedSections = [...sections, duplicatedSection];
     setSections(updatedSections);
-    saveToStorage({ sections: updatedSections }, () => {
-      console.log("sections saved correctly");
-    });
+    saveToStorage({ sections: updatedSections });
   };
 
   const updateTimeRange = (sectionIndex, newTimeRange) => {
@@ -257,15 +233,12 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onCloseModal={() => setActiveModalIndex(null)}
           onToggleModal={toggleModal}
           onAddWebsite={(website) => {
-            console.log("onAddWebsite called with:", website);
             addWebsiteToSection(index, website);
           }}
           onEditWebsite={(websiteId, newWebsite) => {
-            console.log("onEditWebsite called with:", websiteId, newWebsite);
             editWebsiteInSection(index, websiteId, newWebsite);
           }}
           onDeleteWebsite={(websiteId) => {
-            console.log("onDeleteWebsite called with:", websiteId);
             deleteWebsiteFromSection(index, websiteId);
           }}
           onDuplicateSection={() => {
