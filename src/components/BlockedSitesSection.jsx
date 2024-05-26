@@ -10,6 +10,7 @@ import { FaRegWindowClose } from "react-icons/fa";
 //import { TfiSave } from "react-icons/tfi";
 import { FaLock } from "react-icons/fa";
 import { FaLockOpen } from "react-icons/fa";
+import { FaRegCopy } from "react-icons/fa";
 
 export default function BlockedSitesSection({
   index,
@@ -23,6 +24,7 @@ export default function BlockedSitesSection({
   onEditSectionTitle,
   onDeleteSection,
   onDeleteWebsite,
+  onDuplicateSection,
   onLockMethodChange,
   onUpdateTimeRange,
   onToggleSectionLock,
@@ -42,6 +44,9 @@ export default function BlockedSitesSection({
             <FaPencilAlt onClick={() => onEditSectionTitle(index)}>
               Edit
             </FaPencilAlt>
+            <FaRegCopy onClick={() => onDuplicateSection(index)}>
+              Duplicate
+            </FaRegCopy>
             <AiOutlineDelete onClick={() => onDeleteSection(index)}>
               Delete
             </AiOutlineDelete>
@@ -114,6 +119,7 @@ BlockedSitesSection.propTypes = {
   onEditSectionTitle: PropTypes.func.isRequired,
   onDeleteSection: PropTypes.func.isRequired,
   onDeleteWebsite: PropTypes.func.isRequired,
+  onDuplicateSection: PropTypes.func.isRequired,
   onUpdateTimeRange: PropTypes.func.isRequired,
   onToggleSectionLock: PropTypes.func.isRequired,
   onLockMethodChange: PropTypes.func.isRequired,

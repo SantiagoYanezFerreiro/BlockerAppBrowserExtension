@@ -167,6 +167,24 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
   };
 
+  const duplicateSection = (index) => {
+    const sectionToDuplicate = sections[index];
+    const duplicatedSection = {
+      ...sectionToDuplicate,
+      id: uuidv4(),
+      title: `${sectionToDuplicate.title} Copy`,
+      sites: sectionToDuplicate.sites.map((site) => ({
+        ...site,
+        id: uuidv4(),
+      })),
+    };
+    const updatedSections = [...sections, duplicatedSection];
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections }, () => {
+      console.log("sections saved correctly");
+    });
+  };
+
   const updateTimeRange = (sectionIndex, newTimeRange) => {
     const updatedSections = sections.map((section, idx) =>
       idx === sectionIndex ? { ...section, timeRange: newTimeRange } : section
@@ -249,6 +267,9 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onDeleteWebsite={(websiteId) => {
             console.log("onDeleteWebsite called with:", websiteId);
             deleteWebsiteFromSection(index, websiteId);
+          }}
+          onDuplicateSection={() => {
+            duplicateSection(index);
           }}
           onEditSectionTitle={(newTitle) => editSectionTitle(index, newTitle)}
           onDeleteSection={() => deleteSection(index)}

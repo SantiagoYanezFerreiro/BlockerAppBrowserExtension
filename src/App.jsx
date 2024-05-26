@@ -11,7 +11,7 @@ import "./App.css";
 import { getFromStorage } from "./utils/chromeAPI";
 
 function App() {
-  //Lifted state up to dispaly sections in overview
+  //Lifted state up to display sections in overview
   const [sections, setSections] = useState([]);
 
   const updateSections = (newSections) => {
