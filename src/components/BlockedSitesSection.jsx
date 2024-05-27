@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "../BlockedSitesSection.css";
 import LockOptions from "../components/LockOptions.jsx";
 import BlocksModal from "../components/BlocksModal.jsx";
+import Toggle from "../components/Toggle.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 //import { VscDiffAdded } from "react-icons/vsc";
@@ -35,6 +36,10 @@ export default function BlockedSitesSection({
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
 
+  const handleToggleSectionLock = () => {
+    onToggleSectionLock(index); // Added
+  };
+
   return (
     <div className="blocker-sites-section">
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
@@ -50,6 +55,12 @@ export default function BlockedSitesSection({
             <AiOutlineDelete onClick={() => onDeleteSection(index)}>
               Delete
             </AiOutlineDelete>
+            <p className="toggle-text">{section.locked ? "On" : "Off"}</p>
+            <Toggle
+              isEnabled={section.locked}
+              onToggle={handleToggleSectionLock}
+              label="Lock Section"
+            />
           </>
         )}
       </h2>

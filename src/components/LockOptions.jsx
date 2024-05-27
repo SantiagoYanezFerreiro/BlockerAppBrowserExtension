@@ -66,10 +66,6 @@ export default function LockOptions({
     }
   };
 
-  const handleToggleLock = () => {
-    onToggleSectionLock(index, !section.locked);
-  };
-
   //Handlers for Blocking Methods
 
   const handleStartTimeChange = (event) => {
@@ -84,6 +80,11 @@ export default function LockOptions({
     const newTimeRange = { ...timeRangeLock, endTime: newEndTime };
     setTimeRangeLock(newTimeRange);
     onUpdateTimeRange(newTimeRange);
+  };
+
+  const handleToggleSectionLock = () => {
+    // Added
+    onToggleSectionLock(section.index);
   };
 
   const getCurrentDateTime = () => {
@@ -289,7 +290,7 @@ export default function LockOptions({
         <p className="toggle-text">{section.locked ? "On" : "Off"}</p>
         <Toggle
           isEnabled={section.locked}
-          onToggle={handleToggleLock}
+          onToggle={handleToggleSectionLock}
           label="Lock Section"
         />
       </>
