@@ -13,7 +13,6 @@ export default function LockOptions({
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
-
   const [confirmLockValue, setConfirmLockValue] = useState("");
   const [numChars, setNumChars] = useState(20);
   const [timeRangeLock, setTimeRangeLock] = useState({

@@ -20,6 +20,10 @@ export default function WebsiteBlocker({ sections, setSections }) {
         startTime: "",
         endTime: "",
       },
+      breakType: "noBreak",
+      pomodoroWorkTime: 25,
+      pomodoroBreakTime: 5,
+      allowanceTime: 0,
     };
     getFromStorage(["sections"], (result) => {
       const updatedSections =
