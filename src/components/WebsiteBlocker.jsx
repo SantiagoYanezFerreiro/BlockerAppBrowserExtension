@@ -20,7 +20,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
         startTime: "",
         endTime: "",
       },
-      breakType: "noBreak",
+      noBreak: "noBreak",
       pomodoroWorkTime: 25,
       pomodoroBreakTime: 5,
       allowanceTime: 0,
@@ -50,6 +50,10 @@ export default function WebsiteBlocker({ sections, setSections }) {
             startTime: "09:00",
             endTime: "23:59",
           },
+          noBreak: "noBreak",
+          pomodoroWorkTime: 25,
+          pomodoroBreakTime: 5,
+          allowanceTime: 0,
         },
       ];
       setSections(newSections);
@@ -213,6 +217,22 @@ export default function WebsiteBlocker({ sections, setSections }) {
     setSections(newSections);
     saveToStorage({ sections: newSections });
   };
+
+  const handlePomodoroTimesChange = (
+    index,
+    PomodoroWorkTime,
+    PomodoroBreakTime
+  ) => {
+    const updatedSections = sections.map((section, idx) =>
+      idx === index
+        ? { ...section, PomodoroWorkTime, PomodoroBreakTime }
+        : section
+    );
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
+
+  const handleAllowanceTimeChange = (index, AllowanceTime) => {};
 
   return (
     <div className="blocker-container">
