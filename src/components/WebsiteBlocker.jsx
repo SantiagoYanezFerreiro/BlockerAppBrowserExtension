@@ -220,19 +220,25 @@ export default function WebsiteBlocker({ sections, setSections }) {
 
   const handlePomodoroTimesChange = (
     index,
-    PomodoroWorkTime,
-    PomodoroBreakTime
+    pomodoroWorkTime,
+    pomodoroBreakTime
   ) => {
     const updatedSections = sections.map((section, idx) =>
       idx === index
-        ? { ...section, PomodoroWorkTime, PomodoroBreakTime }
+        ? { ...section, pomodoroWorkTime, pomodoroBreakTime }
         : section
     );
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections });
   };
 
-  const handleAllowanceTimeChange = (index, AllowanceTime) => {};
+  const handleAllowanceTimeChange = (index, allowanceTime) => {
+    const updatedSections = sections.map((section, idx) =>
+      idx === index ? { ...section, allowanceTime } : section
+    );
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
 
   return (
     <div className="blocker-container">
