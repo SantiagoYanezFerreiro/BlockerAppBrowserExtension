@@ -279,6 +279,12 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onUpdateTimeRange={(newTimeRange) =>
             updateTimeRange(index, newTimeRange)
           }
+          onPomodoroTimeChange={(workTime, breakTime) =>
+            handlePomodoroTimesChange(index, workTime, breakTime)
+          }
+          onAllowanceTimeChange={(allowanceTime) =>
+            handleAllowanceTimeChange(index, allowanceTime)
+          }
         />
       ))}
 
