@@ -29,15 +29,23 @@ export default function BlockedSitesSection({
   onLockMethodChange,
   onUpdateTimeRange,
   onToggleSectionLock,
+  onAllowanceTimeChange,
   onSectionUpdate,
   onUnlockSection,
 }) {
   const [showLockOptions, setShowLockOptions] = useState(false);
+  const [showAllowanceInput, setShowAllowanceInput] = useState(false);
+  const [allowanceMinutes, setAllowanceMinutes] = useState(0);
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
-
   const handleToggleSectionLock = () => {
-    onToggleSectionLock(index); // Added
+    onToggleSectionLock(index);
+  };
+
+  const handleAllowanceMinutesChange = (event) => {
+    const newAllowanceTimes = parseInt(event.target.value, 10);
+    setAllowanceMinutes(newAllowanceTimes);
+    onAllowanceTimeChange(index, newAllowanceTimes);
   };
 
   return (
@@ -137,4 +145,5 @@ BlockedSitesSection.propTypes = {
   onLockSubmit: PropTypes.func.isRequired,
   onUnlockSection: PropTypes.func.isRequired,
   onSectionUpdate: PropTypes.func.isRequired,
+  onAllowanceTimeChange: PropTypes.func.isRequired,
 };
