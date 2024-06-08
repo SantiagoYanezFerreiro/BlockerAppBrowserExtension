@@ -50,6 +50,11 @@ export default function BlockedSitesSection({
     onAllowanceTimeChange(index, newAllowanceTimes);
   };
 
+  const saveAllowanceTime = () => {
+    onAllowanceTimeChange(index, allowanceMinutes);
+    setShowAllowanceInput(false);
+  };
+
   return (
     <div className="blocker-sites-section">
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
@@ -142,6 +147,7 @@ export default function BlockedSitesSection({
               onChange={handleAllowanceMinutesChange}
               placeholder="Enter allowance minutes"
             />
+            <button onClick={saveAllowanceTime}>Save</button>
           </div>
         )}
       </div>
