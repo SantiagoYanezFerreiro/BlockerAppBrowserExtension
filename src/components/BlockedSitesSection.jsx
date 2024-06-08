@@ -35,7 +35,9 @@ export default function BlockedSitesSection({
 }) {
   const [showLockOptions, setShowLockOptions] = useState(false);
   const [showAllowanceInput, setShowAllowanceInput] = useState(false);
-  const [allowanceMinutes, setAllowanceMinutes] = useState(0);
+  const [allowanceMinutes, setAllowanceMinutes] = useState(
+    section.allowanceTime || 0
+  );
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
   const handleToggleSectionLock = () => {
@@ -120,6 +122,29 @@ export default function BlockedSitesSection({
           </div>
         </div>
       )}
+      <div>
+        <p>
+          <span
+            className="allowance-text"
+            onClick={() => setShowAllowanceInput(!showAllowanceInput)}
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+          >
+            {allowanceMinutes > 0
+              ? `${allowanceMinutes} minutes remaining`
+              : "No Allowance Time Remaining"}
+          </span>
+        </p>
+        {showAllowanceInput && (
+          <div>
+            <input
+              type="number"
+              value={allowanceMinutes}
+              onChange={handleAllowanceMinutesChange}
+              placeholder="Enter allowance minutes"
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
