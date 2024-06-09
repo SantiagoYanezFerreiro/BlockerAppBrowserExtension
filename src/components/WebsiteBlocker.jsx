@@ -81,7 +81,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
   const handleUnlockSection = (index) => {
     const newSections = sections.map((section, idx) => {
       if (idx === index) {
-        return { ...section, locked: false };
+        return { ...section, locked: false, lockValue: "" };
       }
       return section;
     });
@@ -173,6 +173,17 @@ export default function WebsiteBlocker({ sections, setSections }) {
     const updatedSections = sections.map((section, idx) =>
       idx === sectionIndex ? { ...section, timeRange: newTimeRange } : section
     );
+    setSections(updatedSections);
+    saveToStorage({ sections: updatedSections });
+  };
+
+  const updateLockValue = (lockValue, sectionIndex) => {
+    const updatedSections = sections.map((section, idx) => {
+      if (idx === sectionIndex) {
+        return { ...section, lockValue };
+      }
+      return section;
+    });
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections });
   };
@@ -285,6 +296,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onAllowanceTimeChange={(allowanceTime) =>
             handleAllowanceTimeChange(index, allowanceTime)
           }
+          updateLockValue={updateLockValue}
         />
       ))}
 

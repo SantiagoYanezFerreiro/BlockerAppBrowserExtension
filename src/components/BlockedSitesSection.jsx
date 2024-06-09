@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../BlockedSitesSection.css";
 import LockOptions from "../components/LockOptions.jsx";
@@ -12,6 +12,7 @@ import { FaRegWindowClose } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { FaLockOpen } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa";
+//import { TbHours24 } from "react-icons/tb";
 
 export default function BlockedSitesSection({
   index,
@@ -32,12 +33,14 @@ export default function BlockedSitesSection({
   onAllowanceTimeChange,
   onSectionUpdate,
   onUnlockSection,
+  updateLockValue,
 }) {
   const [showLockOptions, setShowLockOptions] = useState(false);
   const [showAllowanceInput, setShowAllowanceInput] = useState(false);
   const [allowanceMinutes, setAllowanceMinutes] = useState(
     section.allowanceTime || 0
   );
+  const [remainingLockTime, setRemainingLockTime] = useState("");
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
   const handleToggleSectionLock = () => {
@@ -54,6 +57,39 @@ export default function BlockedSitesSection({
     onAllowanceTimeChange(index, allowanceMinutes);
     setShowAllowanceInput(false);
   };
+
+  useEffect(() => {
+    if (section.lockMethod === "timer" && section.locked) {
+      const lockUntil = new Date(section.lockValue);
+      const now = new Date();
+      const timeDiff = lockUntil - now;
+
+      if (timeDiff > 0) {
+        const minutes = Math.floor(timeDiff / 60000);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+
+        let remainingTimeText = "";
+
+        if (months > 0) {
+          remainingTimeText = `${months} months remaining`;
+        } else if (days > 0) {
+          remainingTimeText = `${days} days remaining`;
+        } else if (hours > 0) {
+          remainingTimeText = `${hours} hours remaining`;
+        } else if (minutes > 0) {
+          remainingTimeText = `${minutes} minutes remaining`;
+        } else {
+          remainingTimeText = "Less than a minute remaining";
+        }
+
+        setRemainingLockTime(remainingTimeText);
+      } else {
+        setRemainingLockTime("Block time ended");
+      }
+    }
+  }, [section.lockValue, section.lockMethod, section.locked]);
 
   return (
     <div className="blocker-sites-section">
@@ -121,6 +157,7 @@ export default function BlockedSitesSection({
                   onToggleSectionLock={onToggleSectionLock}
                   onSectionUpdate={onSectionUpdate}
                   onUnlockSection={onUnlockSection}
+                  updateLockValue={updateLockValue}
                 />
               </div>
             )}
@@ -137,6 +174,7 @@ export default function BlockedSitesSection({
             {allowanceMinutes > 0
               ? `${allowanceMinutes} minutes remaining`
               : "No Allowance Time Remaining"}
+            {section.lockedTime}
           </span>
         </p>
         {showAllowanceInput && (
@@ -149,6 +187,12 @@ export default function BlockedSitesSection({
             />
             <button onClick={saveAllowanceTime}>Save</button>
           </div>
+        )}
+        {section.lockMethod === "timer" && section.locked && (
+          <p>
+            <FaLock />
+            {remainingLockTime}
+          </p>
         )}
       </div>
     </div>
@@ -177,4 +221,5 @@ BlockedSitesSection.propTypes = {
   onUnlockSection: PropTypes.func.isRequired,
   onSectionUpdate: PropTypes.func.isRequired,
   onAllowanceTimeChange: PropTypes.func.isRequired,
+  updateLockValue: PropTypes.func.isRequired,
 };

@@ -10,6 +10,7 @@ export default function LockOptions({
   onToggleSectionLock,
   onSectionUpdate,
   onUnlockSection,
+  updateLockValue,
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
@@ -31,6 +32,7 @@ export default function LockOptions({
     // Call a function that updates the state in the parent component
     // This function should handle saving the updated section to storage
     onSectionUpdate(updatedSection, index);
+    updateLockValue(lockValue, index);
   };
 
   const handleUnlockAttempt = (e) => {
@@ -53,13 +55,16 @@ export default function LockOptions({
     onLockMethodChange(index, newLockMethod);
 
     if (newLockMethod === "randomText") {
-      setLockValue(generateRandomString(20));
+      const newLockValue = generateRandomString(20);
+      setLockValue(newLockValue);
+      updateLockValue(newLockValue, index);
     } else if (newLockMethod === "password") {
       setLockValue("");
       setConfirmLockValue("");
     } else if (newLockMethod === "timer") {
       const initialTimerValue = getCurrentDateTime();
       setLockValue(initialTimerValue);
+      updateLockValue(initialTimerValue, index);
     } else {
       setLockValue("");
     }
@@ -313,4 +318,5 @@ LockOptions.propTypes = {
   onLockMethodChange: PropTypes.func.isRequired,
   onUnlockSection: PropTypes.func.isRequired,
   onSectionUpdate: PropTypes.func.isRequired,
+  updateLockValue: PropTypes.func.isRequired,
 };
