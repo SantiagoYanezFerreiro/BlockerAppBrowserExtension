@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import "../Overview.css";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { calculateRemainingTime } from "../utils/utils.js";
 
 export default function Overview({ sections }) {
   return (
@@ -20,6 +21,9 @@ export default function Overview({ sections }) {
             <h3 className="overview-section-lock-type">{section.lockMethod}</h3>
             <div className="lock-icon-container">
               <IoLockClosedOutline />
+              {section.lockMethod === "timer" && section.locked && (
+                <p>{calculateRemainingTime(section.lockValue)}</p>
+              )}
             </div>
           </div>
         ))}

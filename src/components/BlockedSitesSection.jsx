@@ -13,6 +13,7 @@ import { FaLock } from "react-icons/fa";
 import { FaLockOpen } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa";
 //import { TbHours24 } from "react-icons/tb";
+import { calculateRemainingTime } from "../utils/utils.js";
 
 export default function BlockedSitesSection({
   index,
@@ -60,34 +61,7 @@ export default function BlockedSitesSection({
 
   useEffect(() => {
     if (section.lockMethod === "timer" && section.locked) {
-      const lockUntil = new Date(section.lockValue);
-      const now = new Date();
-      const timeDiff = lockUntil - now;
-
-      if (timeDiff > 0) {
-        const minutes = Math.floor(timeDiff / 60000);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const months = Math.floor(days / 30);
-
-        let remainingTimeText = "";
-
-        if (months > 0) {
-          remainingTimeText = `${months} months remaining`;
-        } else if (days > 0) {
-          remainingTimeText = `${days} days remaining`;
-        } else if (hours > 0) {
-          remainingTimeText = `${hours} hours remaining`;
-        } else if (minutes > 0) {
-          remainingTimeText = `${minutes} minutes remaining`;
-        } else {
-          remainingTimeText = "Less than a minute remaining";
-        }
-
-        setRemainingLockTime(remainingTimeText);
-      } else {
-        setRemainingLockTime("Block time ended");
-      }
+      setRemainingLockTime(calculateRemainingTime(section.lockValue));
     }
   }, [section.lockValue, section.lockMethod, section.locked]);
 
