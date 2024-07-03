@@ -50,11 +50,13 @@ export default function BlockedSitesSection({
 
   const handleAllowanceMinutesChange = (event) => {
     const newAllowanceTimes = parseInt(event.target.value, 10);
+    console.log(`New Allowance Minutes: ${newAllowanceTimes}`);
     setAllowanceMinutes(newAllowanceTimes);
     onAllowanceTimeChange(index, newAllowanceTimes);
   };
 
   const saveAllowanceTime = () => {
+    console.log(`Saving Allowance Time: ${allowanceMinutes}`);
     onAllowanceTimeChange(index, allowanceMinutes);
     setShowAllowanceInput(false);
   };

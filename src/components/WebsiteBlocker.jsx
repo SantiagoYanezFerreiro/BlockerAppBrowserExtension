@@ -244,6 +244,9 @@ export default function WebsiteBlocker({ sections, setSections }) {
   };
 
   const handleAllowanceTimeChange = (index, allowanceTime) => {
+    console.log(
+      `Updating Allowance Time for section ${index}: ${allowanceTime}`
+    );
     const updatedSections = sections.map((section, idx) =>
       idx === index ? { ...section, allowanceTime } : section
     );

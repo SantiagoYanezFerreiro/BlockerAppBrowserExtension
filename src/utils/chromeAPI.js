@@ -6,7 +6,7 @@ const isChromeExtension = () => {
 
 export const getFromStorage = (key, callback) => {
   if (isChromeExtension()) {
-    chrome.storage.sync.get(ket, callback);
+    chrome.storage.sync.get(key, callback);
   } else {
     const data = localStorage.getItem(key);
     callback({ [key]: data ? JSON.parse(data) : null });
