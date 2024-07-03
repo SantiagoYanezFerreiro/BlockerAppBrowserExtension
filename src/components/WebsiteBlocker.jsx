@@ -250,6 +250,10 @@ export default function WebsiteBlocker({ sections, setSections }) {
     const updatedSections = sections.map((section, idx) =>
       idx === index ? { ...section, allowanceTime } : section
     );
+    console.log(
+      `Updating section ${index} with new allowance time: ${allowanceTime}`
+    );
+    console.log("Updated Sections:", updatedSections);
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections });
   };
