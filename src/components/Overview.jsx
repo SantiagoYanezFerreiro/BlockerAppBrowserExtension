@@ -16,6 +16,8 @@ export default function Overview({ sections }) {
               {section.lockMethod === "password" ||
               section.lockMethod === "randomText"
                 ? "No Breaks"
+                : section.allowanceTime > 0
+                ? `${section.allowanceTime} minutes remaining`
                 : "No Allowance"}
             </h3>
             <h3 className="overview-section-lock-type">{section.lockMethod}</h3>

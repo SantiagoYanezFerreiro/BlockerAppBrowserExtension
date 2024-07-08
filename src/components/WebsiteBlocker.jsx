@@ -247,16 +247,23 @@ export default function WebsiteBlocker({ sections, setSections }) {
     console.log(
       `Updating Allowance Time for section ${index}: ${allowanceTime}`
     );
-    const updatedSections = sections.map((section, idx) =>
-      idx === index ? { ...section, allowanceTime } : section
-    );
-    console.log(
-      `Updating section ${index} with new allowance time: ${allowanceTime}`
-    );
+    const updatedSections = sections.map((section, idx) => {
+      if (idx === index) {
+        console.log(
+          `Updating section ${index} with new allowance time: ${allowanceTime}`
+        );
+        return { ...section, allowanceTime };
+      }
+      return section;
+    });
     console.log("Updated Sections:", updatedSections);
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections });
   };
+
+  useEffect(() => {
+    console.log("WebsiteBlocker sections state:", sections);
+  }, [sections]);
 
   return (
     <div className="blocker-container">

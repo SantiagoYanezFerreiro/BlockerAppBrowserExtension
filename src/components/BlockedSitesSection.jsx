@@ -64,10 +64,20 @@ export default function BlockedSitesSection({
   };
 
   useEffect(() => {
+    console.log(
+      `BlockedSitesSection: Current allowance time: ${allowanceMinutes}`
+    );
+  }, [allowanceMinutes]);
+
+  useEffect(() => {
     if (section.lockMethod === "timer" && section.locked) {
       setRemainingLockTime(calculateRemainingTime(section.lockValue));
     }
   }, [section.lockValue, section.lockMethod, section.locked]);
+
+  useEffect(() => {
+    console.log("BlockedSitesSection props:", section);
+  }, [section]);
 
   return (
     <div className="blocker-sites-section">
