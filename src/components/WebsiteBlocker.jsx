@@ -258,12 +258,17 @@ export default function WebsiteBlocker({ sections, setSections }) {
     });
     console.log("Updated Sections:", updatedSections);
     setSections(updatedSections);
-    saveToStorage({ sections: updatedSections });
+    saveToStorage({ sections: updatedSections }, () => {
+      console.log("Saved sections to storage:", updatedSections);
+    });
   };
 
   useEffect(() => {
-    console.log("WebsiteBlocker sections state:", sections);
-  }, [sections]);
+    getFromStorage(["sections"], (result) => {
+      console.log("Retrieved sections from storage:", result.sections);
+      setSections(result.sections || []);
+    });
+  }, [setSections]);
 
   return (
     <div className="blocker-container">
