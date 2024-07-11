@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { calculateRemainingTime } from "../utils/utils.js";
 
 export default function Overview({ sections }) {
+  const filteredSections = sections.filter((section) => section.lockMethod);
   return (
     <div className="overview-wrapper">
       <div className="overview-container">
         <h1>Active Blocks</h1>
-        {sections.map((section, index) => (
+        {filteredSections.map((section, index) => (
           <div key={index} className="section-overview">
             <h3 className="overview-section-title">{section.title}</h3>
             <h3 className="overview-section-lock-message">
