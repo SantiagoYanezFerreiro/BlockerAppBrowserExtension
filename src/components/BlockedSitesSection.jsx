@@ -59,9 +59,12 @@ export default function BlockedSitesSection({
     console.log(
       `Saving Allowance Time: ${allowanceMinutes} for section index: ${index}`
     );
-    onAllowanceTimeChange(index, allowanceMinutes);
+    onAllowanceTimeChange(allowanceMinutes);
     setShowAllowanceInput(false);
   };
+  useEffect(() => {
+    setAllowanceMinutes(section.allowanceTime || 0); // Update allowance minutes from section data
+  }, [section.allowanceTime]);
 
   useEffect(() => {
     console.log(
