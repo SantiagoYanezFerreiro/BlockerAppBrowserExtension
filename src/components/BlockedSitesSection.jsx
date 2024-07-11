@@ -42,6 +42,7 @@ export default function BlockedSitesSection({
     section.allowanceTime || 0
   );
   const [remainingLockTime, setRemainingLockTime] = useState("");
+  const [isLocked, setIsLocked] = useState(section.locked);
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
   const handleToggleSectionLock = () => {
@@ -53,6 +54,13 @@ export default function BlockedSitesSection({
     console.log(`New Allowance Minutes: ${newAllowanceTimes}`);
     setAllowanceMinutes(newAllowanceTimes);
     onAllowanceTimeChange(index, newAllowanceTimes);
+  };
+
+  const handleLockSubmit = (lockValue) => {
+    const updatedSection = { ...section, lockValue, locked: true };
+    onSectionUpdate(updatedSection, index);
+    updateLockValue(lockValue, index);
+    setIsLocked(true);
   };
 
   const saveAllowanceTime = () => {
@@ -149,6 +157,7 @@ export default function BlockedSitesSection({
                   onSectionUpdate={onSectionUpdate}
                   onUnlockSection={onUnlockSection}
                   updateLockValue={updateLockValue}
+                  handleLockSubmit={handleLockSubmit} // Pass the lock submit handler
                 />
               </div>
             )}
