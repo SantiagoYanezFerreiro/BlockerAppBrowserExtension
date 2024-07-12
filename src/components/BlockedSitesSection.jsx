@@ -90,6 +90,10 @@ export default function BlockedSitesSection({
     console.log("BlockedSitesSection props:", section);
   }, [section]);
 
+  useEffect(() => {
+    setIsLocked(section.locked);
+  }, [section.locked]);
+
   return (
     <div className="blocker-sites-section">
       <h2 className="section-name" onClick={() => onToggleModal(index)}>
