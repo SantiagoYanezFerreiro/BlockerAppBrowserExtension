@@ -11,6 +11,7 @@ export default function LockOptions({
   onSectionUpdate,
   onUnlockSection,
   updateLockValue,
+  handleLockSubmit,
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
@@ -23,7 +24,7 @@ export default function LockOptions({
 
   //Handlers for Blocking Methods
 
-  const handleLockSubmit = () => {
+  const handleLockSubmitInternal = () => {
     if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
       alert("incorrect password");
       return;
@@ -31,6 +32,7 @@ export default function LockOptions({
     const updatedSection = { ...section, lockValue, locked: true };
     // Call a function that updates the state in the parent component
     // This function should handle saving the updated section to storage
+    handleLockSubmit(lockValue);
     onSectionUpdate(updatedSection, index);
     updateLockValue(lockValue, index);
   };
@@ -284,7 +286,9 @@ export default function LockOptions({
   const renderLockToggle = () => {
     const isLocked = section.locked;
     const buttonText = isLocked ? "Unlock" : "Submit";
-    const clickHandler = isLocked ? handleUnlockAttempt : handleLockSubmit;
+    const clickHandler = isLocked
+      ? handleUnlockAttempt
+      : handleLockSubmitInternal;
 
     return (
       <>
@@ -319,4 +323,5 @@ LockOptions.propTypes = {
   onUnlockSection: PropTypes.func.isRequired,
   onSectionUpdate: PropTypes.func.isRequired,
   updateLockValue: PropTypes.func.isRequired,
+  handleLockSubmit: PropTypes.func.isRequired,
 };

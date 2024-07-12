@@ -61,7 +61,12 @@ export default function BlockedSitesSection({
     onSectionUpdate(updatedSection, index);
     updateLockValue(lockValue, index);
     setIsLocked(true);
+    setShowLockOptions(false);
   };
+
+  useEffect(() => {
+    setIsLocked(section.locked);
+  }, [section.locked]);
 
   const saveAllowanceTime = () => {
     console.log(
@@ -150,7 +155,7 @@ export default function BlockedSitesSection({
               </div>
             </div>
 
-            {showLockOptions && (
+            {!isLocked && (
               <div className="lock-section">
                 <LockOptions
                   section={section}
