@@ -26,15 +26,10 @@ export default function LockOptions({
 
   const handleLockSubmitInternal = () => {
     if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
-      alert("incorrect password");
+      alert("Incorrect password");
       return;
     }
-    const updatedSection = { ...section, lockValue, locked: true };
-    // Call a function that updates the state in the parent component
-    // This function should handle saving the updated section to storage
     handleLockSubmit(lockValue);
-    onSectionUpdate(updatedSection, index);
-    updateLockValue(lockValue, index);
   };
 
   const handleUnlockAttempt = (e) => {
@@ -45,6 +40,7 @@ export default function LockOptions({
       onUnlockSection(index);
       setUnlockAttempt("");
       console.log("Unlock successful");
+      setLockValue(""); // Clear lock value on successful unlock
     } else {
       // Log an error message
       console.error("Incorrect unlock attempt");

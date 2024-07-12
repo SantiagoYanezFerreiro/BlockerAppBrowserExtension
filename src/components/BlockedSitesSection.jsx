@@ -46,7 +46,13 @@ export default function BlockedSitesSection({
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
   const handleToggleSectionLock = () => {
-    onToggleSectionLock(index);
+    if (isLocked) {
+      onUnlockSection(index);
+      setIsLocked(false);
+    } else {
+      onToggleSectionLock(index);
+      setIsLocked(true);
+    }
   };
 
   const handleAllowanceMinutesChange = (event) => {
@@ -61,7 +67,7 @@ export default function BlockedSitesSection({
     onSectionUpdate(updatedSection, index);
     updateLockValue(lockValue, index);
     setIsLocked(true);
-    setShowLockOptions(false);
+    setShowLockOptions(false); // Hide the lock options after submission
   };
 
   useEffect(() => {
