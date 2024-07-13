@@ -286,7 +286,7 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onLockSubmit={onLockSubmit}
           onLockMethodChange={handleLockMethodChange}
           onUnlockSection={handleUnlockSection}
-          title={section.title}
+          title={String(section.title)}
           sites={section.sites}
           isModalOpen={activeModalIndex === index}
           onOpenModal={() => toggleModal(index)}

@@ -130,6 +130,21 @@ export default function LockOptions({
     let inputValue;
     let inputChangeHandler;
 
+    if (section.locked && showUnlockForm) {
+      // Render the unlock form for all lock types
+      return (
+        <div>
+          <input
+            type="text"
+            placeholder="Enter Unlock Value"
+            value={unlockAttempt || ""}
+            onChange={(e) => setUnlockAttempt(e.target.value)}
+          />
+          <button onClick={handleUnlockAttempt}>Unlock</button>
+        </div>
+      );
+    }
+
     switch (section.lockMethod) {
       case "timer": {
         if (section.locked) {

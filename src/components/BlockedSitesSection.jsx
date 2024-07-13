@@ -43,12 +43,14 @@ export default function BlockedSitesSection({
   );
   const [remainingLockTime, setRemainingLockTime] = useState("");
   const [isLocked, setIsLocked] = useState(section.locked);
+  const [showUnlockForm, setShowUnlockForm] = useState(false);
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
   const handleToggleSectionLock = () => {
     if (isLocked) {
       onUnlockSection(index);
       setIsLocked(false);
+      setShowUnlockForm(true);
     } else {
       onToggleSectionLock(index);
       setIsLocked(true);
@@ -68,6 +70,7 @@ export default function BlockedSitesSection({
     updateLockValue(lockValue, index);
     setIsLocked(true);
     setShowLockOptions(false); // Hide the lock options after submission
+    setShowUnlockForm(false); // Hide the unlock form after submission
   };
 
   useEffect(() => {
@@ -161,7 +164,7 @@ export default function BlockedSitesSection({
               </div>
             </div>
 
-            {!isLocked && (
+            {!isLocked && !showUnlockForm && (
               <div className="lock-section">
                 <LockOptions
                   section={section}
@@ -173,6 +176,26 @@ export default function BlockedSitesSection({
                   onUnlockSection={onUnlockSection}
                   updateLockValue={updateLockValue}
                   handleLockSubmit={handleLockSubmit} // Pass the lock submit handler
+                />
+              </div>
+            )}
+            {showUnlockForm && (
+              <div className="unlock-section">
+                <LockOptions
+                  section={section}
+                  index={index}
+                  onLockMethodChange={onLockMethodChange}
+                  onUpdateTimeRange={onUpdateTimeRange}
+                  onToggleSectionLock={onToggleSectionLock}
+                  onSectionUpdate={onSectionUpdate}
+                  onUnlockSection={(index) => {
+                    onUnlockSection(index);
+                    setIsLocked(false);
+                    setShowUnlockForm(false);
+                  }}
+                  updateLockValue={updateLockValue}
+                  handleLockSubmit={handleLockSubmit}
+                  showUnlockForm={true} // Show the unlock form
                 />
               </div>
             )}
