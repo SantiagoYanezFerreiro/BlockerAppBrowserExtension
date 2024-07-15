@@ -47,16 +47,17 @@ export default function BlockedSitesSection({
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
   const handleToggleSectionLock = () => {
+    console.log("Toggling section lock. Current isLocked state:", isLocked);
     if (isLocked) {
-      onUnlockSection(index);
-      setIsLocked(false);
       setShowUnlockForm(true);
+      setShowLockOptions(false);
+      console.log("Unlock form should be shown");
     } else {
-      onToggleSectionLock(index);
-      setIsLocked(true);
+      setShowLockOptions(true);
+      setShowUnlockForm(false);
+      console.log("Lock options should be shown");
     }
   };
-
   const handleAllowanceMinutesChange = (event) => {
     const newAllowanceTimes = parseInt(event.target.value, 10);
     console.log(`New Allowance Minutes: ${newAllowanceTimes}`);
@@ -71,6 +72,14 @@ export default function BlockedSitesSection({
     setIsLocked(true);
     setShowLockOptions(false); // Hide the lock options after submission
     setShowUnlockForm(false); // Hide the unlock form after submission
+    console.log("Section locked with lockValue:", lockValue);
+  };
+
+  const handleUnlockSection = (index) => {
+    onUnlockSection(index);
+    setIsLocked(false);
+    setShowUnlockForm(false);
+    console.log("Section unlocked");
   };
 
   useEffect(() => {
@@ -172,10 +181,11 @@ export default function BlockedSitesSection({
                   onLockMethodChange={onLockMethodChange}
                   onUpdateTimeRange={onUpdateTimeRange}
                   onToggleSectionLock={onToggleSectionLock}
+                  onUnlockSection={handleUnlockSection} // Updated to use handleUnlockSection
                   onSectionUpdate={onSectionUpdate}
-                  onUnlockSection={onUnlockSection}
                   updateLockValue={updateLockValue}
-                  handleLockSubmit={handleLockSubmit} // Pass the lock submit handler
+                  handleLockSubmit={handleLockSubmit}
+                  showUnlockForm={showUnlockForm}
                 />
               </div>
             )}
@@ -188,14 +198,10 @@ export default function BlockedSitesSection({
                   onUpdateTimeRange={onUpdateTimeRange}
                   onToggleSectionLock={onToggleSectionLock}
                   onSectionUpdate={onSectionUpdate}
-                  onUnlockSection={(index) => {
-                    onUnlockSection(index);
-                    setIsLocked(false);
-                    setShowUnlockForm(false);
-                  }}
+                  onUnlockSection={handleUnlockSection}
                   updateLockValue={updateLockValue}
                   handleLockSubmit={handleLockSubmit}
-                  showUnlockForm={true} // Show the unlock form
+                  showUnlockForm={showUnlockForm} // Show the unlock form
                 />
               </div>
             )}

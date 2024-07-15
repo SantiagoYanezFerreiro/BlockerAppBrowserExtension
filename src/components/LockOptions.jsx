@@ -12,6 +12,7 @@ export default function LockOptions({
   onUnlockSection,
   updateLockValue,
   handleLockSubmit,
+  showUnlockForm,
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
@@ -30,19 +31,20 @@ export default function LockOptions({
       return;
     }
     handleLockSubmit(lockValue);
+    console.log("Lock submit internal:", lockValue);
   };
 
   const handleUnlockAttempt = (e) => {
     e.preventDefault();
-    console.log("Attempt:", unlockAttempt);
-    console.log("Expected:", section.lockValue);
+    console.log("Unlock attempt started");
+    console.log("Unlock attempt value:", unlockAttempt);
+    console.log("Expected lock value:", section.lockValue);
     if (unlockAttempt === section.lockValue) {
       onUnlockSection(index);
       setUnlockAttempt("");
       console.log("Unlock successful");
       setLockValue(""); // Clear lock value on successful unlock
     } else {
-      // Log an error message
       console.error("Incorrect unlock attempt");
       alert("Incorrect password, please try again.");
     }
@@ -106,6 +108,8 @@ export default function LockOptions({
     return result;
   }
 
+  console.log("Rendering LockOptions. showUnlockForm:", showUnlockForm);
+
   const renderLockMethodSelector = () => {
     if (!section.locked) {
       return (
@@ -132,6 +136,7 @@ export default function LockOptions({
 
     if (section.locked && showUnlockForm) {
       // Render the unlock form for all lock types
+      console.log("Rendering unlock form");
       return (
         <div>
           <input
@@ -335,4 +340,5 @@ LockOptions.propTypes = {
   onSectionUpdate: PropTypes.func.isRequired,
   updateLockValue: PropTypes.func.isRequired,
   handleLockSubmit: PropTypes.func.isRequired,
+  showUnlockForm: PropTypes.bool.isRequired,
 };
