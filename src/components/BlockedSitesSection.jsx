@@ -6,13 +6,8 @@ import BlocksModal from "../components/BlocksModal.jsx";
 import Toggle from "../components/Toggle.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
-//import { VscDiffAdded } from "react-icons/vsc";
 import { FaRegWindowClose } from "react-icons/fa";
-//import { TfiSave } from "react-icons/tfi";
-import { FaLock } from "react-icons/fa";
-import { FaLockOpen } from "react-icons/fa";
-import { FaRegCopy } from "react-icons/fa";
-//import { TbHours24 } from "react-icons/tb";
+import { FaLock, FaLockOpen, FaRegCopy } from "react-icons/fa";
 import { calculateRemainingTime } from "../utils/utils.js";
 
 export default function BlockedSitesSection({
@@ -46,6 +41,7 @@ export default function BlockedSitesSection({
   const [showUnlockForm, setShowUnlockForm] = useState(false);
 
   const toggleLockOptions = () => setShowLockOptions(!showLockOptions);
+
   const handleToggleSectionLock = () => {
     console.log("Toggling section lock. Current isLocked state:", isLocked);
     if (isLocked) {
@@ -58,6 +54,7 @@ export default function BlockedSitesSection({
       console.log("Lock options should be shown");
     }
   };
+
   const handleAllowanceMinutesChange = (event) => {
     const newAllowanceTimes = parseInt(event.target.value, 10);
     console.log(`New Allowance Minutes: ${newAllowanceTimes}`);
@@ -93,6 +90,7 @@ export default function BlockedSitesSection({
     onAllowanceTimeChange(allowanceMinutes);
     setShowAllowanceInput(false);
   };
+
   useEffect(() => {
     setAllowanceMinutes(section.allowanceTime || 0); // Update allowance minutes from section data
   }, [section.allowanceTime]);
@@ -181,11 +179,12 @@ export default function BlockedSitesSection({
                   onLockMethodChange={onLockMethodChange}
                   onUpdateTimeRange={onUpdateTimeRange}
                   onToggleSectionLock={onToggleSectionLock}
-                  onUnlockSection={handleUnlockSection} // Updated to use handleUnlockSection
+                  onUnlockSection={handleUnlockSection}
                   onSectionUpdate={onSectionUpdate}
                   updateLockValue={updateLockValue}
                   handleLockSubmit={handleLockSubmit}
                   showUnlockForm={showUnlockForm}
+                  isLocked={isLocked}
                 />
               </div>
             )}
@@ -201,7 +200,8 @@ export default function BlockedSitesSection({
                   onUnlockSection={handleUnlockSection}
                   updateLockValue={updateLockValue}
                   handleLockSubmit={handleLockSubmit}
-                  showUnlockForm={showUnlockForm} // Show the unlock form
+                  showUnlockForm={showUnlockForm}
+                  isLocked={isLocked}
                 />
               </div>
             )}

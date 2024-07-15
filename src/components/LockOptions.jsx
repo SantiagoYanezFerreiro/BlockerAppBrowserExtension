@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Toggle from "../components/Toggle";
 import PropTypes from "prop-types";
 
@@ -13,6 +13,7 @@ export default function LockOptions({
   updateLockValue,
   handleLockSubmit,
   showUnlockForm,
+  isLocked, // Add this prop
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
@@ -23,11 +24,15 @@ export default function LockOptions({
     endTime: "",
   });
 
-  //Handlers for Blocking Methods
+  useEffect(() => {
+    if (isLocked) {
+      setLockValue(section.lockValue);
+    }
+  }, [isLocked, section.lockValue]);
 
   const handleLockSubmitInternal = () => {
     if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
-      alert("Incorrect password");
+      alert("Passwords do not match");
       return;
     }
     handleLockSubmit(lockValue);
@@ -46,7 +51,7 @@ export default function LockOptions({
       setLockValue(""); // Clear lock value on successful unlock
     } else {
       console.error("Incorrect unlock attempt");
-      alert("Incorrect password, please try again.");
+      alert("Incorrect unlock value, please try again.");
     }
   };
 
@@ -70,8 +75,6 @@ export default function LockOptions({
     }
   };
 
-  //Handlers for Blocking Methods
-
   const handleStartTimeChange = (event) => {
     const newStartTime = event.target.value;
     const newTimeRange = { ...timeRangeLock, startTime: newStartTime };
@@ -87,7 +90,6 @@ export default function LockOptions({
   };
 
   const handleToggleSectionLock = () => {
-    // Added
     onToggleSectionLock(section.index);
   };
 
@@ -98,7 +100,7 @@ export default function LockOptions({
 
   function generateRandomString(length) {
     const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRS";
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
     for (let i = 0; i < length; i++) {
       result += characters.charAt(
@@ -119,7 +121,7 @@ export default function LockOptions({
           onChange={handleLockMethodChange}
         >
           <option value="none">None</option>
-          <option value="password">Password</option>{" "}
+          <option value="password">Password</option>
           <option value="randomText">Random Text</option>
           <option value="timeRange">Time Range</option>
           <option value="timer">Timer</option>
@@ -190,7 +192,7 @@ export default function LockOptions({
               {lockValue}
               <div>
                 <input
-                  type="randomText"
+                  type="text"
                   placeholder="Enter Text"
                   value={unlockAttempt || ""}
                   onChange={(e) => setUnlockAttempt(e.target.value)}
@@ -237,7 +239,7 @@ export default function LockOptions({
                 type="password"
                 placeholder="Enter Password"
                 value={unlockAttempt || ""}
-                onChange={(e) => setUnlockAttempt(e.target.value)}
+                onChange={inputChangeHandler}
               />
             </div>
           );
@@ -341,4 +343,5 @@ LockOptions.propTypes = {
   updateLockValue: PropTypes.func.isRequired,
   handleLockSubmit: PropTypes.func.isRequired,
   showUnlockForm: PropTypes.bool.isRequired,
+  isLocked: PropTypes.bool.isRequired, // Add this prop type
 };
