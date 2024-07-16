@@ -44,6 +44,8 @@ export default function BlockedSitesSection({
 
   const handleToggleSectionLock = () => {
     console.log("Toggling section lock. Current isLocked state:", isLocked);
+    onToggleSectionLock(index);
+    setIsLocked(!isLocked);
     if (isLocked) {
       setShowUnlockForm(true);
       setShowLockOptions(false);
@@ -73,15 +75,12 @@ export default function BlockedSitesSection({
   };
 
   const handleUnlockSection = (index) => {
-    onUnlockSection(index);
+    const updatedSection = { ...section, lockValue: "", locked: false };
+    onSectionUpdate(updatedSection, index);
     setIsLocked(false);
     setShowUnlockForm(false);
     console.log("Section unlocked");
   };
-
-  useEffect(() => {
-    setIsLocked(section.locked);
-  }, [section.locked]);
 
   const saveAllowanceTime = () => {
     console.log(
@@ -133,7 +132,7 @@ export default function BlockedSitesSection({
             <p className="toggle-text">{section.locked ? "On" : "Off"}</p>
             <Toggle
               isEnabled={section.locked}
-              onToggle={handleToggleSectionLock}
+              onToggle={handleToggleSectionLock} // Pass the correct function here
               label="Lock Section"
             />
           </>
@@ -170,7 +169,6 @@ export default function BlockedSitesSection({
                 </div>
               </div>
             </div>
-
             {!isLocked && !showUnlockForm && (
               <div className="lock-section">
                 <LockOptions
@@ -201,6 +199,7 @@ export default function BlockedSitesSection({
                   updateLockValue={updateLockValue}
                   handleLockSubmit={handleLockSubmit}
                   showUnlockForm={showUnlockForm}
+                  setShowUnlockForm={setShowUnlockForm} // Pass the state setter
                   isLocked={isLocked}
                 />
               </div>

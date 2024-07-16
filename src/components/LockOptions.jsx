@@ -13,7 +13,8 @@ export default function LockOptions({
   updateLockValue,
   handleLockSubmit,
   showUnlockForm,
-  isLocked, // Add this prop
+  setShowUnlockForm,
+  isLocked, // Add this prop// Add this prop
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
@@ -25,10 +26,10 @@ export default function LockOptions({
   });
 
   useEffect(() => {
-    if (isLocked) {
+    if (section.locked) {
       setLockValue(section.lockValue);
     }
-  }, [isLocked, section.lockValue]);
+  }, [section.locked, section.lockValue]);
 
   const handleLockSubmitInternal = () => {
     if (section.lockMethod === "password" && lockValue !== confirmLockValue) {
@@ -41,16 +42,12 @@ export default function LockOptions({
 
   const handleUnlockAttempt = (e) => {
     e.preventDefault();
-    console.log("Unlock attempt started");
-    console.log("Unlock attempt value:", unlockAttempt);
-    console.log("Expected lock value:", section.lockValue);
     if (unlockAttempt === section.lockValue) {
       onUnlockSection(index);
       setUnlockAttempt("");
-      console.log("Unlock successful");
-      setLockValue(""); // Clear lock value on successful unlock
+      setLockValue("");
+      setShowUnlockForm(false); // Use the passed prop
     } else {
-      console.error("Incorrect unlock attempt");
       alert("Incorrect unlock value, please try again.");
     }
   };
@@ -137,8 +134,6 @@ export default function LockOptions({
     let inputChangeHandler;
 
     if (section.locked && showUnlockForm) {
-      // Render the unlock form for all lock types
-      console.log("Rendering unlock form");
       return (
         <div>
           <input
@@ -343,5 +338,6 @@ LockOptions.propTypes = {
   updateLockValue: PropTypes.func.isRequired,
   handleLockSubmit: PropTypes.func.isRequired,
   showUnlockForm: PropTypes.bool.isRequired,
+  setShowUnlockForm: PropTypes.func.isRequired, // Add this prop type
   isLocked: PropTypes.bool.isRequired, // Add this prop type
 };

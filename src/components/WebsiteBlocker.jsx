@@ -208,11 +208,11 @@ export default function WebsiteBlocker({ sections, setSections }) {
     const updatedSections = [...sections];
     const section = updatedSections[index];
     section.locked = !section.locked;
-
+    console.log(`Toggling lock for section ${index}: `, section.locked);
     if (section.locked && !section.lockMethod) {
-      section.lockMethod = "password";
-    } else if (!section.locked && section.lockMethod !== "randomText") {
-      section.lockValue = "";
+      section.lockMethod = "password"; // Default lock method
+    } else if (!section.locked) {
+      section.lockValue = ""; // Reset lockValue when unlocking
     }
     setSections(updatedSections);
     saveToStorage({ sections: updatedSections });
@@ -292,18 +292,14 @@ export default function WebsiteBlocker({ sections, setSections }) {
           onOpenModal={() => toggleModal(index)}
           onCloseModal={() => setActiveModalIndex(null)}
           onToggleModal={toggleModal}
-          onAddWebsite={(website) => {
-            addWebsiteToSection(index, website);
-          }}
-          onEditWebsite={(websiteId, newWebsite) => {
-            editWebsiteInSection(index, websiteId, newWebsite);
-          }}
-          onDeleteWebsite={(websiteId) => {
-            deleteWebsiteFromSection(index, websiteId);
-          }}
-          onDuplicateSection={() => {
-            duplicateSection(index);
-          }}
+          onAddWebsite={(website) => addWebsiteToSection(index, website)}
+          onEditWebsite={(websiteId, newWebsite) =>
+            editWebsiteInSection(index, websiteId, newWebsite)
+          }
+          onDeleteWebsite={(websiteId) =>
+            deleteWebsiteFromSection(index, websiteId)
+          }
+          onDuplicateSection={() => duplicateSection(index)}
           onEditSectionTitle={(newTitle) => editSectionTitle(index, newTitle)}
           onDeleteSection={() => deleteSection(index)}
           onUpdateTimeRange={(newTimeRange) =>
