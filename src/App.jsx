@@ -13,6 +13,7 @@ import { getFromStorage } from "./utils/chromeAPI";
 function App() {
   //Lifted state up to display sections in overview
   const [sections, setSections] = useState([]);
+  const [showUnlockForm, setShowUnlockForm] = useState(false);
 
   const updateSections = (newSections) => {
     setSections(newSections);
@@ -47,6 +48,8 @@ function App() {
                 sections={sections}
                 setSections={setSections}
                 updateSections={updateSections}
+                showUnlockForm={showUnlockForm}
+                setShowUnlockForm={setShowUnlockForm}
               />
             }
           />

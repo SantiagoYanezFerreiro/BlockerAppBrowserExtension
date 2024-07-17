@@ -44,9 +44,12 @@ export default function BlockedSitesSection({
 
   const handleToggleSectionLock = () => {
     console.log("Toggling section lock. Current isLocked state:", isLocked);
+    const newIsLocked = !isLocked;
+    setIsLocked(newIsLocked);
     onToggleSectionLock(index);
-    setIsLocked(!isLocked);
-    if (isLocked) {
+
+    console.log(`newIsLocked: ${newIsLocked}`);
+    if (newIsLocked) {
       setShowUnlockForm(true);
       setShowLockOptions(false);
       console.log("Unlock form should be shown");
@@ -182,6 +185,7 @@ export default function BlockedSitesSection({
                   updateLockValue={updateLockValue}
                   handleLockSubmit={handleLockSubmit}
                   showUnlockForm={showUnlockForm}
+                  setShowUnlockForm={setShowUnlockForm} // Add this line
                   isLocked={isLocked}
                 />
               </div>

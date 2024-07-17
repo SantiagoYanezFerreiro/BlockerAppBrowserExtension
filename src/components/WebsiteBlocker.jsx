@@ -6,7 +6,12 @@ import "../WebsiteBlocker.css";
 import { VscDiffAdded } from "react-icons/vsc";
 import { v4 as uuidv4 } from "uuid";
 
-export default function WebsiteBlocker({ sections, setSections }) {
+export default function WebsiteBlocker({
+  sections,
+  setSections,
+  setShowUnlockForm,
+  showUnlockForm,
+}) {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
   const [newSectionTitle, setNewSectionTitle] = useState("");
   const [isAddingNewSection, setIsAddingNewSection] = useState(false);
@@ -312,6 +317,8 @@ export default function WebsiteBlocker({ sections, setSections }) {
             handleAllowanceTimeChange(index, allowanceTime)
           }
           updateLockValue={updateLockValue}
+          setShowUnlockForm={setShowUnlockForm}
+          showUnlockForm={showUnlockForm}
         />
       ))}
 
@@ -339,4 +346,6 @@ export default function WebsiteBlocker({ sections, setSections }) {
 WebsiteBlocker.propTypes = {
   sections: PropTypes.array.isRequired,
   setSections: PropTypes.func.isRequired,
+  showUnlockForm: PropTypes.bool.isRequired,
+  setShowUnlockForm: PropTypes.func.isRequired,
 };

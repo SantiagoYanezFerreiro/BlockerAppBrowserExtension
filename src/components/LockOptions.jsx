@@ -14,7 +14,7 @@ export default function LockOptions({
   handleLockSubmit,
   showUnlockForm,
   setShowUnlockForm,
-  isLocked, // Add this prop// Add this prop
+  isLocked,
 }) {
   const [lockValue, setLockValue] = useState("");
   const [unlockAttempt, setUnlockAttempt] = useState("");
@@ -338,6 +338,6 @@ LockOptions.propTypes = {
   updateLockValue: PropTypes.func.isRequired,
   handleLockSubmit: PropTypes.func.isRequired,
   showUnlockForm: PropTypes.bool.isRequired,
-  setShowUnlockForm: PropTypes.func.isRequired, // Add this prop type
-  isLocked: PropTypes.bool.isRequired, // Add this prop type
+  setShowUnlockForm: PropTypes.func.isRequired,
+  isLocked: PropTypes.bool.isRequired,
 };
